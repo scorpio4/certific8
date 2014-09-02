@@ -1,0 +1,12 @@
+# A member of an HR (Hiring) Team
+
+SET FOREIGN_KEY_CHECKS = 0; 
+DROP TABLE IF EXISTS c8_hr_team;
+
+CREATE TABLE IF NOT EXISTS c8_hr_team (
+	org_id INT NOT NULL DEFAULT 0,
+	user_id INT NOT NULL DEFAULT 0
+) ENGINE=INNODB;
+
+ALTER TABLE c8_hr_team ADD FOREIGN KEY (org_id) REFERENCES c8_org(id);
+ALTER TABLE c8_hr_team ADD FOREIGN KEY (user_id) REFERENCES c8_user(id);
