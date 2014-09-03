@@ -1,0 +1,58 @@
+ html,  div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, img, small, strong, ol, ul, li, form, label,
+table, caption, tr, td, footer, header {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+footer, header, menu, nav, section {
+	display: block;
+}
+ 
+ body {
+	 
+	line-height: 1;
+    font-family: 'Titillium Web', sans-serif;
+    font-weight:400;
+	padding:0;
+    }
+ol, ul {
+	list-style: none;
+}
+ 
+ body { padding:0; margin:0;}
+.main-intro {  
+	background: url("img/body.png") repeat #191919;
+     height:800px;
+   
+    width: 100%;
+    color:#191919;
+}
+.main-intro h1 {  
+	margin:0; padding:50px 0 30px;
+	 color:#191919;
+	 font-size:38px;
+	 font-weight:700;
+}
+.main-intro li {  
+	width:200px;
+}
+.main-intro h2 {  
+	 padding:0px 0 20px;
+	 color:#191919;
+	 font-size:14px;
+}
+
+li.intr  { position:relative;  float:left; margin:0 0 0 20px; padding:70px 0;  min-height:150px;   width:200px;}
+li.intr img  { margin:0 0 0 25px;  box-shadow: 0 0  2px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(255, 255, 255, 0.2) inset, 0 -1px 1px rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.2); border:1px solid #cccccc;}
+a:focus { outline:0; }
+a  { text-decoration:none; }
+.divi-sub {  margin:12px auto;  background-color:#dadcdd;  height:1px; width:80%; display:block; }
+
+.main-intro li  p { font-size:14px; width:200px; clear:both; padding:20px 0; text-align:center; margin:0 0 0 25px;  text-decoration:none;}
+  h2 strong { font-weight:600;}
+  .footi   { margin:30px 0; }
