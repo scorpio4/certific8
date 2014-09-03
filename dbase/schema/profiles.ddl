@@ -15,11 +15,14 @@ CREATE TABLE IF NOT EXISTS c8_profile (
 	short_title VARCHAR(255) NOT NULL DEFAULT '',
 	short_bio TEXT NOT NULL DEFAULT '',
 	avatar VARCHAR(255) NOT NULL DEFAULT 'avatar.png',
-	template VARCHAR(255) NOT NULL DEFAULT 'default.html',
+	template_id INT NOT NULL DEFAULT 0,
 
 	is_active INT NOT NULL DEFAULT 0,
-	is_public INT NOT NULL DEFAULT 0,
-	can_contact INT NOT NULL DEFAULT 0,
+	is_public INT NOT NULL DEFAULT 1,
+	can_contact INT NOT NULL DEFAULT 1,
+	show_vouches INT NOT NULL DEFAULT 1,
+
+	min_salary INT NOT NULL DEFAULT 0,
 
 	user_id INT NOT NULL DEFAULT 0,
 	hr_id INT NOT NULL DEFAULT 0,
@@ -29,3 +32,4 @@ CREATE TABLE IF NOT EXISTS c8_profile (
 ALTER TABLE c8_profile ADD FOREIGN KEY (user_id) REFERENCES c8_user(id);
 ALTER TABLE c8_profile ADD FOREIGN KEY (hr_id) REFERENCES c8_hr(id);
 ALTER TABLE c8_profile ADD FOREIGN KEY (membership_id) REFERENCES c8_membership(id);
+ALTER TABLE c8_profile ADD FOREIGN KEY (template_id) REFERENCES c8_profile_template(id);
