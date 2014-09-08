@@ -1,0 +1,12 @@
+# Describes a registered user
+
+SET FOREIGN_KEY_CHECKS = 0; 
+DROP TABLE IF EXISTS c8_role;
+
+CREATE TABLE IF NOT EXISTS c8_role (
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(255) NOT NULL DEFAULT ''
+) ENGINE=INNODB;
+
+INSERT INTO c8_role (id, name) VALUES (0, 'General Public');
+
