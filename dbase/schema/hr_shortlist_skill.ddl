@@ -1,4 +1,4 @@
-# HR can "save" search results (hr_candidates)
+# HR can "save" search criteria (skills)
 
 SET FOREIGN_KEY_CHECKS = 0; 
 DROP TABLE IF EXISTS c8_hr_shortlist_skill;
