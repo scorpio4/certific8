@@ -1,0 +1,219 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	margin:0px;
+	background-image:url(../images/body.png);
+	
+	}
+.c{
+	clear:both;
+	}
+.login-main{
+	margin:0px;
+	width:100%;
+	height:100%;
+	min-height:100%; 
+	bottom: 0; 
+	top: 0;
+	}
+.logo-login{
+	width:100%;
+	text-align:center;
+	margin-bottom:20px;
+	}
+.login-form-group{
+	margin-bottom:10px;
+	}
+.login{
+	width:270px;
+	margin:0px auto;
+	}
+.login-form-control{
+	width:100%;
+	background-color:#fff;
+	height:40px;
+	border:1px solid #ddd;
+	color:#8c8c8c;
+	font-size:13px;
+	padding:10px;
+	}
+.login-btn{
+	width:100%;
+	background-color:#289ed9;
+	border:none;
+	font-size:16px;
+	font-weight:bold;
+	text-align:center;
+	color:#fff;
+	padding-bottom:12px;
+	padding-top:12px;
+	}
+.text01{
+	font-size:12px;
+	color:#47494a;
+	cursor:pointer;
+	}
+.m-t-lgx{
+	margin-top:200px;
+	}
+.blue-bg{
+	background-color:#29a0dc;
+	}
+.b-b-none{
+	border-bottom:none !important;
+	}
+.header-main{
+	width:100%;
+	margin:0px;
+	background-color:#fff;
+	background-image:url(../images/bg.png);
+	background-repeat:repeat-x;
+	-webkit-box-shadow: -3px 9px 5px -10px rgba(0,0,0,0.52);
+-moz-box-shadow: -3px 9px 5px -10px rgba(0,0,0,0.52);
+box-shadow: -3px 9px 5px -10px rgba(0,0,0,0.52);
+	}
+.logo{
+	float:left;
+	padding-top:24px;
+	padding-bottom:24px;
+	}
+.navigation li{
+	/*border-left:1px solid #428ad4;*/
+	font-size:14px;
+/*	font-weight:600;*/
+	text-align:center;
+	}
+/*.navigation li:last-child{
+	border-right:1px solid #428ad4;
+	}*/
+.navigation li a{
+	padding-top:29px;
+	padding-bottom:29px;
+	padding-left:23px;
+	padding-right:23px;
+	display:block;
+	color:#8e918f;
+	border-top: 3px solid #fff;
+	}
+.navigation li a:hover{
+	 background: none repeat scroll 0 0 rgba(213, 213, 213, 0.25);
+	  border-top: 3px solid #49b0e7;
+	  color:#000;
+	}
+
+.navigation li.active {
+    border-top: 3px solid #49b0e7;
+}
+li.active {
+    background: none repeat scroll 0 0 rgba(213, 213, 213, 0.25);
+}
+/*.navigation li a:focus{
+	background-color:#2176cc;
+	}*/
+.breadcrumb-main{
+	margin:0px;
+	width:100%;
+	margin-top:94px;
+	}
+.breadcrumb-navigation{
+	background-color:#fff;
+	border:1px solid #e8e8e8;
+	padding-left:15px;
+	}
+.breadcrumb-navigation ul{
+	margin:0px;
+	padding:0px;
+	
+	}
+.breadcrumb-navigation ul li{
+	margin:0px;
+	padding:0px;
+	list-style:none;
+	font-size:11px;
+	color:#737272;
+	margin-right:15px;
+	padding-top:10px;
+	padding-bottom:10px;
+	float:left;
+	}
+.breadcrumb-navigation ul li a{
+	color:#737272;
+	text-decoration:none;
+	}
+.bredcrumb-active a{
+	color:#0866c6 !important;
+	}
+.bredcrumb-active{
+	color:#0866c6 !important;
+	}
+.content-main{
+	margin:0px;
+	width:100%;
+	/*background-color:#2268cb;*/
+	padding:20px;
+	}
+.panel-head{
+	background-color:#2aa8e6;
+	font-size:16px;
+	color:#fff;
+	}
+.btn-blue{
+	background-color: #0866c6;
+    border-color: #0866c6;
+    color: #FFFFFF;
+	}
+.btn-red{
+	background-color: #d43a0b;
+    border-color: #d43a0b;
+    color: #FFFFFF;
+	}
+.btn-red:hover{
+	background-color: #d43a0b;
+    border-color: #d43a0b;
+    color: #FFFFFF;
+	}
+.btn-green{
+	background-color: #11a654;
+    border-color: #11a654;
+    color: #FFFFFF;
+	}
+.btn-green:hover{
+	background-color: #11a654;
+    border-color: #11a654;
+    color: #FFFFFF;
+	}
+.btn-blue:hover{
+	background-color: #0866c6;
+    border-color: #0866c6;
+    color: #FFFFFF;
+	}
+.modal-title{
+	color:#29a0dc;
+	}
+.radio-custom > i.checked:before, .checkbox-custom > i.checked:before {
+    color: #29a0dc !important;
+}
+select.styled {
+    -moz-appearance: none;
+    cursor: pointer;
+    display: inline-block;
+    outline: medium none;
+}
+div.forselect-dash:before {
+    background-image: url("../images/drop.jpg");
+    clear: both;
+    content: "";
+    display: block !important;
+    float: right !important;
+    height: 32px !important;
+    margin-top: -33px !important;
+    padding-left: 8px !important;
+    pointer-events: none;
+    position: absolute !important;
+    right: 16px;
+    width: 32px !important;
+}
+.view-table tr th{
+    width:25%;
+    font-weight:bold;
+}
