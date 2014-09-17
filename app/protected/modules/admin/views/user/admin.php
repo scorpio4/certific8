@@ -40,7 +40,6 @@ $sumend = '</small></div>';
                     'maxButtonCount'=>5,
                     'htmlOptions' => array('class' =>'pagination pagination-sm m-t-none m-b-none')
                 ),
-                'htmlOptions'=>array('class'=>''),
                 'columns' => array(
                     'first_name',
                     'last_name',

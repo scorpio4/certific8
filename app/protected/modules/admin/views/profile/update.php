@@ -3,7 +3,7 @@
 /* @var $model Profile */
 
 $this->breadcrumbs=array(
-	'Profiles'=>array('index'),
+	'Profiles'=>array('admin'),
 	$model->id=>array('view','id'=>$model->id),
 	'Update',
 );
@@ -15,7 +15,9 @@ $this->menu=array(
 	array('label'=>'Manage Profile', 'url'=>array('admin')),
 );
 ?>
-
-<h1>Update Profile <?php echo $model->id; ?></h1>
-
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<div class="panel">
+    <div class="panel-heading panel-head">Update Profile <?php echo $model->id; ?></div>
+    <div class="panel-body">
+        <?php $this->renderPartial('_form', array('model'=>$model)); ?>
+    </div>
+</div>

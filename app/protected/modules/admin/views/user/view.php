@@ -36,7 +36,12 @@ $this->menu=array(
 		'country',
 		'username',
 		'registration_token',
-		'avatar',
+                array(
+                    'label'=>'Avatar',
+                    'type'=>'raw',
+                    'value'=> CHtml::image(Yii::app()->request->baseUrl.'/uploads/avatar/'.$model->id.'/'.$model->avatar,$model->first_name,array('style'=>'width:200px;')),
+                    'visible'=>$model->avatar!="avatar.png"
+                ),
 		'is_registered',
 		'is_paid',
 		'is_test',

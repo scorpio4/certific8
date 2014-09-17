@@ -97,8 +97,18 @@ class UserController extends Controller
 
         if (isset($_POST['User'])) {
             $model->attributes = $_POST['User'];
-            if ($model->save())
+            $model->avatar=CUploadedFile::getInstance($model,'avatar');
+            if ($model->save()){
+                $userid = $model->id;
+                $path = Yii::app()->basePath.'/../uploads/avatar/';
+                $userdir = $path.$userid.'/';
+                if (!is_dir($userdir)) {
+                    mkdir($userdir);
+                }
+                $location = $userdir .$model->avatar;
+                $model->avatar->saveAs($location);
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('update', array(

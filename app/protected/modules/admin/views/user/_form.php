@@ -13,6 +13,7 @@
             // There is a call to performAjaxValidation() commented in generated controller code.
             // See class documentation of CActiveForm for details on this.
             'enableAjaxValidation' => false,
+            'htmlOptions' => array('enctype' => 'multipart/form-data'),
         ));
         ?>
 
@@ -98,7 +99,7 @@
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'avatar'); ?>
-            <?php echo $form->textField($model, 'avatar', array('size' => 60, 'maxlength' => 255,'class'=>'form-control')); ?>
+            <?php echo $form->fileField($model, 'avatar'); ?>
             <?php echo $form->error($model, 'avatar'); ?>
         </div>
 
@@ -152,19 +153,58 @@
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'first_joined'); ?>
-            <?php echo $form->textField($model, 'first_joined',array('class'=>'form-control')); ?>
+            <?php
+                $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+                    'model'=>$model,
+                    'attribute'=>'first_joined',
+                    // additional javascript options for the date picker plugin
+                    'options'=>array(
+                        'showAnim'=>'fold',
+                        'dateFormat' => 'yy-mm-dd'
+                    ),
+                    'htmlOptions'=>array(
+                        'class'=>'form-control',
+                    ),
+                ));
+            ?>
             <?php echo $form->error($model, 'first_joined'); ?>
         </div>
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'last_seen'); ?>
-            <?php echo $form->textField($model, 'last_seen',array('class'=>'form-control')); ?>
+            <?php
+                $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+                    'model'=>$model,
+                    'attribute'=>'last_seen',
+                    // additional javascript options for the date picker plugin
+                    'options'=>array(
+                        'showAnim'=>'fold',
+                        'dateFormat' => 'yy-mm-dd'
+                    ),
+                    'htmlOptions'=>array(
+                        'class'=>'form-control',
+                    ),
+                ));
+            ?>
             <?php echo $form->error($model, 'last_seen'); ?>
         </div>
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'last_valdiated'); ?>
-            <?php echo $form->textField($model, 'last_valdiated',array('class'=>'form-control')); ?>
+            <?php
+                $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+                    'model'=>$model,
+                    'attribute'=>'last_valdiated',
+                    // additional javascript options for the date picker plugin
+                    'options'=>array(
+                        'showAnim'=>'fold',
+                        'dateFormat' => 'yy-mm-dd'
+                    ),
+                    'htmlOptions'=>array(
+                        'class'=>'form-control',
+                    ),
+                ));
+            ?>
             <?php echo $form->error($model, 'last_valdiated'); ?>
         </div>
 
