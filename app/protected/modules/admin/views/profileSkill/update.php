@@ -3,7 +3,8 @@
 /* @var $model ProfileSkill */
 
 $this->breadcrumbs=array(
-	'Profile Skills'=>array('admin'),
+        'Profile'=>array('profile/admin'),
+	'Profile Skills'=>array('admin','id'=>$model->profile_id),
 	$model->id=>array('view','id'=>$model->id),
 	'Update',
 );

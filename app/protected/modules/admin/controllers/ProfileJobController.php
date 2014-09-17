@@ -135,6 +135,9 @@ class ProfileJobController extends Controller
 	{
 		$model=new ProfileJob('search');
 		$model->unsetAttributes();  // clear any default values
+                if(isset($_GET['id'])){
+                    $model->profile_id = $_GET['id'];
+                }
 		if(isset($_GET['ProfileJob']))
 			$model->attributes=$_GET['ProfileJob'];
 

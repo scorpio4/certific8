@@ -73,6 +73,7 @@ class User extends CActiveRecord
             array('password2', 'compare', 'compareAttribute' => 'newpassword', 'on' => 'changepassword'),
             array('oldpassword', 'checkpassword', 'on' => 'changepassword'),
             array('newpassword', 'length', 'min' => 4, 'max' => 20, 'tooShort' => '{attribute} is too short.', 'tooLong' => '{attribute} is too long.', 'on' => 'changepassword'),
+            array('avatar', 'file', 'allowEmpty'=>true,'types'=>'jpg,png,gif','on'=>'update'),
 //			array('password_sha256, first_joined, last_seen, last_valdiated', 'required'),
 //			array('is_registered, is_paid, is_test, membership_id, profile_id, current_salary', 'numerical', 'integerOnly'=>true),
 //			array('first_name, last_name, full_name, email, mobile, house_unit_number, street, suburb, state, postcode, country, username, registration_token, avatar', 'length', 'max'=>255),

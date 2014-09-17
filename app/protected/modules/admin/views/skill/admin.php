@@ -45,7 +45,7 @@ $sumend = '</small></div>';
 		'title',
 		'details',
 		'keywords',
-		'logo',
+		//'logo',
 		'webpage',
 		/*
 		'certified_by',

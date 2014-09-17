@@ -53,6 +53,7 @@ class Profile extends CActiveRecord
             array('short_bio', 'required'),
             array('template_id, is_active, is_public, can_contact, show_vouches, min_salary, user_id, hr_id, membership_id', 'numerical', 'integerOnly' => true),
             array('slugname', 'length', 'max' => 16),
+            array('avatar', 'file', 'allowEmpty'=>true,'types'=>'jpg,png,gif','on'=>'update'),
             array('full_name, short_title, avatar', 'length', 'max' => 255),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.

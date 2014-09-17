@@ -3,7 +3,8 @@
 /* @var $model HrTeam */
 
 $this->breadcrumbs=array(
-	'Hr Teams'=>array('admin'),
+        'Hr'=>array('hr/admin'),
+	'Hr Teams'=>array('admin','id'=>$model->org_id),
 	$model->id,
 );
 
@@ -24,8 +25,11 @@ $this->menu=array(
         'data'=>$model,
         'htmlOptions'=>array('class'=>'table table-striped b-t b-light text-sm view-table'),
         'attributes'=>array(
-		'org_id',
-		'user_id',
+                array(
+                    'label'=>'Organization',
+                    'name'=>'org.legal_name',
+                ),
+		'user.username',
         ),
 )); ?>
     </div>

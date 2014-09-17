@@ -94,16 +94,21 @@ class ProfileController extends Controller
 		if(isset($_POST['Profile']))
 		{
 			$model->attributes=$_POST['Profile'];
-                        $model->avatar=CUploadedFile::getInstance($model,'avatar');
+                        $file_flyer = CUploadedFile::getInstance($model,'avatar');
+                        if((is_object($file_flyer) && get_class($file_flyer)==='CUploadedFile')){
+                            $model->avatar=$file_flyer;
+                        }
 			if($model->save()){
-                            $userid = $model->user_id;
-                            $path = Yii::app()->basePath.'/../uploads/avatar/';
-                            $userdir = $path.$userid.'/';
-                            if (!is_dir($userdir)) {
-                                mkdir($userdir);
+                            if(is_object($file_flyer)){
+                                $userid = $model->user_id;
+                                $path = Yii::app()->basePath.'/../uploads/avatar/';
+                                $userdir = $path.$userid.'/';
+                                if (!is_dir($userdir)) {
+                                    mkdir($userdir);
+                                }
+                                $location = $userdir .$model->avatar;
+                                $model->avatar->saveAs($location);
                             }
-                            $location = $userdir .$model->avatar;
-                            $model->avatar->saveAs($location);
                             $this->redirect(array('view','id'=>$model->id));
                         }
 		}

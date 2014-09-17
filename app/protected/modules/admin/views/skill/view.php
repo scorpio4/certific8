@@ -28,11 +28,22 @@ $this->menu=array(
 		'title',
 		'details',
 		'keywords',
-		'logo',
+                array(
+                    'label'=>'Logo',
+                    'type'=>'raw',
+                    'value'=> CHtml::image(Yii::app()->request->baseUrl.'/uploads/skill/'.$model->logo,'',array('style'=>'width:200px;')),
+                    'visible'=>$model->logo!="none.png"
+                ),
 		'webpage',
 		'certified_by',
-		'provider_id',
-		'skill_discipline_id',
+                array(
+                    'label'=>'Provider',
+                    'name'=>'provider.org.legal_name'
+                ),
+                array(
+                    'label'=>'Skill Discipline',
+                    'name'=>'skillDiscipline.name'
+                ),
 		'level',
 		'start_date',
 		'end_date',

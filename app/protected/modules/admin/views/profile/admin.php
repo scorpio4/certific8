@@ -60,7 +60,8 @@ $sumend = '</small></div>';
                      */
                     array(
                         'class' => 'CButtonColumn',
-                        'template'=>'{view} {update} {delete}',
+                        'template'=>'{view} {update} {skill} {job} {delete}',
+                        'headerHtmlOptions'=>array('width'=>'20%'),
                         'buttons'=>array (
                             'view'=>array(
                                 'label' => '<i class="fa fa-search"></i>',
@@ -71,6 +72,18 @@ $sumend = '</small></div>';
                                 'label' => '<i class="fa fa-edit"></i>',
                                 'imageUrl' => false,
                                 'options'=>array('class'=>'btn btn-blue btn-sm','title'=>'Edit'),
+                            ),
+                            'skill'=> array(
+                                'label' => '<i class="fa fa-star"></i>',
+                                'imageUrl' => false,
+                                'options'=>array('class'=>'btn btn-blue btn-sm','title'=>'Profile Skill'),
+                                'url'=>'Yii::app()->createUrl("admin/profileSkill/admin", array("id"=>$data->id))', 
+                            ),
+                            'job'=> array(
+                                'label' => '<i class="fa fa-graduation-cap"></i>',
+                                'imageUrl' => false,
+                                'options'=>array('class'=>'btn btn-blue btn-sm','title'=>'Profile Job'),
+                                'url'=>'Yii::app()->createUrl("admin/profileJob/admin", array("id"=>$data->id))', 
                             ),
                             'delete'=>array(
                                 'label' => '<i class="fa fa-trash-o"></i>',

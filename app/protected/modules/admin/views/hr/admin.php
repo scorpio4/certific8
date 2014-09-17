@@ -59,7 +59,8 @@ $sumend = '</small></div>';
 		*/
 		array(
 			'class'=>'CButtonColumn',
-                        'template'=>'{view} {update} {delete}',
+                        'template'=>'{view} {update} {team} {delete}',
+                        'headerHtmlOptions'=>array('width'=>'20%'),
                         'buttons'=>array (
                             'view'=>array(
                                 'label' => '<i class="fa fa-search"></i>',
@@ -70,6 +71,12 @@ $sumend = '</small></div>';
                                 'label' => '<i class="fa fa-edit"></i>',
                                 'imageUrl' => false,
                                 'options'=>array('class'=>'btn btn-blue btn-sm','title'=>'Edit'),
+                            ),
+                            'team'=> array(
+                                'label' => '<i class="fa fa-users"></i>',
+                                'imageUrl' => false,
+                                'options'=>array('class'=>'btn btn-blue btn-sm','title'=>'HR Team'),
+                                'url'=>'Yii::app()->createUrl("admin/hrTeam/admin", array("id"=>$data->org_id))', 
                             ),
                             'delete'=>array(
                                 'label' => '<i class="fa fa-trash-o"></i>',

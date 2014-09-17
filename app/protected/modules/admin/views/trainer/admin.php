@@ -42,8 +42,14 @@ $sumend = '</small></div>';
         ),
 	'columns'=>array(
 		'id',
-		'org_id',
-		'membership_id',
+                array(
+                    'header'=>'Organization',
+                    'name'=>'org.legal_name'
+                ),
+                array(
+                    'header'=>'Membership',
+                    'name'=>'membership.name'
+                ),
 		'is_registered',
 		'is_paid',
 		'first_joined',

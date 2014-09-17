@@ -3,7 +3,8 @@
 /* @var $model HrTeam */
 
 $this->breadcrumbs=array(
-	'Hr Teams'=>array('admin'),
+        'Hr'=>array('hr/admin'),
+	'Hr Teams'=>array('admin','id'=>$_GET['id']),
 	'Manage',
 );
 
@@ -41,8 +42,8 @@ $sumend = '</small></div>';
             'htmlOptions' => array('class' =>'pagination pagination-sm m-t-none m-b-none')
         ),
 	'columns'=>array(
-		'org_id',
-		'user_id',
+		//'org_id',
+		'user.username',
 		array(
 			'class'=>'CButtonColumn',
                         'template'=>'{view} {update} {delete}',

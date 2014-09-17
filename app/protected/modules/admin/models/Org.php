@@ -41,6 +41,7 @@ class Org extends CActiveRecord
 		return array(
 			array('billing_user_id, admin_user_id, is_registered', 'numerical', 'integerOnly'=>true),
 			array('legal_name, tax_number, logo', 'length', 'max'=>255),
+                        array('logo', 'file', 'allowEmpty'=>true,'types'=>'jpg,png,gif','on'=>'update'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, legal_name, tax_number, logo, billing_user_id, admin_user_id, is_registered', 'safe', 'on'=>'search'),

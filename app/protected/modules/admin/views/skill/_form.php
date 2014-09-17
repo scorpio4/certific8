@@ -23,6 +23,7 @@ $listDiscp = CHtml::listData($modelDiscp,
             // There is a call to performAjaxValidation() commented in generated controller code.
             // See class documentation of CActiveForm for details on this.
             'enableAjaxValidation' => false,
+            'htmlOptions' => array('enctype' => 'multipart/form-data'),
         ));
         ?>
 
@@ -48,7 +49,7 @@ $listDiscp = CHtml::listData($modelDiscp,
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'logo'); ?>
-            <?php echo $form->textField($model, 'logo', array('size' => 60, 'maxlength' => 255,'class' => 'form-control')); ?>
+            <?php echo $form->fileField($model, 'logo'); ?>
             <?php echo $form->error($model, 'logo'); ?>
         </div>
 

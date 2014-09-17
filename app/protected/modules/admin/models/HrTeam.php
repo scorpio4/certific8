@@ -1,36 +1,25 @@
 <?php
 
 /**
- * This is the model class for table "{{profile_job}}".
+ * This is the model class for table "{{hr_team}}".
  *
- * The followings are the available columns in table '{{profile_job}}':
- * @property integer $profile_id
+ * The followings are the available columns in table '{{hr_team}}':
  * @property integer $org_id
- * @property string $job_title
- * @property integer $hr_id
- * @property integer $rating
- * @property string $comment
- * @property string $start_date
- * @property string $end_date
+ * @property integer $user_id
  *
  * The followings are the available model relations:
- * @property Profile $profile
  * @property Org $org
- * @property Hr $hr
+ * @property User $user
  */
-class ProfileJob extends CActiveRecord
+class HrTeam extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return '{{profile_job}}';
+		return '{{hr_team}}';
 	}
-        public function primaryKey()
-        {
-           return 'id';
-        }
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -39,13 +28,10 @@ class ProfileJob extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('comment', 'required'),
-			array('profile_id, org_id, hr_id, rating', 'numerical', 'integerOnly'=>true),
-			array('job_title', 'length', 'max'=>255),
-			array('start_date, end_date', 'safe'),
+			array('org_id, user_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('profile_id, org_id, job_title, hr_id, rating, comment, start_date, end_date', 'safe', 'on'=>'search'),
+			array('org_id, user_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,9 +43,8 @@ class ProfileJob extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'profile' => array(self::BELONGS_TO, 'Profile', 'profile_id'),
 			'org' => array(self::BELONGS_TO, 'Org', 'org_id'),
-			'hr' => array(self::BELONGS_TO, 'Hr', 'hr_id'),
+			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 		);
 	}
 
@@ -69,14 +54,8 @@ class ProfileJob extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'profile_id' => 'Profile',
-			'org_id' => 'Org',
-			'job_title' => 'Job Title',
-			'hr_id' => 'Hr',
-			'rating' => 'Rating',
-			'comment' => 'Comment',
-			'start_date' => 'Start Date',
-			'end_date' => 'End Date',
+			'org_id' => 'Organization',
+			'user_id' => 'User',
 		);
 	}
 
@@ -98,14 +77,8 @@ class ProfileJob extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('profile_id',$this->profile_id);
 		$criteria->compare('org_id',$this->org_id);
-		$criteria->compare('job_title',$this->job_title,true);
-		$criteria->compare('hr_id',$this->hr_id);
-		$criteria->compare('rating',$this->rating);
-		$criteria->compare('comment',$this->comment,true);
-		$criteria->compare('start_date',$this->start_date,true);
-		$criteria->compare('end_date',$this->end_date,true);
+		$criteria->compare('user_id',$this->user_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -116,7 +89,7 @@ class ProfileJob extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return ProfileJob the static model class
+	 * @return HrTeam the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

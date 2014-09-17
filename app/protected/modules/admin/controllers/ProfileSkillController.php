@@ -135,6 +135,9 @@ class ProfileSkillController extends Controller
 	{
 		$model=new ProfileSkill('search');
 		$model->unsetAttributes();  // clear any default values
+                if(isset($_GET['id'])){
+                    $model->profile_id = $_GET['id'];
+                }
 		if(isset($_GET['ProfileSkill']))
 			$model->attributes=$_GET['ProfileSkill'];
 

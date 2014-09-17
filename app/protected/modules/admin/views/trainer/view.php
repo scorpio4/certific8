@@ -25,8 +25,14 @@ $this->menu=array(
         'htmlOptions'=>array('class'=>'table table-striped b-t b-light text-sm view-table'),
         'attributes'=>array(
 		'id',
-		'org_id',
-		'membership_id',
+                array(
+                    'label'=>'Organization',
+                    'name'=>'org.legal_name'
+                ),
+                array(
+                    'label'=>'Membership',
+                    'name'=>'membership.name'
+                ),
 		'is_registered',
 		'is_paid',
 		'first_joined',
