@@ -24,10 +24,6 @@ class HrComment extends CActiveRecord
 	{
 		return '{{hr_comment}}';
 	}
-        public function primaryKey()
-        {
-           return 'id';
-        }
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -53,6 +49,7 @@ class HrComment extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'hrShortlist' => array(self::BELONGS_TO, 'HrShortlist', 'hr_shortlist_id'),
+                        'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 		);
 	}
 

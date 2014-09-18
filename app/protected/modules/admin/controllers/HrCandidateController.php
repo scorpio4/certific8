@@ -135,6 +135,9 @@ class HrCandidateController extends Controller
 	{
 		$model=new HrCandidate('search');
 		$model->unsetAttributes();  // clear any default values
+                if(isset($_GET['id'])){
+                    $model->hr_shortlist_id = $_GET['id'];
+                }
 		if(isset($_GET['HrCandidate']))
 			$model->attributes=$_GET['HrCandidate'];
 

@@ -135,6 +135,9 @@ class HrCommentController extends Controller
 	{
 		$model=new HrComment('search');
 		$model->unsetAttributes();  // clear any default values
+                if(isset($_GET['id'])){
+                    $model->hr_shortlist_id = $_GET['id'];
+                }
 		if(isset($_GET['HrComment']))
 			$model->attributes=$_GET['HrComment'];
 

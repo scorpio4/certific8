@@ -3,7 +3,8 @@
 /* @var $model HrComment */
 
 $this->breadcrumbs=array(
-	'Hr Comments'=>array('admin'),
+        'Hr Shortlist'=>array('hrShortlist/admin'),
+	'Hr Comments'=>array('admin','id'=>$model->hr_shortlist_id),
 	$model->id,
 );
 
@@ -27,7 +28,7 @@ $this->menu=array(
 		'id',
 		'hr_shortlist_id',
 		'hr_candidate_id',
-		'user_id',
+		'user.username',
 		'comment',
 		'preference',
 		'status',

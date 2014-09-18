@@ -3,7 +3,8 @@
 /* @var $model HrComment */
 
 $this->breadcrumbs=array(
-	'Hr Comments'=>array('admin'),
+	'Hr Shortlist'=>array('hrShortlist/admin'),
+	'Hr Comments'=>array('admin','id'=>$model->hr_shortlist_id),
 	$model->id=>array('view','id'=>$model->id),
 	'Update',
 );

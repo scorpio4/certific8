@@ -3,7 +3,8 @@
 /* @var $model HrCandidate */
 
 $this->breadcrumbs=array(
-	'Hr Candidates'=>array('admin'),
+	'Hr Shortlist'=>array('hrShortlist/admin'),
+	'Hr Candidates'=>array('admin','id'=>$model->hr_shortlist_id),
 	$model->id=>array('view','id'=>$model->id),
 	'Update',
 );

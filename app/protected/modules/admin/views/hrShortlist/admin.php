@@ -60,7 +60,8 @@ $sumend = '</small></div>';
                      */
                     array(
                         'class' => 'CButtonColumn',
-                        'template' => '{view} {update} {delete}',
+                        'template' => '{view} {update} {skill} {comment} {candidate} {delete}',
+                        'headerHtmlOptions'=>array('width'=>'25%'),
                         'buttons' => array(
                             'view' => array(
                                 'label' => '<i class="fa fa-search"></i>',
@@ -71,6 +72,24 @@ $sumend = '</small></div>';
                                 'label' => '<i class="fa fa-edit"></i>',
                                 'imageUrl' => false,
                                 'options' => array('class' => 'btn btn-blue btn-sm', 'title' => 'Edit'),
+                            ),
+                            'skill' => array(
+                                'label' => '<i class="fa fa-star"></i>',
+                                'imageUrl' => false,
+                                'options' => array('class' => 'btn btn-blue btn-sm', 'title' => 'Shortlist Skill'),
+                                'url'=>'Yii::app()->createUrl("admin/hrShortlistSkill/admin", array("id"=>$data->id))', 
+                            ),
+                            'comment' => array(
+                                'label' => '<i class="fa fa-star"></i>',
+                                'imageUrl' => false,
+                                'options' => array('class' => 'btn btn-blue btn-sm', 'title' => 'Comment'),
+                                'url'=>'Yii::app()->createUrl("admin/hrComment/admin", array("id"=>$data->id))', 
+                            ),
+                            'candidate' => array(
+                                'label' => '<i class="fa fa-graduation-cap"></i>',
+                                'imageUrl' => false,
+                                'options' => array('class' => 'btn btn-blue btn-sm', 'title' => 'Candidate'),
+                                'url'=>'Yii::app()->createUrl("admin/hrCandidate/admin", array("id"=>$data->id))', 
                             ),
                             'delete' => array(
                                 'label' => '<i class="fa fa-trash-o"></i>',

@@ -135,6 +135,9 @@ class HrShortlistSkillController extends Controller
 	{
 		$model=new HrShortlistSkill('search');
 		$model->unsetAttributes();  // clear any default values
+                if(isset($_GET['id'])){
+                    $model->hr_shortlist_id = $_GET['id'];
+                }
 		if(isset($_GET['HrShortlistSkill']))
 			$model->attributes=$_GET['HrShortlistSkill'];
 

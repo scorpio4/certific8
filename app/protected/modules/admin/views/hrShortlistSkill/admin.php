@@ -3,7 +3,8 @@
 /* @var $model HrShortlistSkill */
 
 $this->breadcrumbs=array(
-	'Hr Shortlist Skills'=>array('admin'),
+	'Hr Shortlist'=>array('hrShortlist/admin'),
+	'Hr Shortlist Skills'=>array('admin','id'=>$_GET['id']),
 	'Manage',
 );
 
@@ -41,9 +42,11 @@ $sumend = '</small></div>';
             'htmlOptions' => array('class' =>'pagination pagination-sm m-t-none m-b-none')
         ),
 	'columns'=>array(
-		'is_required',
-		'hr_shortlist_id',
-		'skill_id',
+                array(
+                    'header'=>'Skill',
+                    'name'=>'skill.title'
+                ),
+                'is_required',
 		array(
 			'class'=>'CButtonColumn',
                         'template'=>'{view} {update} {delete}',

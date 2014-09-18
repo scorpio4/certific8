@@ -48,7 +48,8 @@ $sumend = '</small></div>';
                     'mobile',
                     array(
                         'class' => 'CButtonColumn',
-                        'template'=>'{view} {update} {delete}',
+                        'template'=>'{view} {update} {skill} {delete}',
+                        'headerHtmlOptions'=>array('width'=>'20%'),
                         'buttons'=>array (
                             'view'=>array(
                                 'label' => '<i class="fa fa-search"></i>',
@@ -59,6 +60,13 @@ $sumend = '</small></div>';
                                 'label' => '<i class="fa fa-edit"></i>',
                                 'imageUrl' => false,
                                 'options'=>array('class'=>'btn btn-blue btn-sm','title'=>'Edit'),
+                            ),
+                            'skill'=> array(
+                                'label' => '<i class="fa fa-star"></i>',
+                                'imageUrl' => false,
+                                'options'=>array('class'=>'btn btn-blue btn-sm','title'=>'Skill'),
+                                'visible'=>'$data->username!="admin"',
+                                'url'=>'Yii::app()->createUrl("admin/userSkill/admin", array("id"=>$data->id))', 
                             ),
                             'delete'=>array(
                                 'label' => '<i class="fa fa-trash-o"></i>',

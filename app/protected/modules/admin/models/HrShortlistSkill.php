@@ -21,10 +21,6 @@ class HrShortlistSkill extends CActiveRecord
 	{
 		return '{{hr_shortlist_skill}}';
 	}
-        public function primaryKey()
-        {
-           return 'id';
-        }
 	/**
 	 * @return array validation rules for model attributes.
 	 */

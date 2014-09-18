@@ -3,7 +3,8 @@
 /* @var $model HrCandidate */
 
 $this->breadcrumbs=array(
-	'Hr Candidates'=>array('admin'),
+        'Hr Shortlist'=>array('hrShortlist/admin'),
+	'Hr Candidates'=>array('admin','id'=>$model->hr_shortlist_id),
 	$model->id,
 );
 
@@ -25,7 +26,10 @@ $this->menu=array(
         'htmlOptions'=>array('class'=>'table table-striped b-t b-light text-sm view-table'),
         'attributes'=>array(
 		'hr_shortlist_id',
-		'profile_id',
+                array(
+                    'label'=>'Profile',
+                    'name'=>'profile.full_name',
+                ),
         ),
 )); ?>
     </div>

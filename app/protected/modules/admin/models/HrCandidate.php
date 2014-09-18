@@ -20,10 +20,6 @@ class HrCandidate extends CActiveRecord
 	{
 		return '{{hr_candidate}}';
 	}
-        public function primaryKey()
-        {
-           return 'id';
-        }
 	/**
 	 * @return array validation rules for model attributes.
 	 */
