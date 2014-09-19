@@ -36,6 +36,7 @@ return array(
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
+                         'class' => 'WebUser',
 		),
 		// uncomment the following to enable URLs in path-format
 		
@@ -43,7 +44,9 @@ return array(
                         'urlFormat'=>'path',
                         'showScriptName'=>false,
 			'rules'=>array(
-                                '/'=>'user/site/index',
+                                '/'=>'user/user/home',
+                                '/signup'=>'user/user/index',
+                                '/verify/<id>'=>'user/user/verify',
                                 '/admin'=>'admin/site/login',
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',

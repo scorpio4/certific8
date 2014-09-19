@@ -15,19 +15,33 @@ class UserIdentity extends CUserIdentity
 	 * against some persistent user identity storage (e.g. database).
 	 * @return boolean whether authentication succeeds.
 	 */
-	public function authenticate()
-	{
-		$users=array(
-			// username => password
-			'demo'=>'demo',
-			'admin'=>'admin',
-		);
-		if(!isset($users[$this->username]))
-			$this->errorCode=self::ERROR_USERNAME_INVALID;
-		elseif($users[$this->username]!==$this->password)
-			$this->errorCode=self::ERROR_PASSWORD_INVALID;
-		else
-			$this->errorCode=self::ERROR_NONE;
-		return !$this->errorCode;
-	}
+        private $_id;
+        const ERROR_USERNAME_NOT_ACTIVE = 3;
+	public function authenticate() {
+            $user = User::model()->findByAttributes(array('email' => $this->username));
+            if ($user === null) {
+                $this->errorCode = self::ERROR_USERNAME_INVALID;
+            } else if ($user && !CPasswordHelper::verifyPassword($this->password, $user->password_sha256)) {
+                $this->errorCode = self::ERROR_PASSWORD_INVALID;
+            } elseif ($user->is_registered == 0){
+                $this->errorCode = self::ERROR_USERNAME_NOT_ACTIVE;
+            } else {
+                $this->errorCode = self::ERROR_NONE;
+                $this->_id = $user->id;
+                $role = '';
+                $userRole = UserRole::model()->findByAttributes(array('user_id' => $user->id));
+                if(isset($userRole->role)) {
+                    $role = strtolower($userRole->role->name);
+                }
+                $this->setState('role', $role);  
+            }
+            return $this->errorCode;
+        }
+        
+        public function getId() {
+            return $this->_id;
+        }
+        public function setUser($user_id) {
+          $this->_id=$user_id;
+        }
 }

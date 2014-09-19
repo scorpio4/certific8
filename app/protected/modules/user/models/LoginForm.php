@@ -23,6 +23,7 @@ class LoginForm extends CFormModel
 		return array(
 			// username and password are required
 			array('username, password', 'required'),
+                        array('username', 'email'),
 			// rememberMe needs to be a boolean
 			array('rememberMe', 'boolean'),
 			// password needs to be authenticated
@@ -37,6 +38,7 @@ class LoginForm extends CFormModel
 	{
 		return array(
 			'rememberMe'=>'Remember me next time',
+                        'username'=>'Email',
 		);
 	}
 
@@ -46,13 +48,15 @@ class LoginForm extends CFormModel
 	 */
 	public function authenticate($attribute,$params)
 	{
-		if(!$this->hasErrors())
-		{
-			$this->_identity=new UserIdentity($this->username,$this->password);
-			if(!$this->_identity->authenticate())
-				$this->addError('password','Incorrect username or password.');
-		}
-	}
+            if(!$this->hasErrors()) {
+                $this->_identity = new UserIdentity($this->username, $this->password);
+                if ($this->_identity->authenticate() == 3) {
+                    $this->addError('password', 'User is currently not active, please activate using the activation URL in your email and try again');
+                } elseif ($this->_identity->authenticate() != '' )  {
+                    $this->addError('password', 'Incorrect username or password.');
+                }
+            }
+        }
 
 	/**
 	 * Logs in the user using the given username and password in the model.

@@ -1,0 +1,38 @@
+.styles { background-color:#dadcdd; height:290px; width:180px; display:block; padding:35px 6px 0; position:fixed; top:100px; left:-220px; z-index:10; padding:10px 20px;}
+.styles-open  { background:url(demo/styles-open.png) no-repeat; height:32px; width:22px; display:block;   position:fixed; top:110px; left:-220px; z-index:9;}
+.styles p { padding:20px 0 10px; font-weight:600;}
+.styles p.skins { padding:20px 0 10px; clear:both; }
+.styles li { float:left;  }
+.boxed a, .wide a { background-color:#47494a; color:#fff; float:left; border:1px #cccccc; height:20px; width:30px; display:block; padding:8px 25px;  }
+.wide a { margin:0 10px; }
+.blue a { background:url(demo/blue.png) no-repeat; height:34px; width:34px; display:block; margin-top:5px;}
+.orange a { background:url(demo/orange.png) no-repeat; height:34px; width:34px; display:block; margin-top:5px;}
+.green a { background:url(demo/green.png) no-repeat; height:34px; width:34px; display:block;margin-top:5px;}
+.purple a { background:url(demo/purple.png) no-repeat; height:34px; width:34px; display:block;margin-top:5px;}
+.red a { background:url(demo/red.png) no-repeat; height:34px; width:34px; display:block;margin-top:5px;}
+.yellow a { background:url(demo/yellow.png) no-repeat; height:34px; width:34px; display:block;margin-top:5px;}
+.aurora a { background:url(demo/aurora.png) no-repeat; height:34px; width:34px; display:block;margin-top:5px;}
+.city a { background:url(demo/city.png) no-repeat; height:34px; width:34px; display:block;margin-top:5px;}
+.sky a { background:url(demo/sky.png) no-repeat; height:34px; width:34px; display:block;margin-top:5px;}
+.bg1 a { background:url(demo/bg2.png) no-repeat; height:34px; width:34px; display:block;margin-top:5px;}
+.bg2 a { background:url(demo/bg1.png) no-repeat; height:34px; width:34px; display:block;margin-top:5px;}
+.bg3 a { background:url(demo/bg3.png) no-repeat; height:34px; width:34px; display:block;margin-top:5px;}
+.bg4 a { background:url(demo/bg4.png) no-repeat; height:34px; width:34px; display:block;margin-top:5px;}
+.bg5 a { background:url(demo/bg5.png) no-repeat; height:34px; width:34px; display:block;margin-top:5px;}
+
+.styles-closed  { width:51px; height:47px;  background:url(demo/styles-closed.png) no-repeat;  position:fixed; top:100px; left:0px; display:block; z-index:10; }
+.styles-closed a  { width:51px; height:47px;  position:fixed; top:100px; left:0px; }
+
+.main-intro {  
+	background: url("img/bg-highlight.png") repeat #191919;
+    min-height:1080px;
+   
+    width: 100%;
+    color:#fff;
+}
+.main-intro h1 {  
+	margin:0; padding:100px 0 30px
+}
+.intr { position:relative;  margin-top:80px; min-height:150px; max-width:100%;  width:200px;}
+a:focus { outline:0; }
+.styles li.clear { clear:both; width:100%;   }

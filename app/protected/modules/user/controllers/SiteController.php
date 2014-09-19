@@ -106,4 +106,10 @@ class SiteController extends Controller
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
+        public function actionProfilejson()
+        {
+            $helper = new Certific8Helpers;
+            $profiles = Profile::model()->with('profileJobs','profileJobs.org','profileSkills','profileSkills.skill','socialProfiles')->findAll();
+            echo CJSON::encode($helper->convertModelToArray($profiles));      
+        }
 }
