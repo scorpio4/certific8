@@ -7,13 +7,6 @@ $this->breadcrumbs=array(
 	$model->title,
 );
 
-$this->menu=array(
-	array('label'=>'List Skill', 'url'=>array('index')),
-	array('label'=>'Create Skill', 'url'=>array('create')),
-	array('label'=>'Update Skill', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Skill', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Skill', 'url'=>array('admin')),
-);
 ?>
 
 <div class="panel">

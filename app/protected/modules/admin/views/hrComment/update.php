@@ -9,12 +9,6 @@ $this->breadcrumbs=array(
 	'Update',
 );
 
-$this->menu=array(
-	array('label'=>'List HrComment', 'url'=>array('index')),
-	array('label'=>'Create HrComment', 'url'=>array('create')),
-	array('label'=>'View HrComment', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage HrComment', 'url'=>array('admin')),
-);
 ?>
 <div class="panel">
     <div class="panel-heading panel-head">Update HrComment <?php echo $model->id; ?></div>

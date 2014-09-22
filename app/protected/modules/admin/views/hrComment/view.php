@@ -8,13 +8,6 @@ $this->breadcrumbs=array(
 	$model->id,
 );
 
-$this->menu=array(
-	array('label'=>'List HrComment', 'url'=>array('index')),
-	array('label'=>'Create HrComment', 'url'=>array('create')),
-	array('label'=>'Update HrComment', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete HrComment', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage HrComment', 'url'=>array('admin')),
-);
 ?>
 
 <div class="panel">

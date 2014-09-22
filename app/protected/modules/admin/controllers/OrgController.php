@@ -70,8 +70,23 @@ class OrgController extends Controller
 		if(isset($_POST['Org']))
 		{
 			$model->attributes=$_POST['Org'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+                        $file_flyer = CUploadedFile::getInstance($model,'logo');
+                        if((is_object($file_flyer) && get_class($file_flyer)==='CUploadedFile')){
+                            $model->logo=$file_flyer;
+                        }
+			if($model->save()){
+                            if(is_object($file_flyer)){
+                                $userid = $model->id;
+                                $path = Yii::app()->basePath.'/../uploads/logo/';
+                                $userdir = $path.$userid.'/';
+                                if (!is_dir($userdir)) {
+                                    mkdir($userdir);
+                                }
+                                $location = $userdir .$model->logo;
+                                $model->logo->saveAs($location);
+                            }
+                            $this->redirect(array('view','id'=>$model->id));
+                        }
 		}
 
 		$this->render('create',array(

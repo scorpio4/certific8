@@ -7,10 +7,6 @@ $this->breadcrumbs=array(
 	'Create',
 );
 
-$this->menu=array(
-	array('label'=>'List HrComment', 'url'=>array('index')),
-	array('label'=>'Manage HrComment', 'url'=>array('admin')),
-);
 ?>
 <div class="panel">
     <div class="panel-heading panel-head">Create HrComment</div>

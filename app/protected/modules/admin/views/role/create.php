@@ -7,15 +7,12 @@ $this->breadcrumbs=array(
 	'Create',
 );
 
-$this->menu=array(
-	array('label'=>'List Role', 'url'=>array('index')),
-	array('label'=>'Manage Role', 'url'=>array('admin')),
-);
 ?>
 <div class="panel">
     <div class="panel-heading panel-head">Create Role</div>
     <div class="panel-body">
-        <?php $this->renderPartial('_form', array('model'=>$model)); ?>    </div>
+        <?php $this->renderPartial('_form', array('model'=>$model)); ?>    
+    </div>
 </div>
 
 

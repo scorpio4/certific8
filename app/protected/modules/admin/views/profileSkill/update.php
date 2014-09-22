@@ -9,12 +9,6 @@ $this->breadcrumbs=array(
 	'Update',
 );
 
-$this->menu=array(
-	array('label'=>'List ProfileSkill', 'url'=>array('index')),
-	array('label'=>'Create ProfileSkill', 'url'=>array('create')),
-	array('label'=>'View ProfileSkill', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage ProfileSkill', 'url'=>array('admin')),
-);
 ?>
 <div class="panel">
     <div class="panel-heading panel-head">Update ProfileSkill <?php echo $model->id; ?></div>

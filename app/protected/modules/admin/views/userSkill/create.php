@@ -7,10 +7,10 @@ $this->breadcrumbs=array(
 	'Create',
 );
 
-$this->menu=array(
-	array('label'=>'List UserSkill', 'url'=>array('index')),
-	array('label'=>'Manage UserSkill', 'url'=>array('admin')),
-);
+//$this->menu=array(
+//	array('label'=>'List UserSkill', 'url'=>array('index')),
+//	array('label'=>'Manage UserSkill', 'url'=>array('admin')),
+//);
 ?>
 <div class="panel">
     <div class="panel-heading panel-head">Create UserSkill</div>

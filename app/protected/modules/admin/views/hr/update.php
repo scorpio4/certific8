@@ -8,12 +8,6 @@ $this->breadcrumbs=array(
 	'Update',
 );
 
-$this->menu=array(
-	array('label'=>'List Hr', 'url'=>array('index')),
-	array('label'=>'Create Hr', 'url'=>array('create')),
-	array('label'=>'View Hr', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Hr', 'url'=>array('admin')),
-);
 ?>
 <div class="panel">
     <div class="panel-heading panel-head">Update Hr <?php echo $model->id; ?></div>

@@ -9,12 +9,6 @@ $this->breadcrumbs=array(
 	'Update',
 );
 
-$this->menu=array(
-	array('label'=>'List HrShortlistSkill', 'url'=>array('index')),
-	array('label'=>'Create HrShortlistSkill', 'url'=>array('create')),
-	array('label'=>'View HrShortlistSkill', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage HrShortlistSkill', 'url'=>array('admin')),
-);
 ?>
 <div class="panel">
     <div class="panel-heading panel-head">Update HrShortlistSkill <?php echo $model->id; ?></div>

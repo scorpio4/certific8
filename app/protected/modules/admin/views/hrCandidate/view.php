@@ -8,13 +8,6 @@ $this->breadcrumbs=array(
 	$model->id,
 );
 
-$this->menu=array(
-	array('label'=>'List HrCandidate', 'url'=>array('index')),
-	array('label'=>'Create HrCandidate', 'url'=>array('create')),
-	array('label'=>'Update HrCandidate', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete HrCandidate', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage HrCandidate', 'url'=>array('admin')),
-);
 ?>
 
 <div class="panel">

@@ -7,13 +7,6 @@ $this->breadcrumbs = array(
     $model->name,
 );
 
-$this->menu = array(
-    array('label' => 'List Benefits', 'url' => array('index')),
-    array('label' => 'Create Benefits', 'url' => array('create')),
-    array('label' => 'Update Benefits', 'url' => array('update', 'id' => $model->id)),
-    array('label' => 'Delete Benefits', 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Are you sure you want to delete this item?')),
-    array('label' => 'Manage Benefits', 'url' => array('admin')),
-);
 ?>
 
 <div class="panel">

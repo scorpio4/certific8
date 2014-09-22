@@ -8,8 +8,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Role', 'url'=>array('index')),
-	array('label'=>'Create Role', 'url'=>array('create')),
+	array('label'=>'Create Role', 'url'=>array('create'),'linkOptions'=>array('class'=>'btn btn-green btn-sm')),
 );
 
 $tfooterstart = '<footer class="panel-footer"><div class="row">'; 

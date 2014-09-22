@@ -7,13 +7,6 @@ $this->breadcrumbs=array(
 	$model->id,
 );
 
-$this->menu=array(
-	array('label'=>'List Trainer', 'url'=>array('index')),
-	array('label'=>'Create Trainer', 'url'=>array('create')),
-	array('label'=>'Update Trainer', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Trainer', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Trainer', 'url'=>array('admin')),
-);
 ?>
 
 <div class="panel">

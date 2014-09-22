@@ -7,13 +7,6 @@ $this->breadcrumbs = array(
     $model->id,
 );
 
-$this->menu = array(
-    array('label' => 'List Profile', 'url' => array('index')),
-    array('label' => 'Create Profile', 'url' => array('create')),
-    array('label' => 'Update Profile', 'url' => array('update', 'id' => $model->id)),
-    array('label' => 'Delete Profile', 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Are you sure you want to delete this item?')),
-    array('label' => 'Manage Profile', 'url' => array('admin')),
-);
 ?>
 <div class="panel">
     <div class="panel-heading panel-head">View Profile #<?php echo $model->id; ?></div>

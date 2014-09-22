@@ -10,6 +10,10 @@ $listOrg = CHtml::listData($modelOrg,
 $modelProfile = Profile::model()->findAll();
 $listProfile = CHtml::listData($modelProfile, 
                 'id', 'full_name');
+
+$modelHr = Hr::model()->findAll();
+$listHr = CHtml::listData($modelHr, 
+                'id', 'org.legal_name');
 ?>
 
 <div class="row">
@@ -48,7 +52,7 @@ $listProfile = CHtml::listData($modelProfile,
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'hr_id'); ?>
-            <?php echo $form->textField($model, 'hr_id', array('class' => 'form-control')); ?>
+            <?php echo $form->dropDownList($model, 'hr_id',$listHr, array('class' => 'form-control')); ?>
             <?php echo $form->error($model, 'hr_id'); ?>
         </div>
 

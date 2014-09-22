@@ -8,12 +8,6 @@ $this->breadcrumbs=array(
 	'Update',
 );
 
-$this->menu=array(
-	array('label'=>'List Trainer', 'url'=>array('index')),
-	array('label'=>'Create Trainer', 'url'=>array('create')),
-	array('label'=>'View Trainer', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Trainer', 'url'=>array('admin')),
-);
 ?>
 <div class="panel">
     <div class="panel-heading panel-head">Update Trainer <?php echo $model->id; ?></div>

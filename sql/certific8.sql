@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 18, 2014 at 11:24 AM
+-- Generation Time: Sep 22, 2014 at 11:31 AM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.16
 
@@ -346,14 +346,14 @@ CREATE TABLE IF NOT EXISTS `c8_membership` (
   `max_skills` int(11) NOT NULL DEFAULT '3',
   `status` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `c8_membership`
 --
 
 INSERT INTO `c8_membership` (`id`, `name`, `description`, `logo`, `price`, `duration_days`, `can_search`, `can_contact`, `max_skills`, `status`) VALUES
-(1, 'FREE Member', 'dfgdfgdfg\r\ndfgdfgdfg', 'member.png', '1.00', 30, 1, 0, 3, 0),
+(1, 'FREE Member', 'dfgdfgdfg\r\ndfgdfgdfg', 'Chrysanthemum.jpg', '1.00', 30, 1, 0, 3, 0),
 (2, 'Silver Member', '', 'member.png', '1.00', 30, 1, 0, 3, 0),
 (3, 'Gold Member', '', 'member.png', '1.00', 30, 1, 0, 3, 0),
 (4, 'FREE Trainer', '', 'member.png', '1.00', 30, 1, 0, 3, 0),
@@ -516,7 +516,7 @@ CREATE TABLE IF NOT EXISTS `c8_profile` (
   KEY `template_id` (`template_id`),
   KEY `c8_profile_ibfk_1` (`user_id`),
   KEY `c8_profile_ibfk_2` (`hr_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=108 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=113 ;
 
 --
 -- Dumping data for table `c8_profile`
@@ -979,7 +979,7 @@ CREATE TABLE IF NOT EXISTS `c8_profile_skill` (
 --
 
 INSERT INTO `c8_profile_skill` (`id`, `profile_id`, `skill_id`) VALUES
-(1, 3, 1),
+(1, 3, 6),
 (2, 6, 1),
 (3, 7, 101),
 (4, 7, 60),
@@ -1475,7 +1475,7 @@ CREATE TABLE IF NOT EXISTS `c8_role` (
 --
 
 INSERT INTO `c8_role` (`id`, `name`) VALUES
-(1, 'General Public');
+(1, 'Members');
 
 -- --------------------------------------------------------
 
@@ -1678,12 +1678,14 @@ CREATE TABLE IF NOT EXISTS `c8_social` (
 --
 
 CREATE TABLE IF NOT EXISTS `c8_social_profile` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `social_id` int(11) NOT NULL DEFAULT '0',
   `username` varchar(255) NOT NULL,
   `profile_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
   KEY `social_id` (`social_id`),
   KEY `profile_id` (`profile_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1849,7 +1851,7 @@ CREATE TABLE IF NOT EXISTS `c8_user` (
   PRIMARY KEY (`id`),
   KEY `c8_user_ibfk_1` (`membership_id`),
   KEY `c8_user_ibfk_2` (`profile_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=102 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=104 ;
 
 --
 -- Dumping data for table `c8_user`
@@ -1857,7 +1859,7 @@ CREATE TABLE IF NOT EXISTS `c8_user` (
 
 INSERT INTO `c8_user` (`id`, `first_name`, `last_name`, `full_name`, `email`, `mobile`, `house_unit_number`, `street`, `suburb`, `state`, `postcode`, `country`, `username`, `password_sha256`, `registration_token`, `avatar`, `is_registered`, `is_paid`, `is_test`, `membership_id`, `profile_id`, `current_salary`, `geo_territory`, `ipv4address`, `first_joined`, `last_seen`, `last_valdiated`) VALUES
 (1, '', '', '', 'admin@certific8.com', '', '', '', '', '', '', '', 'admin', '$2a$13$N/GirTqOZ6NIkT7SXZosaef//gTFvSwz2kN4Pb0Sh0WFOFWW.WmrW', '', 'avatar.png', 0, 0, 1, 9, NULL, 0, '', '', '0000-00-00', '0000-00-00', '0000-00-00'),
-(2, 'Katlyn', 'Carter', 'Miss Vada Trantow Jr.', 'gabriel.lynch@stantonkeeling.info', '(437)831-1412x7470', '366', 'Hattie Valleys', '320 Liliana Drive Suite 075', 'Nevada', '21065', 'Nicaragua', 'dhyatt', 'aa4a704a8e16f156638329dd642b39d13da4e925240f72fe51e312dfa9f3c661', '00b7ae948fb98aefe26b219d923f4bf83d0e1596', 'Penguins.jpg', 0, 0, 1, 9, NULL, 0, 'Saint Barthelemy', '51.88.179.2', '1988-01-04', '2009-12-21', '1991-12-17'),
+(2, 'Katlyn', 'Carter', 'Miss Vada Trantow Jr.', 'gabriel.lynch@stantonkeeling.info', '(437)831-1412x7470', '366', 'Hattie Valleys', '320 Liliana Drive Suite 075', 'Nevada', '21065', 'Nicaragua', 'dhyatt', '$2a$13$N/GirTqOZ6NIkT7SXZosaef//gTFvSwz2kN4Pb0Sh0WFOFWW.WmrW', '00b7ae948fb98aefe26b219d923f4bf83d0e1596', 'Penguins.jpg', 1, 1, 1, 9, NULL, 0, 'Saint Barthelemy', '51.88.179.2', '1988-01-04', '2014-09-22', '1991-12-17'),
 (3, 'Evert', 'Kilback', 'Katharina Cartwright', 'o''reilly.carol@hotmail.com', '1-994-824-9674', '3884', 'Cloyd Stream', '5446 Casper Mews Suite 869', 'New York', '17849-2910', 'Liberia', 'bashirian.drake', 'd76201a6e07dc7b2c5d0e4c6b82fdcd747442728f4151ae5107aefe07e0a2194', 'dbda574eb164bd33d7d9442df1adb0658cb0f70b', 'Tulips.jpg', 0, 0, 1, 9, NULL, 0, 'United States Virgin Islands', '19.101.210.106', '1994-05-03', '1999-09-28', '1971-03-22'),
 (4, 'Isabell', 'Paucek', 'Skye Hessel', 'crath@gmail.com', '1-430-627-5032x821', '59777', 'Jordan Crossing', '403 Raynor Viaduct', 'Alaska', '77525-3739', 'Czech Republic', 'dereck.tromp', '0bd30f64b6c8b48ca498a4a81dbd5498f0422fae3a176e752f061055699f818a', '3f8dce15615bab7e571abe644755a18f62cd1365', 'avatar.png', 0, 0, 1, 9, NULL, 0, 'Marshall Islands', '95.107.233.135', '2009-12-25', '1986-06-24', '2009-03-17'),
 (5, 'Marilou', 'Wintheiser', 'Lonzo Reichel', 'myles.kohler@gmail.com', '203-721-2234x94091', '9905', 'Jacey Rapid', '58517 Saige Overpass', 'Iowa', '15799', 'Guernsey', 'eichmann.luz', '3b0fa125df7b74874c1940cf55245857cc09288a03be316eda12eb2da9ff800c', '37af6c30f754bee7b8c39fa0344ee6c10159d79f', 'avatar.png', 0, 0, 1, 9, NULL, 0, 'Tanzania', '150.60.183.125', '1970-03-20', '2003-02-17', '1976-12-24'),
@@ -1956,7 +1958,9 @@ INSERT INTO `c8_user` (`id`, `first_name`, `last_name`, `full_name`, `email`, `m
 (98, 'Maynard', 'Wolf', 'Hayley Schiller', 'shanna.jast@gmail.com', '02915438061', '11707', 'Josiane Center', '08269 Koss Station', 'Tennessee', '33268-5878', 'Angola', 'mikayla14', '3374ce9789ec552ed8825e137fd2e1e195441e4dcd16e9f955cce62d0a3b63c4', '5416ab5ad3a6ded48cd629a01dd18253ed61cd3f', 'avatar.png', 0, 0, 1, 9, NULL, 0, 'Gambia', '185.125.1.226', '1994-09-26', '1977-10-06', '2012-04-14'),
 (99, 'Belle', 'Cummings', 'Christian Stroman', 'ireinger@torp.net', '011.533.7084x8974', '229', 'Zella Course', '214 Garett Junction Apt. 759', 'Nebraska', '78519-7750', 'Mali', 'gmaggio', '1cde5bab965827e4d9242a2ab405e72c28e4be80a203178bec600c8657a6d766', 'b200e9da53c74f0cdc579b60a8da44f7678f7708', 'avatar.png', 0, 0, 1, 9, NULL, 0, 'France', '122.202.97.86', '2013-08-24', '1978-01-21', '2002-12-24'),
 (100, 'Otis', 'Corkery', 'Dr. Floy Mayert', 'pjacobson@yahoo.com', '588.925.2933x883', '642', 'Farrell Loop', '93951 Bednar Lake', 'Kansas', '33544-8906', 'Portugal', 'aisha00', 'a42d2a474ea058a709cb6f3e662fa0f3f3926693f05c4480ee8c39d18ca817a6', '8ff8aec5d2bfaf57e254367f1dfb7cb788f19489', 'avatar.png', 0, 0, 1, 9, NULL, 0, 'Kiribati', '88.253.163.103', '1983-04-08', '2001-08-24', '1987-03-31'),
-(101, 'Houston', 'Bernhard', 'Delphine Stiedemann', 'wilfredo.hand@spinka.com', '+22(1)9158673939', '98483', 'Franecki Forest', '8815 Schamberger Islands Apt. 682', 'South Carolina', '15162-5343', 'Qatar', 'jamaal73', 'ba948912b1c81d5598d7f5bfece8c76ccd98d0a56e789bdbe6e0dfdd091e8080', '3c9e074b5975b43c26458c409e14fb6d12322846', 'avatar.png', 0, 0, 1, 9, NULL, 0, 'China', '31.19.64.163', '1972-07-15', '1992-01-08', '2000-02-24');
+(101, 'Houston', 'Bernhard', 'Delphine Stiedemann', 'wilfredo.hand@spinka.com', '+22(1)9158673939', '98483', 'Franecki Forest', '8815 Schamberger Islands Apt. 682', 'South Carolina', '15162-5343', 'Qatar', 'jamaal73', 'ba948912b1c81d5598d7f5bfece8c76ccd98d0a56e789bdbe6e0dfdd091e8080', '3c9e074b5975b43c26458c409e14fb6d12322846', 'avatar.png', 0, 0, 1, 9, NULL, 0, 'China', '31.19.64.163', '1972-07-15', '1992-01-08', '2000-02-24'),
+(102, '', '', '', '', '', '', '', '', '', '', '', '', '$2a$13$fEab4/fo6lKyhifxsH.y/uir1NuIfQ.iLJQmA1lqebkhsIr3.sXPq', '', '', 0, 0, 1, 1, NULL, 0, '', '', '0000-00-00', '0000-00-00', '0000-00-00'),
+(103, 'sdfsdfsdf', 'sdfsdfsdf', 'sdfsdfsd', 'sdfsdf', 'sdfsdf', 'sdfsdf', 'sdfsdf', 'sdfsdf', 'sdfsdfsdf', 'sdfsdf', 'sdfsdfsdf', 'joji123', '$2a$13$4Wqg89HEfG1dBPwtIwPHIO2oD3sIiMP0Lij4g6vBJcGFhKVQtud5i', 'sdfsdfsdfsdf', '100kb.jpg', 0, 0, 1, 1, NULL, 0, 'sdfsdf', 'sdfsdf', '0000-00-00', '0000-00-00', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -1965,11 +1969,20 @@ INSERT INTO `c8_user` (`id`, `first_name`, `last_name`, `full_name`, `email`, `m
 --
 
 CREATE TABLE IF NOT EXISTS `c8_user_role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL DEFAULT '0',
   `role_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
   KEY `role_id` (`role_id`),
   KEY `c8_user_role_ibfk_1` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `c8_user_role`
+--
+
+INSERT INTO `c8_user_role` (`id`, `user_id`, `role_id`) VALUES
+(1, 2, 1);
 
 -- --------------------------------------------------------
 

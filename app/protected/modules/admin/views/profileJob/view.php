@@ -3,17 +3,11 @@
 /* @var $model ProfileJob */
 
 $this->breadcrumbs=array(
-	'Profile Jobs'=>array('admin'),
+        'Profile' => array('profile/admin'),
+	'Profile Jobs'=>array('admin', 'id' =>$model->profile_id),
 	$model->id,
 );
 
-$this->menu=array(
-	array('label'=>'List ProfileJob', 'url'=>array('index')),
-	array('label'=>'Create ProfileJob', 'url'=>array('create')),
-	array('label'=>'Update ProfileJob', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete ProfileJob', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage ProfileJob', 'url'=>array('admin')),
-);
 ?>
 
 <div class="panel">
@@ -24,10 +18,19 @@ $this->menu=array(
         'data'=>$model,
         'htmlOptions'=>array('class'=>'table table-striped b-t b-light text-sm view-table'),
         'attributes'=>array(
-		'profile_id',
-		'org_id',
+                array(
+                    'name'=>'profile_id',
+                    'value'=>$model->profile->full_name,
+                ),
+                array(
+                    'name'=>'org_id',
+                    'value'=>$model->org->legal_name,
+                ),
 		'job_title',
-		'hr_id',
+                array(
+                    'name'=>'hr_id',
+                    'value'=>$model->hr->org->legal_name,
+                ),
 		'rating',
 		'comment',
 		'start_date',

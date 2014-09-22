@@ -8,13 +8,13 @@ $this->breadcrumbs=array(
 	$model->id,
 );
 
-$this->menu=array(
-	array('label'=>'List UserSkill', 'url'=>array('index')),
-	array('label'=>'Create UserSkill', 'url'=>array('create')),
-	array('label'=>'Update UserSkill', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete UserSkill', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage UserSkill', 'url'=>array('admin')),
-);
+//$this->menu=array(
+//	array('label'=>'List UserSkill', 'url'=>array('index')),
+//	array('label'=>'Create UserSkill', 'url'=>array('create')),
+//	array('label'=>'Update UserSkill', 'url'=>array('update', 'id'=>$model->id)),
+//	array('label'=>'Delete UserSkill', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+//	array('label'=>'Manage UserSkill', 'url'=>array('admin')),
+//);
 ?>
 
 <div class="panel">

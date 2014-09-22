@@ -7,13 +7,6 @@ $this->breadcrumbs = array(
     $model->id,
 );
 
-$this->menu = array(
-    array('label' => 'List SkillTrainer', 'url' => array('index')),
-    array('label' => 'Create SkillTrainer', 'url' => array('create')),
-    array('label' => 'Update SkillTrainer', 'url' => array('update', 'id' => $model->id)),
-    array('label' => 'Delete SkillTrainer', 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Are you sure you want to delete this item?')),
-    array('label' => 'Manage SkillTrainer', 'url' => array('admin')),
-);
 ?>
 
 <div class="panel">

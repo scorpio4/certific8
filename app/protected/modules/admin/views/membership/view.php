@@ -7,13 +7,6 @@ $this->breadcrumbs=array(
 	$model->name,
 );
 
-$this->menu=array(
-	array('label'=>'List Membership', 'url'=>array('index')),
-	array('label'=>'Create Membership', 'url'=>array('create')),
-	array('label'=>'Update Membership', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Membership', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Membership', 'url'=>array('admin')),
-);
 ?>
 
 <div class="panel">
@@ -27,7 +20,12 @@ $this->menu=array(
 		'id',
 		'name',
 		'description',
-		'logo',
+                array(
+                    'label'=>'Logo',
+                    'type'=>'raw',
+                    'value'=> CHtml::image(Yii::app()->request->baseUrl.'/uploads/membership/'.$model->logo,'',array('style'=>'width:200px;')),
+                    'visible'=>$model->logo!="member.png"
+                ),
 		'price',
 		'duration_days',
 		'can_search',

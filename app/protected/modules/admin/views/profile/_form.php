@@ -14,6 +14,10 @@ $listMembership = CHtml::listData($modelMembership,
 $modelUser = User::model()->findAll();
 $listUser = CHtml::listData($modelUser, 
                 'id', 'username');
+
+$modelHr = Hr::model()->findAll();
+$listHr = CHtml::listData($modelHr, 
+                'id', 'org.legal_name');
 ?>
 
 <div class="row">
@@ -73,25 +77,25 @@ $listUser = CHtml::listData($modelUser,
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'is_active'); ?>
-            <?php echo $form->textField($model, 'is_active',array('class'=>'form-control')); ?>
+            <?php echo $form->dropDownList( $model,'is_active', array('0'=>'NO','1'=>'YES'),array('class'=>'form-control')); ?>
             <?php echo $form->error($model, 'is_active'); ?>
         </div>
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'is_public'); ?>
-            <?php echo $form->textField($model, 'is_public',array('class'=>'form-control')); ?>
+            <?php echo $form->dropDownList( $model,'is_public', array('0'=>'NO','1'=>'YES'),array('class'=>'form-control')); ?>
             <?php echo $form->error($model, 'is_public'); ?>
         </div>
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'can_contact'); ?>
-            <?php echo $form->textField($model, 'can_contact',array('class'=>'form-control')); ?>
+            <?php echo $form->dropDownList( $model,'can_contact', array('0'=>'NO','1'=>'YES'),array('class'=>'form-control')); ?>
             <?php echo $form->error($model, 'can_contact'); ?>
         </div>
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'show_vouches'); ?>
-            <?php echo $form->textField($model, 'show_vouches',array('class'=>'form-control')); ?>
+            <?php echo $form->dropDownList( $model,'show_vouches', array('0'=>'NO','1'=>'YES'),array('class'=>'form-control')); ?>
             <?php echo $form->error($model, 'show_vouches'); ?>
         </div>
 
@@ -109,7 +113,7 @@ $listUser = CHtml::listData($modelUser,
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'hr_id'); ?>
-            <?php echo $form->textField($model, 'hr_id',array('class'=>'form-control')); ?>
+            <?php echo $form->dropDownList($model, 'hr_id',$listHr,array('class'=>'form-control')); ?>
             <?php echo $form->error($model, 'hr_id'); ?>
         </div>
 

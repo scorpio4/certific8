@@ -2,6 +2,14 @@
 /* @var $this ProfileSkillController */
 /* @var $model ProfileSkill */
 /* @var $form CActiveForm */
+
+$modelProfile = Profile::model()->findAll();
+$listProfile = CHtml::listData($modelProfile, 
+                'id', 'full_name');
+
+$modelSkill = Skill::model()->findAll();
+$listSkill = CHtml::listData($modelSkill, 
+                'id', 'title');
 ?>
 
 <div class="row">
@@ -22,13 +30,13 @@
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'profile_id'); ?>
-            <?php echo $form->textField($model, 'profile_id', array('class' => 'form-control')); ?>
+            <?php echo $form->dropDownList($model, 'profile_id',$listProfile, array('class' => 'form-control','empty'=>'Select')); ?>
             <?php echo $form->error($model, 'profile_id'); ?>
         </div>
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'skill_id'); ?>
-            <?php echo $form->textField($model, 'skill_id', array('class' => 'form-control')); ?>
+            <?php echo $form->dropDownList($model, 'skill_id',$listSkill, array('class' => 'form-control','empty'=>'Select')); ?>
             <?php echo $form->error($model, 'skill_id'); ?>
         </div>
 

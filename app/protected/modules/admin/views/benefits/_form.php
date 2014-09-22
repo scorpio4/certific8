@@ -44,7 +44,7 @@ $listMembership = CHtml::listData($modelMembership,
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'status'); ?>
-            <?php echo $form->textField($model, 'status', array('class' => 'form-control')); ?>
+            <?php echo $form->dropDownList( $model,'status', array('0'=>'DISABLED','1'=>'ENABLED'),array('class'=>'form-control')); ?>
             <?php echo $form->error($model, 'status'); ?>
         </div>
 

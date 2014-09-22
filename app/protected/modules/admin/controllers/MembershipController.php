@@ -70,8 +70,21 @@ class MembershipController extends Controller
 		if(isset($_POST['Membership']))
 		{
 			$model->attributes=$_POST['Membership'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+                        $file_flyer = CUploadedFile::getInstance($model,'logo');
+                        if((is_object($file_flyer) && get_class($file_flyer)==='CUploadedFile')){
+                            $model->logo=$file_flyer;
+                        }
+			if($model->save()){
+                            if(is_object($file_flyer)){
+                                $path = Yii::app()->basePath.'/../uploads/membership/';
+                                if (!is_dir($path)) {
+                                    mkdir($path);
+                                }
+                                $location = $path .$model->logo;
+                                $model->logo->saveAs($location);
+                            }
+                            $this->redirect(array('view','id'=>$model->id));
+                        }
 		}
 
 		$this->render('create',array(
@@ -94,8 +107,21 @@ class MembershipController extends Controller
 		if(isset($_POST['Membership']))
 		{
 			$model->attributes=$_POST['Membership'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+                        $file_flyer = CUploadedFile::getInstance($model,'logo');
+                        if((is_object($file_flyer) && get_class($file_flyer)==='CUploadedFile')){
+                            $model->logo=$file_flyer;
+                        }
+			if($model->save()){
+                            if(is_object($file_flyer)){
+                                $path = Yii::app()->basePath.'/../uploads/membership/';
+                                if (!is_dir($path)) {
+                                    mkdir($path);
+                                }
+                                $location = $path .$model->logo;
+                                $model->logo->saveAs($location);
+                            }
+                            $this->redirect(array('view','id'=>$model->id));
+                        }
 		}
 
 		$this->render('update',array(

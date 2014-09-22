@@ -7,10 +7,6 @@ $this->breadcrumbs=array(
 	'Manage',
 );
 
-$this->menu=array(
-	array('label'=>'List View', 'url'=>array('index')),
-	array('label'=>'Create View', 'url'=>array('create')),
-);
 
 $tfooterstart = '<footer class="panel-footer"><div class="row">'; 
 $tfooterend = '</div></footer>';

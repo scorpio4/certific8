@@ -57,7 +57,7 @@ $listUser = CHtml::listData($modelUser,
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'is_registered'); ?>
-            <?php echo $form->textField($model, 'is_registered', array('class' => 'form-control')); ?>
+            <?php echo $form->dropDownList( $model,'is_registered', array('0'=>'NO','1'=>'YES'),array('class'=>'form-control')); ?>
             <?php echo $form->error($model, 'is_registered'); ?>
         </div>
 

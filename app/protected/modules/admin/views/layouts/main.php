@@ -30,6 +30,13 @@
         ?>
         <section class="content-main">
             <div class="container">
+                <?php 
+                    if(!Yii::app()->user->isGuest){
+                        if(isset($this->menu)){
+                            echo $this->renderPartial('/layouts/submenu'); 
+                        }
+                    }
+                ?>
                 <?php echo $content; ?>
             </div>
         </section>

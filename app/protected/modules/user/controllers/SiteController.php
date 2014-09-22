@@ -108,8 +108,11 @@ class SiteController extends Controller
 	}
         public function actionProfilejson()
         {
-            $helper = new Certific8Helpers;
-            $profiles = Profile::model()->with('profileJobs','profileJobs.org','profileSkills','profileSkills.skill','socialProfiles')->findAll();
-            echo CJSON::encode($helper->convertModelToArray($profiles));      
+            if(!Yii::app()->user->isGuest){
+                $userId = Yii::app()->user->id;
+                $helper = new Certific8Helpers;
+                $profiles = Profile::model()->with('profileJobs','profileJobs.org','profileSkills','profileSkills.skill','socialProfiles')->findAllByAttributes(array('user_id'=>$userId));
+                echo CJSON::encode($helper->convertModelToArray($profiles));      
+            }
         }
 }

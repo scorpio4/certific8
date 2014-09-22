@@ -8,13 +8,6 @@ $this->breadcrumbs=array(
 	$model->id,
 );
 
-$this->menu=array(
-	array('label'=>'List HrShortlistSkill', 'url'=>array('index')),
-	array('label'=>'Create HrShortlistSkill', 'url'=>array('create')),
-	array('label'=>'Update HrShortlistSkill', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete HrShortlistSkill', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage HrShortlistSkill', 'url'=>array('admin')),
-);
 ?>
 
 <div class="panel">

@@ -8,8 +8,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Membership', 'url'=>array('index')),
-	array('label'=>'Create Membership', 'url'=>array('create')),
+	//array('label'=>'List Membership', 'url'=>array('index')),
+	array('label'=>'Create Membership', 'url'=>array('create'),'linkOptions'=>array('class'=>'btn btn-green btn-sm')),
 );
 
 $tfooterstart = '<footer class="panel-footer"><div class="row">'; 
@@ -44,7 +44,11 @@ $sumend = '</small></div>';
 		'id',
 		'name',
 		'description',
-		'logo',
+                array(
+                    'name' => 'logo',
+                    'type' => 'html',
+                    'value' => 'CHtml::image(Yii::app()->request->baseUrl."/uploads/membership/".$data->logo,"",array("style"=>"width:100px;"))',
+                ),
 		'price',
 		'duration_days',
 		/*

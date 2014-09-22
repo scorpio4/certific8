@@ -1,7 +1,7 @@
 <header class="header-main navbar navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">        
-            <a href="index.html" class="logo"><img src="<?php echo Yii::app()->theme->baseUrl ?>/images/logo.png" class="m-r-sm"></a>
+            <a href="<?php echo Yii::app()->homeUrl.'admin'; ?>" class="logo"><img src="<?php echo Yii::app()->theme->baseUrl ?>/images/logo.png" class="m-r-sm"></a>
             <button class="btn btn-link visible-xs" type="button" data-toggle="collapse" data-target=".navbar-collapse" style="float:right">
                 <i class="fa fa-bars"></i>
             </button>

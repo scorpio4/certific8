@@ -7,13 +7,6 @@ $this->breadcrumbs=array(
 	$model->title,
 );
 
-$this->menu=array(
-	array('label'=>'List Social', 'url'=>array('index')),
-	array('label'=>'Create Social', 'url'=>array('create')),
-	array('label'=>'Update Social', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Social', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Social', 'url'=>array('admin')),
-);
 ?>
 
 <div class="panel">

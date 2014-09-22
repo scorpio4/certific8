@@ -7,13 +7,6 @@ $this->breadcrumbs = array(
     $model->id,
 );
 
-$this->menu = array(
-    array('label' => 'List Vouch', 'url' => array('index')),
-    array('label' => 'Create Vouch', 'url' => array('create')),
-    array('label' => 'Update Vouch', 'url' => array('update', 'id' => $model->id)),
-    array('label' => 'Delete Vouch', 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Are you sure you want to delete this item?')),
-    array('label' => 'Manage Vouch', 'url' => array('admin')),
-);
 ?>
 
 <div class="panel">

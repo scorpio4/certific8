@@ -7,13 +7,6 @@ $this->breadcrumbs=array(
 	$model->id,
 );
 
-$this->menu=array(
-	array('label'=>'List Hr', 'url'=>array('index')),
-	array('label'=>'Create Hr', 'url'=>array('create')),
-	array('label'=>'Update Hr', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Hr', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Hr', 'url'=>array('admin')),
-);
 ?>
 
 <div class="panel">

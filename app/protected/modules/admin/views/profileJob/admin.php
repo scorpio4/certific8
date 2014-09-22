@@ -9,8 +9,8 @@ $this->breadcrumbs = array(
 );
 
 $this->menu = array(
-    array('label' => 'List ProfileJob', 'url' => array('index')),
-    array('label' => 'Create ProfileJob', 'url' => array('create')),
+    //array('label' => 'List ProfileJob', 'url' => array('index')),
+    array('label' => 'Create ProfileJob', 'url' => array('create'),'linkOptions'=>array('class'=>'btn btn-green btn-sm')),
 );
 
 $tfooterstart = '<footer class="panel-footer"><div class="row">';

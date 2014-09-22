@@ -8,12 +8,6 @@ $this->breadcrumbs=array(
 	'Update',
 );
 
-$this->menu=array(
-	array('label'=>'List Provider', 'url'=>array('index')),
-	array('label'=>'Create Provider', 'url'=>array('create')),
-	array('label'=>'View Provider', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Provider', 'url'=>array('admin')),
-);
 ?>
 <div class="panel">
     <div class="panel-heading panel-head">Update Provider <?php echo $model->id; ?></div>

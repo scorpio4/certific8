@@ -8,8 +8,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Trainer', 'url'=>array('index')),
-	array('label'=>'Create Trainer', 'url'=>array('create')),
+	//array('label'=>'List Trainer', 'url'=>array('index')),
+	array('label'=>'Create Trainer', 'url'=>array('create'),'linkOptions'=>array('class'=>'btn btn-green btn-sm')),
 );
 
 $tfooterstart = '<footer class="panel-footer"><div class="row">'; 

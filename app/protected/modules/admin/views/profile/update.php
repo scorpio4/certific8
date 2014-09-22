@@ -8,12 +8,12 @@ $this->breadcrumbs=array(
 	'Update',
 );
 
-$this->menu=array(
-	array('label'=>'List Profile', 'url'=>array('index')),
-	array('label'=>'Create Profile', 'url'=>array('create')),
-	array('label'=>'View Profile', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Profile', 'url'=>array('admin')),
-);
+//$this->menu=array(
+//	array('label'=>'List Profile', 'url'=>array('index')),
+//	array('label'=>'Create Profile', 'url'=>array('create')),
+//	array('label'=>'View Profile', 'url'=>array('view', 'id'=>$model->id)),
+//	array('label'=>'Manage Profile', 'url'=>array('admin')),
+//);
 ?>
 <div class="panel">
     <div class="panel-heading panel-head">Update Profile <?php echo $model->id; ?></div>

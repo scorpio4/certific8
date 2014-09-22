@@ -7,13 +7,6 @@ $this->breadcrumbs = array(
     $model->id,
 );
 
-$this->menu = array(
-    array('label' => 'List Org', 'url' => array('index')),
-    array('label' => 'Create Org', 'url' => array('create')),
-    array('label' => 'Update Org', 'url' => array('update', 'id' => $model->id)),
-    array('label' => 'Delete Org', 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Are you sure you want to delete this item?')),
-    array('label' => 'Manage Org', 'url' => array('admin')),
-);
 ?>
 
 <div class="panel">

@@ -2,6 +2,14 @@
 /* @var $this ProviderTrainerController */
 /* @var $model ProviderTrainer */
 /* @var $form CActiveForm */
+
+$modelTrainer = Trainer::model()->findAll();
+$listTrainer = CHtml::listData($modelTrainer, 
+                'id', 'org.legal_name');
+
+$modelProvider = Provider::model()->findAll();
+$listProvider = CHtml::listData($modelProvider, 
+                'id', 'org.legal_name');
 ?>
 
 <div class="row">
@@ -20,13 +28,13 @@
 
                 <div class="form-group">
                     <?php echo $form->labelEx($model,'trainer_id'); ?>
-                    <?php echo $form->textField($model,'trainer_id', array('class' => 'form-control')); ?>
+                    <?php echo $form->dropDownList($model, 'trainer_id',$listTrainer, array('class' => 'form-control')); ?>
                     <?php echo $form->error($model,'trainer_id'); ?>
             </div>
 
                 <div class="form-group">
                     <?php echo $form->labelEx($model,'provider_id'); ?>
-                    <?php echo $form->textField($model,'provider_id', array('class' => 'form-control')); ?>
+                    <?php echo $form->dropDownList($model, 'provider_id',$listTrainer, array('class' => 'form-control')); ?>
                     <?php echo $form->error($model,'provider_id'); ?>
             </div>
 

@@ -9,12 +9,6 @@ $this->breadcrumbs=array(
 	'Update',
 );
 
-$this->menu=array(
-	array('label'=>'List HrTeam', 'url'=>array('index')),
-	array('label'=>'Create HrTeam', 'url'=>array('create')),
-	array('label'=>'View HrTeam', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage HrTeam', 'url'=>array('admin')),
-);
 ?>
 <div class="panel">
     <div class="panel-heading panel-head">Update HrTeam <?php echo $model->id; ?></div>

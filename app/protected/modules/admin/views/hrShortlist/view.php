@@ -7,13 +7,6 @@ $this->breadcrumbs = array(
     $model->name,
 );
 
-$this->menu = array(
-    array('label' => 'List HrShortlist', 'url' => array('index')),
-    array('label' => 'Create HrShortlist', 'url' => array('create')),
-    array('label' => 'Update HrShortlist', 'url' => array('update', 'id' => $model->id)),
-    array('label' => 'Delete HrShortlist', 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Are you sure you want to delete this item?')),
-    array('label' => 'Manage HrShortlist', 'url' => array('admin')),
-);
 ?>
 
 <div class="panel">

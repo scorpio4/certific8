@@ -72,7 +72,7 @@ $listHr = CHtml::listData($modelHr,
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'is_archived'); ?>
-            <?php echo $form->textField($model, 'is_archived',array('class'=>'form-control')); ?>
+            <?php echo $form->dropDownList( $model,'is_archived', array('0'=>'NO','1'=>'YES'),array('class'=>'form-control')); ?>
             <?php echo $form->error($model, 'is_archived'); ?>
         </div>
 

@@ -9,12 +9,12 @@ $this->breadcrumbs=array(
 	'Update',
 );
 
-$this->menu=array(
-	array('label'=>'List UserSkill', 'url'=>array('index')),
-	array('label'=>'Create UserSkill', 'url'=>array('create')),
-	array('label'=>'View UserSkill', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage UserSkill', 'url'=>array('admin')),
-);
+//$this->menu=array(
+//	array('label'=>'List UserSkill', 'url'=>array('index')),
+//	array('label'=>'Create UserSkill', 'url'=>array('create')),
+//	array('label'=>'View UserSkill', 'url'=>array('view', 'id'=>$model->id)),
+//	array('label'=>'Manage UserSkill', 'url'=>array('admin')),
+//);
 ?>
 <div class="panel">
     <div class="panel-heading panel-head">Update UserSkill <?php echo $model->id; ?></div>

@@ -7,13 +7,6 @@ $this->breadcrumbs = array(
     $model->id,
 );
 
-$this->menu = array(
-    array('label' => 'List ProviderTrainer', 'url' => array('index')),
-    array('label' => 'Create ProviderTrainer', 'url' => array('create')),
-    array('label' => 'Update ProviderTrainer', 'url' => array('update', 'id' => $model->id)),
-    array('label' => 'Delete ProviderTrainer', 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Are you sure you want to delete this item?')),
-    array('label' => 'Manage ProviderTrainer', 'url' => array('admin')),
-);
 ?>
 
 <div class="panel">
