@@ -4,7 +4,7 @@
 
 $this->breadcrumbs = array(
     'Users' => array('admin'),
-    $model->id,
+    $model->first_name,
 );
 
 $this->menu = array(
@@ -64,7 +64,7 @@ $this->menu = array(
                             'is_test',
                             array(
                                 'name'=>'membership_id',
-                                'value'=>$model->membership->name
+                                'value'=>isset($model->membership->name)?$model->membership->name:''
                             ),
                             'profile_id',
                             'current_salary',

@@ -13,10 +13,22 @@ $this->menu = array(
     array('label' => 'Create ProfileJob', 'url' => array('create'),'linkOptions'=>array('class'=>'btn btn-green btn-sm')),
 );
 
-$tfooterstart = '<footer class="panel-footer"><div class="row">';
-$tfooterend = '</div></footer>';
-$sumstart = '<div class="col-sm-4 text-center"><small class="text-muted inline m-t-sm m-b-sm">';
+$tfooterstart = '<div class="panel-footer">';
+$tfooterend = '</div>';
+$sumstart = '<div class="col-sm-4 mt5"><small class="text-muted inline m-t-sm m-b-sm">';
 $sumend = '</small></div>';
+
+Yii::app()->clientScript->registerScript('search', "   
+    $('body').on('keyup','.filters > td > input', function() {
+        $('#profile-job-grid').yiiGridView('update', {
+            data: $(this).serialize()  
+        });
+        return false; 
+    });
+    $('.table tbody tr').live('click', function(){
+      window.location.href = $(this).find('.updater').attr('href');
+    });
+");
 ?>
 <div class="panel">
     <div class="panel-heading panel-head">Profile Jobs</div>
@@ -27,9 +39,10 @@ $sumend = '</small></div>';
                 'id' => 'profile-job-grid',
                 'dataProvider' => $model->search(),
                 //'filter' => $model,
-                'itemsCssClass' => 'table table-striped b-t b-light text-sm',
-                'pagerCssClass' => 'col-sm-4 text-right text-center-xs',
+                'itemsCssClass' => 'table table-primary table-striped m-b-n',
+                'pagerCssClass' => 'pull-right padder',
                 'template' => '<div class="table-responsive">{items}</div>' . $tfooterstart . $sumstart . '{summary}' . $sumend . '{pager}' . $tfooterend,
+                'htmlOptions' => array('class' => ''),
                 'pager' => array(
                     'header' => '',
                     'cssFile' => false,
@@ -40,7 +53,7 @@ $sumend = '</small></div>';
                     'prevPageLabel' => '<',
                     'nextPageLabel' => '>',
                     'maxButtonCount' => 5,
-                    'htmlOptions' => array('class' => 'pagination pagination-sm m-t-none m-b-none')
+                    'htmlOptions' => array('class' => 'pagination pagination-metro nomargin')
                 ),
                 'columns' => array(
                     array(
@@ -70,7 +83,7 @@ $sumend = '</small></div>';
                             'update' => array(
                                 'label' => '<i class="fa fa-edit"></i>',
                                 'imageUrl' => false,
-                                'options' => array('class' => 'btn btn-blue btn-sm', 'title' => 'Edit'),
+                                'options' => array('class' => 'btn btn-blue btn-sm updater', 'title' => 'Edit'),
                             ),
                             'delete' => array(
                                 'label' => '<i class="fa fa-trash-o"></i>',

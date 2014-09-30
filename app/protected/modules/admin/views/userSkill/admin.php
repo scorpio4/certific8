@@ -27,7 +27,9 @@ Yii::app()->clientScript->registerScript('search', "
         return false; 
     });
     $('.table tbody tr').live('click', function(){
-      window.location.href = $(this).find('.updater').attr('href');
+      if($(this).find('.updater').attr('href')){
+        window.location.href = $(this).find('.updater').attr('href');
+      }
     });
 ");
 ?>
@@ -52,10 +54,10 @@ $this->widget('zii.widgets.grid.CGridView', array(
         'prevPageLabel' => '<',
         'nextPageLabel' => '>',
         'maxButtonCount' => 5,
-        'htmlOptions' => array('class' => 'pagination pagination-sm m-t-none m-b-none')
+        'htmlOptions' => array('class' => 'pagination pagination-metro nomargin')
     ),
     'columns' => array(
-        'id',
+        //'id',
         //'user_id',
         array(
             'header' => 'Skill',

@@ -87,8 +87,7 @@ class UserController extends Controller {
                 $template = EmailTemplate::model()->findByAttributes(array('type' => 'email_verify'));
                 if ($template) {
                     $to = $model->email;
-                    $from = 'admin@certific8.in';
-                    $from = $model->email;
+                    $from = Yii::app()->params['adminEmail'];
                     $sub = $template->subject;
                     $msg = $template->template;
                     $url = Yii::app()->createAbsoluteUrl('/verify/' . $token);

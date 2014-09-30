@@ -11,12 +11,14 @@
         $cs = Yii::app()->clientScript;
         $cs->registerCssFile(Yii::app()->theme->baseUrl . '/css/style.default.css')
            ->registerCssFile(Yii::app()->theme->baseUrl . '/css/bootstrap-timepicker.min.css')
+           ->registerCssFile(Yii::app()->theme->baseUrl . '/css/select2.css')
           ->registerCssFile(Yii::app()->theme->baseUrl . '/css/style.css');
 
         $cs->registerCoreScript('jquery');
         $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/jquery-migrate-1.2.1.min.js', CClientScript::POS_HEAD);
         $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/bootstrap.min.js', CClientScript::POS_END);
         $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/jquery-ui-1.10.3.min.js', CClientScript::POS_END);
+        $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/select2.min.js', CClientScript::POS_END);
         ?>
     </head>
 

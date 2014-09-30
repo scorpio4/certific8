@@ -2,10 +2,10 @@
 /* @var $this UserSkillController */
 /* @var $model UserSkill */
 
-$this->breadcrumbs=array(
-        'User'=>array('user/admin'),
-	'User Skills'=>array('admin','id'=>$model->user_id),
-	$model->id,
+$this->breadcrumbs = array(
+    'User' => array('user/admin'),
+    'User Skills' => array('admin', 'id' => $model->user_id),
+    $model->id,
 );
 
 //$this->menu=array(
@@ -16,30 +16,51 @@ $this->breadcrumbs=array(
 //	array('label'=>'Manage UserSkill', 'url'=>array('admin')),
 //);
 ?>
+<div class="panel-body">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="table-responsive">
+                <div class="panel panel-default">
 
-<div class="panel">
-    <div class="panel-heading panel-head">View UserSkill #<?php echo $model->id; ?></div>
-    <div class="panel-body">
+                    <?php
+                    $this->widget('zii.widgets.CDetailView', array(
+                        'data' => $model,
+                        'htmlOptions' => array('class' => 'table table-striped b-t b-light text-sm view-table'),
+                        'attributes' => array(
+                            //'id',
+                            'user.username',
+                            array(
+                                'label' => 'Skill',
+                                'name' => 'skill.title',
+                            ),
+                            array(
+                                'label' => 'Trainer',
+                                'name' => 'trainer.org.legal_name',
+                            ),
+                            'award_number',
+                            'award_rank',
+                        ),
+                    ));
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="table-responsive">
+                <div class="panel panel-default">
+                    <?php
+                    $this->widget('zii.widgets.CDetailView', array(
+                        'data' => $model,
+                        'htmlOptions' => array('class' => 'table table-striped b-t b-light text-sm view-table'),
+                        'attributes' => array(
+                            'award_date',
+                            'expiry_date',
+                        ),
+                    ));
+                    ?>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-        'data'=>$model,
-        'htmlOptions'=>array('class'=>'table table-striped b-t b-light text-sm view-table'),
-        'attributes'=>array(
-		'id',
-		'user.username',
-                array(
-                    'label'=>'Skill',
-                    'name'=>'skill.title',
-                ),
-                array(
-                    'label'=>'Trainer',
-                    'name'=>'trainer.org.legal_name',
-                ),
-		'award_number',
-		'award_rank',
-		'award_date',
-		'expiry_date',
-        ),
-)); ?>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

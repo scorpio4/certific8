@@ -2,7 +2,7 @@
     <div class="container">
         <div class="breadcrumb-navigation">
             <?php
-                $url=Yii::app()->homeUrl;
+                $url=Yii::app()->homeUrl.'admin';
                 $this->widget('zii.widgets.CBreadcrumbs', array(
                     'links' => $this->breadcrumbs,
                     'tagName' => 'ul',

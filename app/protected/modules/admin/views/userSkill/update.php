@@ -2,11 +2,11 @@
 /* @var $this UserSkillController */
 /* @var $model UserSkill */
 
-$this->breadcrumbs=array(
-	'User'=>array('user/admin'),
-	'User Skills'=>array('admin','id'=>$model->user_id),
-	$model->id=>array('view','id'=>$model->id),
-	'Update',
+$this->breadcrumbs = array(
+    'User' => array('user/admin'),
+    'User Skills' => array('admin', 'id' => $model->user_id),
+    $model->skill->title => array('view', 'id' => $model->id),
+    'Update',
 );
 
 //$this->menu=array(
@@ -16,10 +16,10 @@ $this->breadcrumbs=array(
 //	array('label'=>'Manage UserSkill', 'url'=>array('admin')),
 //);
 ?>
-<div class="panel">
-    <div class="panel-heading panel-head">Update UserSkill <?php echo $model->id; ?></div>
-    <div class="panel-body">
-        <?php $this->renderPartial('_form', array('model'=>$model)); ?>    </div>
+
+<div class="panel-body">
+    <?php $this->renderPartial('_form', array('model' => $model)); ?>    
 </div>
+
 
 
