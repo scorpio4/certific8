@@ -53,7 +53,14 @@ return array(
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
-		
+                'clientScript'=>array(
+                    'packages'=>array(
+                         'jquery'=>array(
+                             'baseUrl'=>Yii::app()->request->baseUrl . 'js/',
+                             'js'=>array('jquery-1.11.1.min.js')
+                          )                                       
+                     )
+                ),
 //		'db'=>array(
 //			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 //		),

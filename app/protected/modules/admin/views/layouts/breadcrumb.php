@@ -10,7 +10,7 @@
                     'activeLinkTemplate' => '<li class="bredcrumb-active"><a href="{url}">{label}</a></li>',
                     'inactiveLinkTemplate' => '<li>{label}</li>',
                     'homeLink' => '<li><a href="' .$url. '"><i class="fa fa-home"></i></a></li>',
-                    'htmlOptions' => array('class' => ''),
+                    'htmlOptions' => array('class' => 'breadcrumb'),
                 ));
             ?>
             <div class="c"></div>

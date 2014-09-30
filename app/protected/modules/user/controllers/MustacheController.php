@@ -4,6 +4,7 @@ class MustacheController extends Controller
 {
 	public function actionIndex()
 	{
+            $profile = new Profile;
             spl_autoload_unregister(array('YiiBase','autoload'));
             Yii::import('application.vendor.mustache.*');
             require_once('src/Mustache/Autoloader.php');

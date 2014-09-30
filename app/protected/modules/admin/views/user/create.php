@@ -8,15 +8,13 @@ $this->breadcrumbs = array(
 );
 
 $this->menu = array(
-    //array('label' => 'List User', 'url' => array('index')),
-    //array('label' => 'Manage User', 'url' => array('admin')),
+        //array('label' => 'List User', 'url' => array('index')),
+        //array('label' => 'Manage User', 'url' => array('admin')),
 );
 ?>
-<div class="panel">
-    <div class="panel-heading panel-head">Create User</div>
-    <div class="panel-body">
-        <?php $this->renderPartial('_form', array('model' => $model)); ?>
-    </div>
+
+<div class="panel-body">
+    <?php $this->renderPartial('_form', array('model' => $model)); ?>
 </div>
 
 
