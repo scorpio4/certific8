@@ -10,7 +10,7 @@ $this->breadcrumbs = array(
 
 $this->menu = array(
     //array('label' => 'List Org', 'url' => array('index')),
-    array('label' => 'Create Organization', 'url' => array('create'), 'linkOptions' => array('class' => 'btn btn-green btn-sm')),
+    array('label' => 'Create Organization', 'url' => array('create'), 'linkOptions' => array('class' => 'btn btn-primary')),
 );
 
 $tfooterstart = '<div class="panel-footer">';

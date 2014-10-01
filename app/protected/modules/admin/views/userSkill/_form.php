@@ -37,19 +37,19 @@ $form = $this->beginWidget('CActiveForm', array(
     <div class="col-md-6">
         <div class="form-group">
             <?php echo $form->labelEx($model, 'user_id'); ?>
-            <?php echo $form->dropDownList($model, 'user_id', $listUser, array('style' => 'width:100%')); ?>
+            <?php echo $form->dropDownList($model, 'user_id', $listUser, array('style' => 'width:100%','empty'=>'Select')); ?>
             <?php echo $form->error($model, 'user_id'); ?>
         </div>
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'skill_id'); ?>
-            <?php echo $form->dropDownList($model, 'skill_id', $listSkill, array('style' => 'width:100%')); ?>
+            <?php echo $form->dropDownList($model, 'skill_id', $listSkill, array('style' => 'width:100%','empty'=>'Select')); ?>
             <?php echo $form->error($model, 'skill_id'); ?>
         </div>
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'trainer_id'); ?>
-            <?php echo $form->dropDownList($model, 'trainer_id', $listTrainer, array('style' => 'width:100%')); ?>
+            <?php echo $form->dropDownList($model, 'trainer_id', $listTrainer, array('style' => 'width:100%','empty'=>'Select')); ?>
             <?php echo $form->error($model, 'trainer_id'); ?>
         </div>
 

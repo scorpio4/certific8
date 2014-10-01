@@ -25,7 +25,9 @@ Yii::app()->clientScript->registerScript('search', "
         return false; 
     });
     $('.table tbody tr').live('click', function(){
-      window.location.href = $(this).find('.updater').attr('href');
+      if($(this).find('.updater').attr('href')){
+        window.location.href = $(this).find('.updater').attr('href');
+      }
     });
 ");
 ?>

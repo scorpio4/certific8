@@ -11,7 +11,7 @@ $this->breadcrumbs = array(
 
 $this->menu = array(
     //array('label' => 'List ProfileSkill', 'url' => array('index')),
-    array('label' => 'Create ProfileSkill', 'url' => array('create'), 'linkOptions' => array('class' => 'btn btn-green btn-sm')),
+    array('label' => 'Create ProfileSkill', 'url' => array('create'), 'linkOptions' => array('class' => 'btn btn-primary')),
 );
 
 $tfooterstart = '<div class="panel-footer">';
@@ -27,7 +27,9 @@ Yii::app()->clientScript->registerScript('search', "
         return false; 
     });
     $('.table tbody tr').live('click', function(){
-      window.location.href = $(this).find('.updater').attr('href');
+      if($(this).find('.updater').attr('href')){
+        window.location.href = $(this).find('.updater').attr('href');
+      }
     });
 ");
 ?>

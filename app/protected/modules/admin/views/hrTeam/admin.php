@@ -11,7 +11,7 @@ $this->breadcrumbs = array(
 
 $this->menu = array(
     //array('label'=>'List HrTeam', 'url'=>array('index')),
-    array('label' => 'Create HrTeam', 'url' => array('create'), 'linkOptions' => array('class' => 'btn btn-green btn-sm')),
+    array('label' => 'Create HrTeam', 'url' => array('create'), 'linkOptions' => array('class' => 'btn btn-primary')),
 );
 
 $tfooterstart = '<div class="panel-footer">';

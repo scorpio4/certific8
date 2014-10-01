@@ -10,7 +10,7 @@ $this->breadcrumbs = array(
 
 $this->menu = array(
     //array('label' => 'List Invite', 'url' => array('index')),
-    array('label' => 'Create Invite', 'url' => array('create'), 'linkOptions' => array('class' => 'btn btn-green btn-sm')),
+    array('label' => 'Create Invite', 'url' => array('create'), 'linkOptions' => array('class' => 'btn btn-primary')),
 );
 
 $tfooterstart = '<div class="panel-footer">';
