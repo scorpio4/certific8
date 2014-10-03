@@ -35,9 +35,6 @@
                 <div class="mainpanel">
                     <div class="pageheader">
                         <div class="media head-left">
-                            <div class="pageicon pull-left">
-                                <i class="fa fa-users"></i>
-                            </div>
                             <div class="media-body">
                                 <?php echo $this->renderPartial('/layouts/breadcrumb'); ?>
                             </div>

@@ -65,8 +65,14 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'header' => 'Membership',
             'name' => 'membership.name'
         ),
-        'is_registered',
-        'is_paid',
+        array(
+          'name'=>'is_registered',
+          'filter'=>array('1'=>'YES','0'=>'NO'),  
+        ),
+        array(
+          'name'=>'is_paid',
+          'filter'=>array('1'=>'YES','0'=>'NO'),  
+        ),
         'first_joined',
         /*
           'last_seen',

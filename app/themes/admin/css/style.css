@@ -34,6 +34,29 @@
     transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
     width: 100%;
 }
+.filters select:focus{
+    border-color: #999;
+    box-shadow: none;
+}
+.filters select{
+    border-radius: 3px;
+    box-shadow: none;
+    font-size: 13px;
+    height: auto;
+    padding: 10px;
+
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #555;
+    display: block;
+    font-size: 14px;
+    line-height: 1.42857;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 90%;
+}
 .filters input:focus{
     border-color: #999;
     box-shadow: none;
@@ -42,4 +65,10 @@
     list-style: none;
     padding: 0;
     margin: 0;
+}
+.errorMessage{
+    color: #F00;
+}
+.errorSummary{
+    color: #F00;
 }

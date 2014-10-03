@@ -5,7 +5,7 @@
                 <img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/logo.png" alt="" /> 
             </a>
             <div class="pull-right">
-                <a href="" class="menu-collapse">
+                <a href="#" class="menu-collapse">
                     <i class="fa fa-bars"></i>
                 </a>
             </div>

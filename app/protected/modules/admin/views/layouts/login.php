@@ -8,7 +8,8 @@
         <!-- Bootstrap -->
         <?php
         $cs = Yii::app()->clientScript;
-        $cs->registerCssFile(Yii::app()->theme->baseUrl . '/css/style.default.css');
+        $cs->registerCssFile(Yii::app()->theme->baseUrl . '/css/style.default.css')
+            ->registerCssFile(Yii::app()->theme->baseUrl . '/css/style.css');
 
         $cs->registerCoreScript('jquery');
         $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/jquery-migrate-1.2.1.min.js', CClientScript::POS_HEAD);
