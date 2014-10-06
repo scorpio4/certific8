@@ -68,10 +68,12 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
           'name'=>'is_registered',
           'filter'=>array('1'=>'YES','0'=>'NO'),  
+          'value'=>'$data->is_registered=="1"?"YES":"NO"',
         ),
         array(
           'name'=>'is_paid',
           'filter'=>array('1'=>'YES','0'=>'NO'),  
+          'value'=>'$data->is_paid=="1"?"YES":"NO"',
         ),
         'first_joined',
         /*

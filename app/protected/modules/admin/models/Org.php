@@ -78,7 +78,7 @@ class Org extends CActiveRecord
 			'logo' => 'Logo',
 			'billing_user_id' => 'Billing User',
 			'admin_user_id' => 'Admin User',
-			'is_registered' => 'Is Registered',
+			'is_registered' => 'Registered',
 		);
 	}
 

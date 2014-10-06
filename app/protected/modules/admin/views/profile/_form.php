@@ -54,6 +54,12 @@ $form = $this->beginWidget('CActiveForm', array(
             <?php echo $form->textField($model, 'full_name', array('size' => 60, 'maxlength' => 255, 'class' => 'form-control')); ?>
             <?php echo $form->error($model, 'full_name'); ?>
         </div>
+        
+        <div class="form-group">
+            <?php echo $form->labelEx($model, 'label'); ?>
+            <?php echo $form->textField($model, 'label', array('size' => 60, 'maxlength' => 255, 'class' => 'form-control')); ?>
+            <?php echo $form->error($model, 'label'); ?>
+        </div>
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'short_title'); ?>
@@ -131,6 +137,7 @@ $form = $this->beginWidget('CActiveForm', array(
 </div>
 <div class="panel-footer">
     <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('class' => 'btn btn-primary')); ?>
+    <?php echo CHtml::link('Cancel', array('admin'), array('class'=>'btn btn-default')); ?>
 </div>
 
 <?php $this->endWidget(); ?>

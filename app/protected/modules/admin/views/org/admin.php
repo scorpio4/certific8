@@ -62,7 +62,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'name' => 'logo',
             'type' => 'html',
-            'value' => 'CHtml::image(Yii::app()->request->baseUrl."/uploads/logo/".$data->id."/".$data->logo,$data->legal_name,array("style"=>"width:100px;"))',
+            'value' => '$data->logo!="logo.png"?CHtml::image(Yii::app()->request->baseUrl."/uploads/logo/".$data->id."/".$data->logo,$data->legal_name,array("style"=>"width:100px;")):""',
         ),
         array(
             'header' => 'Billing User',

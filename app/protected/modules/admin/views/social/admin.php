@@ -69,6 +69,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'class' => 'CButtonColumn',
             'template' => '{view} {update} {delete}',
+            'headerHtmlOptions' => array('width' => '13%'),
             'buttons' => array(
                 'view' => array(
                     'label' => '<i class="fa fa-search"></i>',

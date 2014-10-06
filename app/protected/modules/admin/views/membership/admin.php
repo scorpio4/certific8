@@ -61,7 +61,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'name' => 'logo',
             'type' => 'html',
-            'value' => 'CHtml::image(Yii::app()->request->baseUrl."/uploads/membership/".$data->logo,"",array("style"=>"width:100px;"))',
+            'value' => '$data->logo!="member.png"?CHtml::image(Yii::app()->request->baseUrl."/uploads/membership/".$data->logo,"",array("style"=>"width:100px;")):""',
         ),
         'price',
         'duration_days',
@@ -74,6 +74,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'class' => 'CButtonColumn',
             'template' => '{view} {update} {delete}',
+            'headerHtmlOptions' => array('width' => '13%'),
             'buttons' => array(
                 'view' => array(
                     'label' => '<i class="fa fa-search"></i>',

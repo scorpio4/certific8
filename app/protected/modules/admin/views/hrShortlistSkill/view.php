@@ -40,7 +40,10 @@ $this->breadcrumbs = array(
                         'data' => $model,
                         'htmlOptions' => array('class' => 'table table-striped b-t b-light text-sm view-table'),
                         'attributes' => array(
-                            'is_required',
+                            array(
+                                'name'=>'is_required',
+                                'value'=>$model->is_required=='1'?'YES':'NO',
+                            ),
                         ),
                     ));
                     ?>

@@ -40,8 +40,14 @@ $this->breadcrumbs = array(
                         'data' => $model,
                         'htmlOptions' => array('class' => 'table table-striped b-t b-light text-sm view-table'),
                         'attributes' => array(
-                            'is_registered',
-                            'is_paid',
+                            array(
+                                'name'=>'is_registered',
+                                'value'=>$model->is_registered=='1'?'YES':'NO',
+                            ),
+                            array(
+                                'name'=>'is_paid',
+                                'value'=>$model->is_paid=='1'?'YES':'NO',
+                            ),
                             'first_joined',
                             'last_seen',
                             'last_valdiated',

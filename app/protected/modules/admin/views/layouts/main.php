@@ -19,6 +19,7 @@
         $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/bootstrap.min.js', CClientScript::POS_END);
         $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/jquery-ui-1.10.3.min.js', CClientScript::POS_END);
         $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/select2.min.js', CClientScript::POS_END);
+        $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/custom.js', CClientScript::POS_END);
         ?>
     </head>
 

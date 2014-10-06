@@ -55,7 +55,7 @@ class HrShortlistSkill extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'is_required' => 'Is Required',
+			'is_required' => 'Required',
 			'hr_shortlist_id' => 'Hr Shortlist',
 			'skill_id' => 'Skill',
 		);

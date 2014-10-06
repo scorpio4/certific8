@@ -42,7 +42,10 @@ $this->breadcrumbs = array(
                         'htmlOptions' => array('class' => 'table table-striped b-t b-light text-sm view-table'),
                         'attributes' => array(
                             'ipv4address',
-                            'is_archived',
+                            array(
+                                'name'=>'is_archived',
+                                'value'=>$model->is_archived=='1'?'YES':'NO',
+                            ),
                             'create_date',
                             'expire_date',
                         ),

@@ -59,9 +59,18 @@ $this->menu = array(
                         'data' => $model,
                         'htmlOptions' => array('class' => 'table table-striped table-view'),
                         'attributes' => array(
-                            'is_registered',
-                            'is_paid',
-                            'is_test',
+                            array(
+                                'name'=>'is_registered',
+                                'value'=>$model->is_registered=='1'?'YES':'NO',
+                            ),
+                            array(
+                                'name'=>'is_paid',
+                                'value'=>$model->is_paid=='1'?'YES':'NO',
+                            ),
+                            array(
+                                'name'=>'is_test',
+                                'value'=>$model->is_test=='1'?'YES':'NO',
+                            ),
                             array(
                                 'name'=>'membership_id',
                                 'value'=>isset($model->membership->name)?$model->membership->name:''

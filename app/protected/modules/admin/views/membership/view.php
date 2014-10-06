@@ -44,9 +44,18 @@ $this->breadcrumbs = array(
                         'data' => $model,
                         'htmlOptions' => array('class' => 'table table-striped b-t b-light text-sm view-table'),
                         'attributes' => array(
-                            'can_search',
-                            'can_contact',
-                            'status',
+                            array(
+                                'name'=>'can_search',
+                                'value'=>$model->can_search=='1'?'YES':'NO',
+                            ),
+                            array(
+                                'name'=>'can_contact',
+                                'value'=>$model->can_contact=='1'?'YES':'NO',
+                            ),
+                            array(
+                                'name'=>'status',
+                                'value'=>$model->status=='1'?'ENABLED':'DISABLED',
+                            ),
                         ),
                     ));
                     ?>

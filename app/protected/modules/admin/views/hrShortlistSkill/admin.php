@@ -61,7 +61,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'header' => 'Skill',
             'name' => 'skill.title'
         ),
-        'is_required',
+        array(
+          'name'=>'is_required',
+          'filter'=>array('1'=>'YES','0'=>'NO'),  
+          'value'=>'$data->is_required=="1"?"YES":"NO"',
+        ),
         array(
             'class' => 'CButtonColumn',
             'template' => '{view} {update} {delete}',

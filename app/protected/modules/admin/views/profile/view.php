@@ -20,6 +20,7 @@ $this->breadcrumbs = array(
                             //'id',
                             'slugname',
                             'full_name',
+                            'label',
                             'short_title',
                             'short_bio',
                             array(
@@ -30,8 +31,14 @@ $this->breadcrumbs = array(
                             ),
                             'min_salary',
                             'user.username',
-                            'hr_id',
-                            'membership_id',
+                            array(
+                                'name' => 'hr_id',
+                                'value' => isset($model->hr->org->legal_name)?$model->hr->org->legal_name:"",
+                            ),
+                            array(
+                                'name' => 'membership_id',
+                                'value' => isset($model->membership->name)?$model->membership->name:"",
+                            ),
                         ),
                     ));
                     ?>
@@ -50,10 +57,22 @@ $this->breadcrumbs = array(
                                 'name' => 'template_id',
                                 'value' => $model->template->template_name,
                             ),
-                            'is_active',
-                            'is_public',
-                            'can_contact',
-                            'show_vouches',
+                            array(
+                                'name'=>'is_active',
+                                'value'=>$model->is_active=='1'?'YES':'NO',
+                            ),
+                            array(
+                                'name'=>'is_public',
+                                'value'=>$model->is_public=='1'?'YES':'NO',
+                            ),
+                            array(
+                                'name'=>'can_contact',
+                                'value'=>$model->can_contact=='1'?'YES':'NO',
+                            ),
+                            array(
+                                'name'=>'show_vouches',
+                                'value'=>$model->show_vouches=='1'?'YES':'NO',
+                            ),
                         ),
                     ));
                     ?>

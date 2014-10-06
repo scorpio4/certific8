@@ -47,6 +47,7 @@ $form = $this->beginWidget('CActiveForm', array(
 </div>
 <div class="panel-footer">
     <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('class' => 'btn btn-primary')); ?>
+    <?php echo CHtml::link('Cancel', array('hr/admin'), array('class'=>'btn btn-default')); ?>
 </div>
 
 <?php $this->endWidget(); ?>

@@ -24,15 +24,24 @@ $this->pageTitle = Yii::app()->name . ' - Login';
             ),
         ));
         ?>
-        <div class="input-group mb15">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-            <?php echo $form->textField($model, 'username', array("onfocus" => "this.placeholder = ''", "onblur" => "this.placeholder = 'Username'", "class" => "form-control", "placeholder" => "Username")); ?>
-            <?php echo $form->error($model, 'username'); ?>
+        <div class="mb15">
+            <div class="input-group ">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <?php echo $form->textField($model, 'username', array("onfocus" => "this.placeholder = ''", "onblur" => "this.placeholder = 'Username'", "class" => "form-control", "placeholder" => "Username")); ?>
+            </div>
+            <div>
+                <?php echo $form->error($model, 'username'); ?>
+            </div>
         </div><!-- input-group -->
-        <div class="input-group mb15">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-            <?php echo $form->passwordField($model, 'password', array("onfocus" => "this.placeholder = ''", "onblur" => "this.placeholder = 'Password'", "class" => "form-control", "placeholder" => "Password")); ?>
-            <?php echo $form->error($model, 'password'); ?>
+        
+        <div class="mb15">
+            <div class="input-group ">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <?php echo $form->passwordField($model, 'password', array("onfocus" => "this.placeholder = ''", "onblur" => "this.placeholder = 'Password'", "class" => "form-control", "placeholder" => "Password")); ?>
+            </div>
+            <div>
+                <?php echo $form->error($model, 'password'); ?>
+            </div>
         </div><!-- input-group -->
 
         <div class="clearfix">

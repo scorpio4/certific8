@@ -85,7 +85,7 @@ class HrShortlist extends CActiveRecord
 			'max_results' => 'Max Results',
 			'geo_territory' => 'Geo Territory',
 			'ipv4address' => 'Ipv4address',
-			'is_archived' => 'Is Archived',
+			'is_archived' => 'Archived',
 			'create_date' => 'Create Date',
 			'expire_date' => 'Expire Date',
 		);

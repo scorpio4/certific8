@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	//array('label'=>'List Hr', 'url'=>array('index')),
-	array('label'=>'Create Hr', 'url'=>array('create'),'linkOptions'=>array('class'=>'btn btn-primary')),
+	array('label'=>'Create HR', 'url'=>array('create'),'linkOptions'=>array('class'=>'btn btn-primary')),
 );
 
 $tfooterstart = '<div class="panel-footer">';
@@ -65,10 +65,12 @@ Yii::app()->clientScript->registerScript('search', "
                 array(
                     'name'=>'is_registered',
                     'filter'=>array('1'=>'YES','0'=>'NO'),
+                    'value'=>'$data->is_registered=="1"?"YES":"NO"',
                 ),
                 array(
                     'name'=>'is_paid',
                     'filter'=>array('1'=>'YES','0'=>'NO'),
+                    'value'=>'$data->is_paid=="1"?"YES":"NO"',
                 ),
 		'first_joined',
 		/*

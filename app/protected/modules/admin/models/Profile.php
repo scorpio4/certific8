@@ -54,7 +54,7 @@ class Profile extends CActiveRecord
             array('template_id, is_active, is_public, can_contact, show_vouches, min_salary, user_id, hr_id, membership_id', 'numerical', 'integerOnly' => true),
             array('slugname', 'length', 'max' => 16),
             array('avatar', 'file', 'allowEmpty'=>true,'types'=>'jpg,png,gif','on'=>'update'),
-            array('full_name, short_title, avatar', 'length', 'max' => 255),
+            array('full_name, short_title, avatar, label', 'length', 'max' => 255),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, slugname, full_name, short_title, short_bio, avatar, template_id, is_active, is_public, can_contact, show_vouches, min_salary, user_id, hr_id, membership_id', 'safe', 'on' => 'search'),
@@ -95,8 +95,8 @@ class Profile extends CActiveRecord
             'short_bio' => 'Short Bio',
             'avatar' => 'Avatar',
             'template_id' => 'Template',
-            'is_active' => 'Is Active',
-            'is_public' => 'Is Public',
+            'is_active' => 'Active',
+            'is_public' => 'Public',
             'can_contact' => 'Can Contact',
             'show_vouches' => 'Show Vouches',
             'min_salary' => 'Min Salary',
