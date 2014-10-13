@@ -66,13 +66,16 @@ class User extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('full_name,password_sha256, email', 'required','on'=>'register'),
+                        array('first_name,last_name, email, mobile', 'required','on'=>'create,update'),
+                        array('avatar', 'file','types'=>'jpg, gif, png', 'allowEmpty'=>true, 'on'=>'create,update'),
                         array('password_sha256, email', 'required','on'=>'login'),
 			array('is_registered, is_paid, is_test, membership_id, profile_id, current_salary', 'numerical', 'integerOnly'=>true),
 			array('first_name, last_name, full_name, email, mobile, house_unit_number, street, suburb, state, postcode, country, username, registration_token, avatar', 'length', 'max'=>255),
 			array('geo_territory', 'length', 'max'=>32),
 			array('ipv4address', 'length', 'max'=>16),
                         array('email', 'email'),
-                        array('email', 'unique','on'=>'register'),
+                        array('email', 'unique','on'=>'register,update'),
+                       
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, first_name, last_name, full_name, email, mobile, house_unit_number, street, suburb, state, postcode, country, username, password_sha256, registration_token, avatar, is_registered, is_paid, is_test, membership_id, profile_id, current_salary, geo_territory, ipv4address, first_joined, last_seen, last_valdiated', 'safe', 'on'=>'search'),
@@ -110,12 +113,12 @@ class User extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'first_name' => 'First Name',
-			'last_name' => 'Last Name',
-			'full_name' => 'Your Name',
+			'first_name' => 'First name',
+			'last_name' => 'Last name',
+			'full_name' => 'Your name',
 			'email' => 'Email',
 			'mobile' => 'Mobile',
-			'house_unit_number' => 'House Unit Number',
+			'house_unit_number' => 'House unit number',
 			'street' => 'Street',
 			'suburb' => 'Suburb',
 			'state' => 'State',
@@ -216,6 +219,9 @@ class User extends CActiveRecord
             return $str;
         }
         
+        /**
+	 * Send mail with given attributes
+	 */
         public function sendMail($to, $from, $msg, $sub,$path=null,$from_name=null)
         {
             $mailer = Yii::createComponent('application.extensions.mailer.EMailer');

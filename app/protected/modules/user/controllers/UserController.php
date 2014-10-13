@@ -11,7 +11,8 @@ class UserController extends Controller {
     /**
      * @return array action filters
      */
-    public function filters() {
+    public function filters() 
+    {
         return array(
             'accessControl', // perform access control for CRUD operations
             'postOnly + delete', // we only allow deletion via POST request
@@ -23,20 +24,20 @@ class UserController extends Controller {
      * This method is used by the 'accessControl' filter.
      * @return array access control rules
      */
-    public function accessRules() {
+    public function accessRules() 
+    {
         return array(
-            array('allow', // allow all users to perform 'index' and 'view' actions
+            array('allow', 
                 'actions' => array('index', 'register', 'login', 'changeFrom', 'socialLogin', 'verify'),
                 'users' => array('?'),
             ),
-            array('allow', // allow authenticated user to perform 'create' and 'update' actions
+            array('allow', 
                 'actions' => array('index', 'socialResponse'),
                 'users' => array('*'),
             ),
-            array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('home'),
+            array('allow', 
+                'actions' => array('update'),
                 'roles' => array('members'),
-            //'users'=>array('*'),
             ),
             array('deny', // deny all users
                 'users' => array('*'),
@@ -47,7 +48,8 @@ class UserController extends Controller {
     /**
      * Creates a new model.
      */
-    public function actionRegister() {
+    public function actionRegister() 
+    {
         $model = new User;
         $model->scenario = 'register';
 
@@ -107,7 +109,8 @@ class UserController extends Controller {
     /**
      * Manage user login
      */
-    public function actionLogin() {
+    public function actionLogin() 
+    {
         $model = new LoginForm;
 
         // if it is ajax validation request
@@ -138,7 +141,8 @@ class UserController extends Controller {
 
     /* Change display form */
 
-    public function actionChangeFrom() {
+    public function actionChangeFrom() 
+    {
         if (isset($_POST['type'])) {
             $type = $_POST['type'];
             Yii::app()->clientScript->scriptMap['jquery.js'] = false;
@@ -155,32 +159,102 @@ class UserController extends Controller {
     /**
      * Lists all models.
      */
-    public function actionIndex() {
+    public function actionIndex() 
+    {
         if (!Yii::app()->user->isGuest) {
-            $this->redirect(array('/'));
+            $this->redirect(array('/user'));
         }
+        $this->layout = 'login';
         $model = new User;
-
+      
         $this->render('index', array(
             'model' => $model,
         ));
     }
 
     /**
-     * Lists all models.
+     * Create/ Updates a particular user.
      */
-    public function actionHome() {
-        $model = new User;
+    public function actionUpdate()
+    {
+        $model = $this->loadModel(Yii::app()->user->id);
+        $model->scenario ='create';
+        $email = $model->email;
+        if(isset($_POST['ajax']) && $_POST['ajax']==='user-form') {
+                echo CActiveForm::validate($model);
+                Yii::app()->end();
+        }
+        if (isset($_POST['User'])) {
 
-        $this->render('home', array(
+            $model->attributes = $_POST['User'];
+            $photos = CUploadedFile::getInstances($model,'avatar');
+            if($email != $model->email) {
+                $model->scenario ='update';
+            }
+            if ($model->save()) {
+                if (isset($photos) && count($photos) > 0) {
+                    foreach ($photos as $image => $pic) {
+                        $url = $pic->tempName;
+                        $ext = substr(strrchr($pic->name, "."), 1);
+                        if(!$ext) {
+                            $ext = 'png';
+                        }
+                        $image = 'avatar_' . $model->id . '.'.$ext;
+                        $model->avatar = $image;
+                        $destination = Yii::getPathOfAlias('webroot') . '/uploads/avatar/' . $model->id;
+                        if (!file_exists($destination)) {
+                            mkdir($destination);
+                        }
+                        $destination = $destination . '/' . $image;
+                        file_put_contents($destination, file_get_contents($url));
+                        Yii::import('application.extensions.EWideImage.EWideImage');
+                        $imgload = EWideImage::load($destination);
+                        $image = $imgload->resize(50,50,'fill');
+                        $tempname = Yii::getPathOfAlias('webroot') . '/uploads/avatar/' . $model->id.'/thumb';
+                        if (!file_exists($tempname)) {
+                            mkdir($tempname);
+                        }
+                        $tempname = $tempname . '/' . $model->avatar;
+                        file_put_contents($tempname, file_get_contents($url));
+                        $image->saveToFile($tempname);
+                        
+                        $image = $imgload->resize(150,150,'fill');
+                        $tempname = Yii::getPathOfAlias('webroot') . '/uploads/avatar/' . $model->id.'/profile';
+                        if (!file_exists($tempname)) {
+                            mkdir($tempname);
+                        }
+                        $tempname = $tempname . '/' . $model->avatar;
+                        file_put_contents($tempname, file_get_contents($url));
+                        $image->saveToFile($tempname);
+                        
+                        $image = $imgload->resize(171,174,'fill');
+                        $tempname = Yii::getPathOfAlias('webroot') . '/uploads/avatar/' . $model->id.'/user';
+                        if (!file_exists($tempname)) {
+                            mkdir($tempname);
+                        }
+                        $tempname = $tempname . '/' . $model->avatar;
+                        file_put_contents($tempname, file_get_contents($url));
+                        $image->saveToFile($tempname);
+                        
+                        $model->save(false);
+                    }
+                }
+                Yii::app()->user->setFlash('success', 'Profle saved successfully.');
+                $this->redirect(array('/'));
+                exit;
+            }
+        }
+
+        $this->render('update', array(
             'model' => $model,
         ));
     }
 
     /**
      * User login by social api.
-     */
-    public function actionSocialLogin($provider) {
+    */
+    public function actionSocialLogin($provider) 
+    {
         error_reporting(E_ERROR);
         $path = Yii::getPathOfAlias('ext.hybridauth');
         $config = $path . '/config.php';
@@ -212,6 +286,34 @@ class UserController extends Controller {
                             }
                             $destination = $destination . '/' . $image;
                             file_put_contents($destination, file_get_contents($url));
+                            Yii::import('application.extensions.EWideImage.EWideImage');
+                            $imgload = EWideImage::load($destination);
+                            $image = $imgload->resize(50,50,'fill');
+                            $tempname = Yii::getPathOfAlias('webroot') . '/uploads/avatar/' . $user->id.'/thumb';
+                            if (!file_exists($tempname)) {
+                                mkdir($tempname);
+                            }
+                            $tempname = $tempname . '/' . $user->avatar;
+                            file_put_contents($tempname, file_get_contents($url));
+                            $image->saveToFile($tempname);
+                            
+                            $image = $imgload->resize(150,150,'fill');
+                            $tempname = Yii::getPathOfAlias('webroot') . '/uploads/avatar/' . $user->id.'/profile';
+                            if (!file_exists($tempname)) {
+                                mkdir($tempname);
+                            }
+                            $tempname = $tempname . '/' . $user->avatar;
+                            file_put_contents($tempname, file_get_contents($url));
+                            $image->saveToFile($tempname);
+
+                            $image = $imgload->resize(171,174,'fill');
+                            $tempname = Yii::getPathOfAlias('webroot') . '/uploads/avatar/' . $user->id.'/user';
+                            if (!file_exists($tempname)) {
+                                mkdir($tempname);
+                            }
+                            $tempname = $tempname . '/' . $user->avatar;
+                            file_put_contents($tempname, file_get_contents($url));
+                            $image->saveToFile($tempname);
                         }
                         $user->save(false);
                         unset($profile->identifier);
@@ -247,7 +349,6 @@ class UserController extends Controller {
                     $user->first_joined = date('Y-m-d');
                     $user->last_valdiated = date('Y-m-d');
                     $user->last_seen = date('Y-m-d');
-                    //$user->username = $profile->displayName;
                     $user->ipv4address = ip2long(Yii::app()->request->getUserHostAddress());
                     $user->is_registered = 1;
                     $user->membership_id = 1;
@@ -262,6 +363,34 @@ class UserController extends Controller {
                         }
                         $destination = $destination . '/' . $image;
                         file_put_contents($destination, file_get_contents($url));
+                        Yii::import('application.extensions.EWideImage.EWideImage');
+                        $imgload = EWideImage::load($destination);
+                        $image = $imgload->resize(50,50,'fill');
+                        $tempname = Yii::getPathOfAlias('webroot') . '/uploads/avatar/' . $user->id.'/thumb';
+                        if (!file_exists($tempname)) {
+                            mkdir($tempname);
+                        }
+                        $tempname = $tempname . '/' . $user->avatar;
+                        file_put_contents($tempname, file_get_contents($url));
+                        $image->saveToFile($tempname);
+                        
+                        $image = $imgload->resize(150,150,'fill');
+                        $tempname = Yii::getPathOfAlias('webroot') . '/uploads/avatar/' . $user->id.'/profile';
+                        if (!file_exists($tempname)) {
+                            mkdir($tempname);
+                        }
+                        $tempname = $tempname . '/' . $user->avatar;
+                        file_put_contents($tempname, file_get_contents($url));
+                        $image->saveToFile($tempname);
+
+                        $image = $imgload->resize(171,174,'fill');
+                        $tempname = Yii::getPathOfAlias('webroot') . '/uploads/avatar/' . $user->id.'/user';
+                        if (!file_exists($tempname)) {
+                            mkdir($tempname);
+                        }
+                        $tempname = $tempname . '/' . $user->avatar;
+                        file_put_contents($tempname, file_get_contents($url));
+                        $image->saveToFile($tempname);
                     }
                     $user->save(false);
                     $socialprofile = new SocialProfile;
@@ -313,7 +442,8 @@ class UserController extends Controller {
     /**
      * Hybridauth redirect url.
      */
-    public function actionSocialResponse() {
+    public function actionSocialResponse() 
+    {
         $path = Yii::getPathOfAlias('ext.hybridauth');
         require_once $path . '/index.php';
     }
@@ -321,7 +451,8 @@ class UserController extends Controller {
     /**
      *  Verify email
      */
-    public function actionVerify() {
+    public function actionVerify() 
+    {
         if (isset($_GET['id']) && Yii::app()->user->isGuest) {
             $user = User::model()->findByAttributes(array('registration_token' => $_GET['id']));
             if ($user) {
@@ -349,7 +480,8 @@ class UserController extends Controller {
      * @return User the loaded model
      * @throws CHttpException
      */
-    public function loadModel($id) {
+    public function loadModel($id) 
+    {
         $model = User::model()->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
@@ -360,7 +492,8 @@ class UserController extends Controller {
      * Performs the AJAX validation.
      * @param User $model the model to be validated
      */
-    protected function performAjaxValidation($model) {
+    protected function performAjaxValidation($model) 
+    {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'user-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();

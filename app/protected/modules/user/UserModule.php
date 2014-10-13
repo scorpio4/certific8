@@ -32,6 +32,7 @@ class UserModule extends CWebModule
 			// you may place customized code here
                         Yii::app()->theme = 'user'; 
 			Yii::app()->name  = 'Certific8';
+                        Yii::app()->errorHandler->errorAction = 'user/site/error';
 			
 			$controller->layout = 'user';
 			return true;

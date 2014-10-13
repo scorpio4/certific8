@@ -11,7 +11,6 @@
         public function checkAccess($operation, $params=array())
         {
             if (empty($this->id)) {
-                // Not identified => no rights
                 return false;
             }
             $role = $this->getState("role");

@@ -11,72 +11,86 @@
         Yii::app()->clientScript->registerCoreScript('jquery');
         Yii::app()->clientScript->registerCoreScript('jquery.ui');
         $cs = Yii::app()->clientScript;
-        $cs->registerCssFile(Yii::app()->theme->baseUrl . '/css/bootstrap.css')
-                ->registerCssFile(Yii::app()->theme->baseUrl . '/css/lightbox.css')
-                ->registerCssFile(Yii::app()->theme->baseUrl . '/css/styles.css')
-                ->registerCssFile(Yii::app()->theme->baseUrl . '/css/demo.css')
-                ->registerCssFile(Yii::app()->theme->baseUrl . '/css/skins/blue.css')
-                ->registerCssFile(Yii::app()->theme->baseUrl . '/css/skins/wide.css')
-                ->registerCssFile(Yii::app()->theme->baseUrl . '/css/skins/non-background.css');
+        $cs->registerCssFile(Yii::app()->theme->baseUrl . '/css/style.default.css')
+                ->registerCssFile(Yii::app()->theme->baseUrl . '/css/bootstrap-timepicker.min.css')
+                ->registerCssFile(Yii::app()->theme->baseUrl . '/css/style.css')
+                ->registerCssFile(Yii::app()->theme->baseUrl . '/css/bootstrap-editable.css');
+        //$cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/jquery-1.11.1.min.js', CClientScript::POS_END);
+        $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/jquery-migrate-1.2.1.min.js', CClientScript::POS_END);
+        $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/bootstrap.min.js', CClientScript::POS_END);
+        $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/jquery-ui-1.10.3.min.js', CClientScript::POS_END);
+        $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/bootstrap-timepicker.min.js', CClientScript::POS_END);
+        $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/bootstrap-editable.js', CClientScript::POS_END);
+        $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/main.js', CClientScript::POS_END);
         $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/custom.js', CClientScript::POS_END);
-        $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/user.js', CClientScript::POS_END);
         ?>
-        <link rel="shortcut icon" href="<?php echo Yii::app()->theme->baseUrl; ?>/img/favicon.png" type="image/x-icon" />
-        <link href="http://fonts.googleapis.com/css?family=Titillium+Web:400,700,600,200" rel="stylesheet" type="text/css"/>
-        <script type="text/javascript" >
-            baseUrl = '<?php echo Yii::app()->baseUrl;?>';
+
+    </head>
+
+    <body>
+        <?php echo $this->renderPartial('/layouts/header'); ?>
+        <section>
+            <div class="mainwrapper">
+                <?php echo $this->renderPartial('/layouts/left-panel'); ?>
+                <div class="mainpanel">
+                    <div class="pageheader">
+                        <div class="media left-head">
+                            <div class="media-body">
+                                <?php echo $this->renderPartial('/layouts/breadcrumb'); ?>
+                            </div>
+                        </div><!-- media -->
+                        <div class="right-head">
+                            <?php echo $this->renderPartial('/layouts/submenu'); ?>
+<!--                            <a href="" class="btn btn-primary" title="Create"><i class="fa fa-plus"></i></a>
+                            <a href="" class="btn btn-success" title="Edit"><i class="fa fa-pencil"></i></a>
+                            <a href="" class="btn btn-warning" title="Duplicate"><i class="fa fa-files-o"></i></a>
+                            <a href="" class="btn btn-danger" title="Delete"><i class="fa fa-trash-o"></i></a>-->
+                        </div>
+                        <div class="clearfix"></div>
+                    </div><!-- pageheader -->
+
+                    <div class="contentpanel">
+                        <div class="row">
+                            <div class="col-md-6">
+                               <?php echo $content; ?>
+                            </div>
+                        </div>
+                    </div><!-- contentpanel -->
+
+                </div><!-- mainpanel -->
+            </div><!-- mainwrapper -->
+        </section>
+
+        <script>
             $(document).ready(function() {
-                $(".styles-open").click(function() {
-                    $(".styles, .styles-open").animate({"left": "-220px"}, 1000);
-                    $(".styles-closed").animate({"left": "0"}, 1000);
-                    return false;
-                });
-                $(".styles-closed a").click(function() {
-                    $(".styles-closed").animate({"left": "-220px"}, 1000);
-                    $(".styles").animate({"left": "0"}, 1000);
-                    $(".styles-open").animate({"left": "220"}, 1000);
-                    return false;
-                });
+                // Date Picker
+                jQuery('#datepicker').datepicker();
+
+            });
+       
+            $(".profile-head").hover(function() {
+                $(".edit-before").show();
             });
         </script>
-    </head>
-    <body>
-        <div class="wrap-switcher">
-            <header>
-                <div class="container">
-                    <a href="<?php echo Yii::app()->createAbsoluteUrl('/');?>"><div class="logo"><i><small>my.</small>Certific8.in</i></div></a>
-                    <div class="navi">
-                        <?php 
-                            $menu = array();
-                            $page = Yii::app()->controller->id.'-'.Yii::app()->controller->action->id;
-                            $menu[] = array('label'=>'Home', 'url'=>array('/'),'active'=> $page=='user-index' );
-                            $menu[] = array('label'=>'About', 'url'=>array('/'));
-                            $menu[] = array('label'=>'Contact', 'url'=>array('/'));
-                            $menu[] = array('label'=>'Logout', 'url'=>array('site/logout'),'visible'=> !Yii::app()->user->isGuest );
-                            $this->widget('zii.widgets.CMenu',array(
-                                'activeCssClass'=>'active',
-                                'htmlOptions' => array(),
-                                'items'=> $menu,
-                            )); 
-                        ?>
+
+        <!-- Remove publication -->
+        <div class="modal fade" id="Removepublication" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header blue-bg">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Remove position</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div><label>Are you sure you want to remove this position?</label>	</div>
+                        <div>
+                            <button class="btn btn-primary mr5">Yes, remove</button>
+                            <button class="btn btn-default mr5">Cancel</button>
+                        </div>
                     </div>
                 </div>
-            </header>
-            <div class="clear"></div>
-            <?php echo $content; ?>
-            <footer> 
-                <div class="container">
-                    <div class="copy">  <p><strong>Certific8.in</strong> &#169; copyright 2014. all rights reserved</p> </div>
-                    <div class="social"> 
-                        <ul> 
-                            <li class="google"> <a href="https://plus.google.com/u/0/102099023673840724640/about"></a> </li> 
-                            <li class="linkedin"> <a href="https://linkedin.com/certific8"></a> </li> 
-                            <li class="blog"> <a href="http://certific8.blog.com/"></a> </li> 
-                            <li class="twitter"> <a href="https://twitter.com/certific8"></a> </li> 
-                        </ul> 
-                    </div>
-                </div>
-            </footer>
+            </div>
         </div>
+
     </body>
 </html>

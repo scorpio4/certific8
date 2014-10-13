@@ -44,8 +44,8 @@ return array(
                         'urlFormat'=>'path',
                         'showScriptName'=>false,
 			'rules'=>array(
-                                '/'=>'user/user/home',
-                                '/signup'=>'user/user/index',
+                                '/user'=>'user/user/update',
+                                '/'=>'user/user/index',
                                 '/verify/<id>'=>'user/user/verify',
                                 '/admin'=>'admin/site/login',
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
@@ -56,7 +56,7 @@ return array(
                 'clientScript'=>array(
                     'packages'=>array(
                          'jquery'=>array(
-                             'baseUrl'=>Yii::app()->request->baseUrl . 'js/',
+                             'baseUrl'=>Yii::getPathOfAlias('webroot') . 'js/',
                              'js'=>array('jquery-1.11.1.min.js')
                           )                                       
                      )

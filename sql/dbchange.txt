@@ -1,0 +1,20 @@
+ALTER TABLE  `c8_social_profile` ADD  `user_id` INT( 11 ) NOT NULL AFTER  `social_id` ;
+ALTER TABLE  `c8_social_profile` ADD  `identifier` VARCHAR( 255 ) NOT NULL AFTER  `profile_id` ;
+INSERT INTO `c8_social` (`id`, `title`, `website`, `small_logo_url`, `large_logo_url`, `username_title`, `url_template`, `oauth_url`) VALUES
+(1, 'Facebook', 'https://www.facebook.com', '', '', 'username', '', ''),
+(2, 'LinkedIn', 'https://www.linkedin.com', '', '', 'username', '', '');
+
+
+CREATE TABLE IF NOT EXISTS `c8_email_template` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(128) NOT NULL,
+  `subject` varchar(128) NOT NULL,
+  `template` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+INSERT INTO `c8_email_template` (`id`, `type`, `subject`, `template`) VALUES
+(4, 'email_verify', ' Confirm your email address to start using Certific8', 'To start using your Certific8 account, click the link to confirm your email address.<br><br>\n{Confirm_Email_URL}<br><br>\nCertific8 Team<br>');
+DELETE FROM `certific8`.`c8_role` WHERE `c8_role`.`name` = "Members";
+INSERT INTO `c8_role` (`id`, `name`) VALUES(1, 'Members');
+
