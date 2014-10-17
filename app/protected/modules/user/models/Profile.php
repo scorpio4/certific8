@@ -50,7 +50,7 @@ class Profile extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('short_bio', 'required'),
+            array('full_name, short_title, short_bio', 'required','on'=>'save'),
             array('template_id, is_active, is_public, can_contact, show_vouches, min_salary, user_id, hr_id, membership_id', 'numerical', 'integerOnly' => true),
             array('slugname', 'length', 'max' => 16),
             array('avatar', 'file', 'allowEmpty'=>true,'types'=>'jpg,png,gif','on'=>'update'),
@@ -91,7 +91,7 @@ class Profile extends CActiveRecord
             'id' => 'ID',
             'slugname' => 'Slugname',
             'full_name' => 'Full Name',
-            'short_title' => 'Short Title',
+            'short_title' => 'Designation',
             'short_bio' => 'Short Bio',
             'avatar' => 'Avatar',
             'template_id' => 'Template',
@@ -118,13 +118,13 @@ class Profile extends CActiveRecord
      * @return CActiveDataProvider the data provider that can return the models
      * based on the search/filter conditions.
      */
-    public function search()
+    public function search($id)
     {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria = new CDbCriteria;
 
-        $criteria->compare('id', $this->id);
+        /*$criteria->compare('id', $this->id);
         $criteria->compare('slugname', $this->slugname, true);
         $criteria->compare('full_name', $this->full_name, true);
         $criteria->compare('short_title', $this->short_title, true);
@@ -138,8 +138,10 @@ class Profile extends CActiveRecord
         $criteria->compare('min_salary', $this->min_salary);
         $criteria->compare('user_id', $this->user_id);
         $criteria->compare('hr_id', $this->hr_id);
-        $criteria->compare('membership_id', $this->membership_id);
-
+        $criteria->compare('membership_id', $this->membership_id);*/
+        $criteria->compare('user_id', $id);
+        $criteria->compare('full_name', $this->full_name, true);
+        $criteria->compare('short_title', $this->short_title, true);
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
         ));

@@ -35,14 +35,13 @@ class ProfileJob extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			//array('comment', 'required'),
-			array('profile_id, org_id, hr_id, rating', 'numerical', 'integerOnly'=>true),
+			array('comment, job_title, org_id,start_date,end_date', 'required','on'=>'save'),
+			array('profile_id, hr_id, rating', 'numerical', 'integerOnly'=>true),
 			array('job_title', 'length', 'max'=>255),
-			array('start_date, end_date', 'safe'),
+			array('end_date', 'checkDate'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-                        array('id, profile_id, org_id, job_title, hr_id, rating, comment, start_date, end_date', 'safe'),
-			array('id, profile_id, org_id, job_title, hr_id, rating, comment, start_date, end_date', 'safe', 'on'=>'search'),
+			array('id, profile_id, org_id, job_title, hr_id, rating, comment, start_date, end_date', 'safe', 'on'=>'search,save'),
 		);
 	}
 
@@ -68,10 +67,10 @@ class ProfileJob extends CActiveRecord
 		return array(
 			'profile_id' => 'Profile',
 			'org_id' => 'Org',
-			'job_title' => 'Job Title',
+			'job_title' => 'Title',
 			'hr_id' => 'Hr',
 			'rating' => 'Rating',
-			'comment' => 'Comment',
+			'comment' => 'Description',
 			'start_date' => 'Start Date',
 			'end_date' => 'End Date',
 		);
@@ -89,21 +88,15 @@ class ProfileJob extends CActiveRecord
 	 * @return CActiveDataProvider the data provider that can return the models
 	 * based on the search/filter conditions.
 	 */
-	public function search()
+	public function search($profId)
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('profile_id',$this->profile_id);
-		$criteria->compare('org_id',$this->org_id);
-		$criteria->compare('job_title',$this->job_title,true);
-		$criteria->compare('hr_id',$this->hr_id);
-		$criteria->compare('rating',$this->rating);
-		$criteria->compare('comment',$this->comment,true);
-		$criteria->compare('start_date',$this->start_date,true);
-		$criteria->compare('end_date',$this->end_date,true);
-
+		$criteria->compare('profile_id',$profId);
+		//$criteria->compare('org_id',$this->org_id);
+                
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
@@ -119,4 +112,19 @@ class ProfileJob extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        /*
+         * Compare date and check if error
+         */
+        public function checkDate()
+        {
+            if($this->start_date <> '' || $this->end_date <> '') {
+                $year = date('y');
+                $startdt = $this->start_date.'/'.$year;
+                $endate = $this->end_date.'/'.$year;
+                if(strtotime($startdt) > strtotime($endate)) {
+                    $this->addError('end_date', 'End date must be greater than "Start date"');
+                }
+            }
+        }
 }

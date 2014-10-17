@@ -1,14 +1,39 @@
 <header>
-    <div class="headerwrapper">
+    <?php 
+        $value = 0;
+        if(isset(Yii::app()->request->cookies['menu_fold'])) {
+            $value = Yii::app()->request->cookies['menu_fold']->value;
+        }
+        if($value == 1) {
+            $class = 'collapsed';
+        } else {
+            $class = '';
+        }
+    ?>
+    <div class="headerwrapper <?php echo $class;?>" id="head-wrp">
         <div class="header-left">
-            <a href="index.html" class="logo">
+            <a href="<?php echo Yii::app()->homeUrl;?>" class="logo">
                 <img src="<?php echo Yii::app()->theme->baseUrl ?>/images/logo.png" alt="" /> 
             </a>
             <div class="pull-right">
-                <a href="" class="menu-collapse">
+                <a href="" class="menu-collapse" >
                     <i class="fa fa-bars"></i>
                 </a>
             </div>
-        </div><!-- header-left -->
-    </div><!-- headerwrapper -->
+        </div>
+    </div>
 </header>
+<script type="text/javascript">
+$('.menu-collapse').click(function() {
+    $.ajax({
+            type:"post",
+            url:'<?php echo $this->createUrl('profile/setMenu');?>' ,
+            success:function(rsponse) {
+                        
+                    }
+    });
+});
+$(window).load(function(){
+  $('#main-wrp,#head-wrp').addClass('<?php echo $class;?>');
+});
+</script>

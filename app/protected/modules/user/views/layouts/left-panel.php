@@ -1,7 +1,7 @@
 <div class="leftpanel">
     <div class="media profile-left">
         <?php $user = User::model()->findByPk(Yii::app()->user->id);?>
-        <a class="pull-left profile-thumb" href="">
+        <a class="pull-left profile-thumb" href="<?php echo Yii::app()->homeUrl;?>">
             <?php 
                 $path = Yii::getPathOfAlias('webroot'). '/uploads/avatar/' . $user->id.'/thumb/'.$user->avatar;
                 if(file_exists($path)) {?>
@@ -28,7 +28,7 @@
             'items'=> array(
                     array('label'=>'<i class="fa fa-male"></i> <span>Personal</span>', 'url'=>array('/'),'active'=>$currentPage=='user-update'?true:false),
                     array('label'=>'<i class="fa fa-star-half-o"></i> <span>Membership</span>', 'url'=>array('/'),'active'=>$currentPage=='user-'?true:false),
-                    array('label'=>'<i class="fa fa-user"></i> <span>Profiles Main</span>', 'url'=>array('/'),'active'=>$currentPage=='user-'?true:false),
+                    array('label'=>'<i class="fa fa-user"></i> <span>My Profiles</span>', 'url'=>array('profile/index'),'active'=>$currentPage=='profile-index'?true:false),
                     array('label'=>'<i class="fa fa-calculator"></i> <span>Billing</span>', 'url'=>array('/'),'active'=>$currentPage=='user-'?true:false),
                     array('label'=>'<i class="fa fa-adjust"></i> <span>Coaching</span>', 'url'=>array('/'),'active'=>$currentPage=='user-'?true:false),
                     array('label'=>'<i class="fa fa-coffee"></i> <span>Branding</span>', 'url'=>array('/'),'active'=>$currentPage=='user-'?true:false),

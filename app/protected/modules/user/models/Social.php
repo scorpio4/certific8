@@ -112,4 +112,14 @@ class Social extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        /*
+         * List all social data.
+         */
+        public function getAllSocial()
+        {
+            $social = Social::model()->findAll(array('select'=>'t.id,t.title'));
+            
+            return $social;
+        }
 }

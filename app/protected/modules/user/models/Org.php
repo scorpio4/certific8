@@ -123,4 +123,16 @@ class Org extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        /*
+         * List all organization.
+         */
+        public function getAllOrg()
+        {
+            $criteria = new CDbCriteria;
+            $criteria->select = 't.logo,t.legal_name'; 
+            $orgs = Org::model()->findAll($criteria);
+            
+            return $orgs;
+        }
 }

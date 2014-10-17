@@ -46,6 +46,9 @@ return array(
 			'rules'=>array(
                                 '/user'=>'user/user/update',
                                 '/'=>'user/user/index',
+                                '/profile'=>'user/profile/update',
+                                '/profile/<id>'=>'user/profile/update',
+                                '/listprofile'=>'user/profile/index',
                                 '/verify/<id>'=>'user/user/verify',
                                 '/admin'=>'admin/site/login',
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',

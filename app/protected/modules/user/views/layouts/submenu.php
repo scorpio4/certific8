@@ -1,8 +1,11 @@
-<?php
-$this->widget('zii.widgets.CMenu', array(
-    'id' => 'submenu-home',
-    'activeCssClass' => 'active',
-    'htmlOptions' => array('class' =>'admin-submenu'),
-    'items' => $this->menu,
-));
-?>
+<div class="user-submenu">
+    <?php
+    $this->widget('zii.widgets.CMenu', array(
+        'id' => 'submenu-home',
+        'encodeLabel'=>false,
+        'activeCssClass' => 'active',
+        'htmlOptions' => array('class' =>''),
+        'items' => $this->menu,
+    ));
+    ?>
+</div>
