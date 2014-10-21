@@ -13,3 +13,4 @@ CREATE TABLE IF NOT EXISTS c8_hr_shortlist_skill (
 
 ALTER TABLE c8_hr_shortlist_skill ADD FOREIGN KEY (hr_shortlist_id) REFERENCES c8_hr_shortlist(id);
 ALTER TABLE c8_hr_shortlist_skill ADD FOREIGN KEY (skill_id) REFERENCES c8_skill(id);
+

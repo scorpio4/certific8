@@ -1,0 +1,188 @@
+<!-- Localized -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Example Profile Template</title>
+<link type="text/css" rel="stylesheet" media="screen" href="styles/main.css" />
+<link type="text/css" rel="stylesheet" media="screen" href="styles/prettyPhoto.css" />
+</head>
+<body>
+
+<!-- Start of User Profile -->
+<!--
+	This is the default user/profile template. 
+	A user may have multiple profiles. 
+	Each profile may use a different template. 
+	This is the prototype. 
+	Additional templates will be supplied / commissioned in phase 2.
+
+	The final version must be valid XHTML and W3C compliant.
+	When included in the main site it should be responsive.
+	It must NOT use embedded styles (only CSS).
+
+	It exists in 3 formats: preview, (inline) editable and in search results.
+	It will be populated with fields from the database.
+	It must contain only light PHP (reference to variables, and simple loops for the various lists of items). 
+	Inline editing should adopt a WYSIWYG approach.
+
+
+	Each profile also includes a vCard customised to their user/profile.
+	There are multiple look/feel for the site - templates that wrap the profile will be provided.
+
+	It must NOT include any business logic.
+	Validation scripts should be activated via javascript.
+	Validation logic MUST also be implemented on the server.
+
+	** A Bonus Fee is offered for adding valid FOAF/RDFa **
+
+-->
+
+<div id="outerWrapper" class='outerWrapper'>
+  <div id="contentWrapper" class='contentWrapper'>
+    <ul id="navMain" class='navMain'>
+      <!-- You can change the order of the menu or the icons here -->
+      <li><a href="#home" title="home"><img src="images/icons/home.gif" alt="Home" /></a></li>
+      <li><a href="#about" title="about"><img src="images/icons/about.gif" alt="About" /></a></li>
+      <li><a href="#gallery" title="gallery"><img src="images/icons/gallery.gif" alt="Skills" /></a></li>
+      <li><a href="#networks" title="networks"><img src="images/icons/network.gif" alt="Social" /></a></li>
+      <li><a href="#contact" title="contact"><img src="images/icons/contact.gif" alt="Contact" /></a></li>
+    </ul>
+    
+    
+    <div id="content" class='content'>
+
+      <div id="scrollWrapper" class='scrollWrapper'>
+        <ul>
+          <!-- Home Section Details -->
+          <li id="home" class="home section">
+            <h1>Lee Curtis<a href="myVcard.vcf" class="vcard" title="Download vCard"><img src="images/icons/vcard.gif" alt="Download vCard" /></a>
+              <!-- Link to your vcard file -->
+            </h1>
+            <h3>Knowledge Engineer</h3>
+            <!-- end #home -->
+          </li>
+          <!-- About Section Details -->
+          <li id="about" class="about section">
+            <h2>About Me</h2>
+            <img src="images/avatar.jpg" alt="Your Name" class="left" />
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies magna non lectus elementum consectetur. Aliquam erat volutpat. Nulla et imperdiet mauris. Etiam ac ante id arcu luctus suscipit non sed leo. Donec malesuada dapibus purus ac dictum. Vestibulum quis odio mi, et accumsan metus. Aliquam erat volutpat. <a href="#gallery">Aenean ullamcorper</a> lorem sed erat ullamcorper vitae facilisis ante pulvinar. Etiam varius facilisis porta. Sed vehicula consectetur condimentum. Nunc ornare, nisl sed semper varius, nibh ligula consequat augue, eu luctus lectus tortor vitae lectus. Donec ac velit ut massa egestas hendrerit.</p>
+            <p>Aliquam a lorem id <a href="#">felis</a> adipiscing <a href="#">ultrices</a>. Nunc interdum consequat fermentum. Aliquam at quam tortor. Suspendisse pharetra mi sit amet nulla posuere pellentesque in vitae sapien. Donec viverra lorem sed metus accumsan vitae aliquet odio laoreet. In lacinia mi non ipsum rutrum eget lacinia mi viverra. Praesent cursus condimentum mauris nec ultrices.</p>
+            <!-- end #about -->
+          </li>
+          <!-- Gallery Section Details -->
+          <!-- Gallery 1 -->
+          <li id="gallery" class="gallery section">
+            <ul class="navGallery">
+              <li class="current"><a href="#gallery">1</a></li>
+              <li><a href="#gallery2">2</a></li>
+            </ul>
+            <h2>My Qualifications</h2>
+            <ul class="gallery">
+              <li><a href="images/gallery/preview_image.gif" rel="prettyPhoto" title="Custom Title"><img src="images/gallery/image.gif" alt="image" width="70" height="65" /></a> </li>
+              <li><a href="images/gallery/preview_image.gif" rel="prettyPhoto[groupName]" title="Image 1"><img src="images/gallery/image-group.gif" alt="image" width="70" height="65" /></a> </li>
+              <li><a href="images/gallery/preview_image.gif" rel="prettyPhoto[groupName]" title="Image 2"><img src="images/gallery/image-group.gif" alt="image" width="70" height="65" /></a> </li>
+              <li><a href="images/gallery/preview_image.gif" rel="prettyPhoto[groupName]" title="Image 3"><img src="images/gallery/image-group.gif" alt="image" width="70" height="65" /></a> </li>
+              <li><a href="http://www.adobe.com/products/flashplayer/include/marquee/design.swf?width=792&height=294" rel="prettyPhoto" title="Custom Title"><img src="images/gallery/flash-content.gif" alt="image" width="70" height="65" /></a> </li>
+              <li><a href="http://movies.apple.com/movies/sony_pictures/angelsanddemons/angelsanddemons-video_h.480.mov?width=480&height=260" rel="prettyPhoto" title="Custom Title"><img src="images/gallery/quicktime-content.gif" alt="image" width="70" height="65" /></a> </li>
+              <!-- First row ends here -->
+              <li><a href="http://www.youtube.com/watch?v=qb8R-vJ6e5o" rel="prettyPhoto" title="Custom Title"><img src="images/gallery/youtube-content.gif" alt="image" width="70" height="65" /></a> </li>
+              <li><a href="http://www.google.com?iframe=true&width=600&height=400" rel="prettyPhoto" title="Custom Title"><img src="images/gallery/iFrame-content.gif" alt="image" width="70" height="65" /></a> </li>
+              <li><a href="images/gallery/preview_image.gif" rel="prettyPhoto" title="Yes! even tooltips!" class="tooltip"><img src="images/gallery/image.gif" alt="image" width="70" height="65" /></a> </li>
+              <li><a href="images/gallery/preview_image.gif" rel="prettyPhoto" title="Custom Title"><img src="images/gallery/image.gif" alt="image" width="70" height="65" /></a> </li>
+              <li><a href="images/gallery/preview_image.gif" rel="prettyPhoto" title="Custom Title"><img src="images/gallery/image.gif" alt="image" width="70" height="65" /></a> </li>
+              <li><a href="images/gallery/preview_image.gif" rel="prettyPhoto" title="Custom Title"><img src="images/gallery/image.gif" alt="image" width="70" height="65" /></a> </li>
+            </ul>
+            <!-- end #gallery 1 -->
+          </li>
+          <!-- Gallery 2 -->
+          <li id="gallery2" class="gallery2 section">
+            <ul class="navGallery">
+              <li><a href="#gallery">1</a></li>
+              <li class="current"><a href="#gallery2">2</a></li>
+            </ul>
+            <h2>My Qualification 2</h2>
+            <ul class="gallery">
+              <li><a href="images/gallery/preview_image.gif" rel="prettyPhoto" title="Custom Title"><img src="images/gallery/image.gif" alt="image" width="70" height="65" /></a> </li>
+              <li><a href="images/gallery/preview_image.gif" rel="prettyPhoto" title="Custom Title"><img src="images/gallery/image.gif" alt="image" width="70" height="65" /></a> </li>
+              <li><a href="images/gallery/preview_image.gif" rel="prettyPhoto" title="Custom Title"><img src="images/gallery/image.gif" alt="image" width="70" height="65" /></a> </li>
+              <li><a href="images/gallery/preview_image.gif" rel="prettyPhoto" title="Custom Title"><img src="images/gallery/image.gif" alt="image" width="70" height="65" /></a> </li>
+              <li><a href="images/gallery/preview_image.gif" rel="prettyPhoto" title="Custom Title"><img src="images/gallery/image.gif" alt="image" width="70" height="65" /></a> </li>
+              <li><a href="images/gallery/preview_image.gif" rel="prettyPhoto" title="Custom Title"><img src="images/gallery/image.gif" alt="image" width="70" height="65" /></a> </li>
+              <li><a href="images/gallery/preview_image.gif" rel="prettyPhoto" title="Custom Title"><img src="images/gallery/image.gif" alt="image" width="70" height="65" /></a> </li>
+              <li><a href="images/gallery/preview_image.gif" rel="prettyPhoto" title="Custom Title"><img src="images/gallery/image.gif" alt="image" width="70" height="65" /></a> </li>
+              <li><a href="images/gallery/preview_image.gif" rel="prettyPhoto" title="Custom Title"><img src="images/gallery/image.gif" alt="image" width="70" height="65" /></a> </li>
+            </ul>
+            <!-- end #gallery 2 -->
+          </li>
+          <!-- Network Section Details -->
+          <li id="networks" class="networks section">
+            <h2>Learn more about me</h2>
+            <ul>
+              <li><a href="http://twitter.com/mustafaquilon" class="external"><img src="images/social/twitter.png" alt="Twitter" /> <strong>Twitter</strong> twitter.com/mustafaquilon</a></li>
+              <li><a href="http://facebook.com/mustafaquilon" class="external"><img src="images/social/facebook.png" alt="Facebook" /> <strong>Facebook</strong>facebook.com/mustafaquilon</a></li>
+              <li><a href="http://linkedin.com/in/mustafaquilon" class="external"><img src="images/social/linkedin.png" alt="LinkedIn" /> <strong>LinkedIn</strong>linkedin.com/in/mustafaquilon</a></li>
+              <li><a href="http://lastfm.com/" class="external"><img src="images/social/lastfm.png" alt="lastfm" /> <strong>Last FM</strong> lastfm.com/profileName</a></li>
+              <li><a href="http://flickr.com/" class="external"><img src="images/social/flickr.png" alt="flickr" /> <strong>Flickr</strong> flickr.com/profileName</a></li>
+              <li><a href="http://orkut.com/" class="external"><img src="images/social/orkut.png" alt="orkut" /> <strong>Orkut</strong> orkut.com/profileName</a></li>
+              <li><a href="http://digg.com/" class="external"><img src="images/social/digg.png" alt="orkut" /> <strong>Digg</strong> digg.com/profileName</a></li>
+              <li><a href="mailto:example@email.com" class="external"><img src="images/social/google_wave.png" alt="orkut" /> <strong>Google Wave</strong> example@email.com</a></li>
+            </ul>
+            <!-- end #networks -->
+          </li>
+          <!-- Contact Section Details -->
+          <li id="contact" class="contact section">
+            <h2>Contact</h2>
+            <div id="addressDetails" class='addressDetails'>
+              <h3>Bob Smith - Knowledge Engineer</h3>
+              <p>Street/Road Name,<br />
+                Address Line 2,<br />
+                Locality, Area,<br />
+                CityName: 600 001,</p>
+              <p><strong>Tel:</strong> +1 555 515 5555<br />
+                <strong>Cell:</strong> +1 555 515 5555<br />
+                <strong>Email:</strong> <a href="mailto:example@email.com">example@email.com</a>
+
+                <!--For additional security it is advisable to encrypt this email id using something like: http://hivelogic.com/enkoder/form -->
+
+              </p>
+              <!-- end #addressDetails -->
+            </div>
+            <div id="contactForm" class='contactForm'>
+              <div id="note" class='note'>Please send a short email. A copy will be sent to you too.</div>
+              <form action="javascript:alert('error!');" class="contact">
+                <!-- Change your email id in the config.php file -->
+                <div class="field">
+                  <label for="name">Name</label>
+                  <input type="text" name="name" id="name" value="" class="text" />
+                </div>
+                <div class="field">
+                  <label for="email">E-Mail</label>
+                  <input type="text" name="email" id="email" value="" class="text" />
+                </div>
+                <div class="field">
+                  <label for="message">Message</label>
+                  <textarea class="textbox" name="message" id="message" rows="5" cols="40"></textarea>
+                </div>
+                <div class="buttons">
+                  <input type="submit" value="Send" class="submit" />
+                </div>
+              </form>
+              <!-- end #contactForm -->
+            </div>
+            <!-- end #contact -->
+          </li>
+        </ul>
+        <!-- end #scrollWrapper -->
+      </div>
+      <!-- end #content -->
+    </div>
+    <!-- end #contentWrapper -->
+  </div>
+  <!-- end #outerWrapper -->
+</div>
+
+<!-- End of User Profile -->
+
+</body>
+</html>

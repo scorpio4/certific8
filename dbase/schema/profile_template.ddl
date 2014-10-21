@@ -8,3 +8,5 @@ CREATE TABLE IF NOT EXISTS c8_profile_template (
 	template_name VARCHAR(255) NOT NULL DEFAULT 'default'
 
 ) ENGINE=INNODB;
+
+INSERT INTO c8_profile_template (template_name) VALUES ("default");

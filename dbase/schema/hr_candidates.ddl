@@ -2,7 +2,6 @@
 
 SET FOREIGN_KEY_CHECKS = 0; 
 DROP TABLE IF EXISTS c8_hr_candidate;
-
 CREATE TABLE IF NOT EXISTS c8_hr_candidate (
 	hr_shortlist_id INT NOT NULL DEFAULT 0,
 	profile_id INT NOT NULL DEFAULT 0

@@ -1,13 +1,13 @@
-# links a skill to a user's profile
+# part of user's career history - a job at some organisation, listed on a profile
 
 SET FOREIGN_KEY_CHECKS = 0; 
 DROP TABLE IF EXISTS c8_profile_job;
 
 CREATE TABLE IF NOT EXISTS c8_profile_job (
-	profile_id INT NOT NULL DEFAULT 0,
-	org_id INT NOT NULL DEFAULT 0,
+	profile_id INT,
+	org_id INT,
+	hr_id INT,
 	job_title VARCHAR(255) NOT NULL DEFAULT '',
-	hr_id INT NOT NULL DEFAULT 0,
 	rating INT NOT NULL DEFAULT 0,
 	comment TEXT NOT NULL DEFAULT '',
 	start_date DATE,

@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS c8_membership (
 	status INT NOT NULL DEFAULT 0
 ) ENGINE=INNODB;
 
+INSERT INTO c8_membership (name) VALUES("User");
 INSERT INTO c8_membership (name) VALUES("FREE Member");
 INSERT INTO c8_membership (name) VALUES("Silver Member");
 INSERT INTO c8_membership (name) VALUES("Gold Member");

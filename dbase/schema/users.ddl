@@ -28,10 +28,11 @@ CREATE TABLE IF NOT EXISTS c8_user (
 	is_registered INT NOT NULL DEFAULT 0,
 	is_paid INT NOT NULL DEFAULT 0,
 	is_test INT NOT NULL DEFAULT 1,
-	membership_id INT NOT NULL DEFAULT 0,
+	membership_id INT NOT NULL DEFAULT 1,
 
-	profile_id INT NOT NULL DEFAULT 0,
+	profile_id INT,
 	current_salary INT NOT NULL DEFAULT 0,
+	currency VARCHAR(8) NOT NULL DEFAULT 'AUD',
 
 	geo_territory VARCHAR(32) NOT NULL DEFAULT '',
 	ipv4address VARCHAR(16) NOT NULL DEFAULT '',
