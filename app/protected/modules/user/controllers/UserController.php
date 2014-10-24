@@ -36,6 +36,10 @@ class UserController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', 
+                'actions' => array('changepassword'),
+                'users' => array('@'),
+            ),
+            array('allow', 
                 'actions' => array('update'),
                 'roles' => array('members'),
             ),
@@ -145,6 +149,7 @@ class UserController extends Controller {
     {
         if (isset($_POST['type'])) {
             $type = $_POST['type'];
+            Yii::app()->clientScript->scriptMap['jquery-1.11.1.min.js'] = false;
             Yii::app()->clientScript->scriptMap['jquery.js'] = false;
             if ($type == 'login') {
                 $model = new LoginForm;
@@ -472,7 +477,27 @@ class UserController extends Controller {
         }
         $this->redirect(array('/'));
     }
-
+    
+    /*
+     * Change user password.
+     */
+    public function actionChangepassword()
+    {
+        $model = User::model()->findByPk(Yii::app()->user->id);
+        $model->scenario = 'changepassword';
+        if (isset($_POST['User'])) {
+            $model->attributes = $_POST['User'];
+            if ($model->validate()) {
+                $model->password_sha256 = CPasswordHelper::hashPassword($model->newpassword);
+                $model->save(false);
+                Yii::app()->user->setFlash('success', "Password changed successfully.");
+                $this->redirect(array('changepassword'));
+            }
+        }
+        $this->render('change-password', array(
+            'model' => $model,
+        ));
+    }
     /**
      * Returns the data model based on the primary key given in the GET variable.
      * If the data model is not found, an HTTP exception will be raised.

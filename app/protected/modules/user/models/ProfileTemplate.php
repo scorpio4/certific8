@@ -1,25 +1,23 @@
 <?php
 
 /**
- * This is the model class for table "{{profile_skill}}".
+ * This is the model class for table "{{profile_template}}".
  *
- * The followings are the available columns in table '{{profile_skill}}':
+ * The followings are the available columns in table '{{profile_template}}':
  * @property integer $id
- * @property integer $profile_id
- * @property integer $user_skill_id
+ * @property string $template_name
  *
  * The followings are the available model relations:
- * @property Profile $profile
- * @property Skill $userSkill
+ * @property Profile[] $profiles
  */
-class ProfileSkill extends CActiveRecord
+class ProfileTemplate extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return '{{profile_skill}}';
+		return '{{profile_template}}';
 	}
 
 	/**
@@ -30,10 +28,10 @@ class ProfileSkill extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('profile_id, user_skill_id', 'numerical', 'integerOnly'=>true),
+			array('template_name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, profile_id, user_skill_id', 'safe', 'on'=>'search'),
+			array('id, template_name', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -45,8 +43,7 @@ class ProfileSkill extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'profile' => array(self::BELONGS_TO, 'Profile', 'profile_id'),
-			'userSkill' => array(self::BELONGS_TO, 'UserSkill', 'user_skill_id'),
+			'profiles' => array(self::HAS_MANY, 'Profile', 'template_id'),
 		);
 	}
 
@@ -57,8 +54,7 @@ class ProfileSkill extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'profile_id' => 'Profile',
-			'user_skill_id' => 'User Skill',
+			'template_name' => 'Template Name',
 		);
 	}
 
@@ -74,16 +70,14 @@ class ProfileSkill extends CActiveRecord
 	 * @return CActiveDataProvider the data provider that can return the models
 	 * based on the search/filter conditions.
 	 */
-	public function search($id)
+	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
 
-		//$criteria->compare('id',$this->id);
-		$criteria->compare('profile_id',$id);
-                $criteria->order = 't.order';
-		//$criteria->compare('user_skill_id',$this->user_skill_id);
+		$criteria->compare('id',$this->id);
+		$criteria->compare('template_name',$this->template_name,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -94,7 +88,7 @@ class ProfileSkill extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return ProfileSkill the static model class
+	 * @return ProfileTemplate the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

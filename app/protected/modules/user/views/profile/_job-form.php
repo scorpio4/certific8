@@ -50,7 +50,7 @@ $form = $this->beginWidget('CActiveForm', array(
                     </div>
                 </div>
                 <?php echo $form->hiddenField($profileJob, 'profile_id');?>
-                <?php echo $form->hiddenField($profileJob, 'id');?>
+                <?php echo $form->hiddenField($profileJob, 'id',array('class'=>'hidden-values'));?>
             </div>
         </div>
     </div>
@@ -83,6 +83,7 @@ $form = $this->beginWidget('CActiveForm', array(
 $(document).ready(function(){
     companies = [];
     imgs = [];
+    ids = [];
     $('#ProfileJob_org_id').typeahead({
     property: 'name',
     items:20,
@@ -95,15 +96,18 @@ $(document).ready(function(){
         $.each(data, function (i, company) {
             companies.push(company.legal_name);
             imgs[company.legal_name] = company.logo;
+            ids[company.legal_name] = company.id;
+            imgs.push();
+            ids.push();
         });
 
         process(companies);
     },
     highlighter: function(item,t){
-        image = '';
+        image = imgs[item];
         return "<li class='' data-value='"+item+"'>"+
                     "<a href='#'>"+
-                       "<img src ='<?php echo Yii::app()->homeUrl;?>uploads/logo.jpg"+image+"'>"+item+
+                       "<img src ='<?php echo Yii::app()->homeUrl;?>uploads/logo/"+ids[item]+"/"+image+"'>"+item+
                     "</a>"+
                 "</li>";
     },
@@ -111,5 +115,20 @@ $(document).ready(function(){
         return item;
     },
     });
-});   
+
+    var stdate = $("#ProfileJob_start_date").datepicker( {
+        format: "dd/mm",
+        viewMode: "dates", 
+        maxViewMode: "months"
+    }).on('changeDate', function(ev) {
+            stdate.hide();
+        }).data('datepicker');;
+    var endate = $("#ProfileJob_end_date").datepicker( {
+        format: "dd/mm",
+        viewMode: "dates", 
+        maxViewMode: "months"
+    }).on('changeDate', function(ev) {
+            endate.hide();
+        }).data('datepicker');;
+})
 </script>

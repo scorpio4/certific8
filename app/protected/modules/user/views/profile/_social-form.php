@@ -29,7 +29,7 @@ $form = $this->beginWidget('CActiveForm', array(
                 </div>
             </div>
             <?php echo $form->hiddenField($socialProfile, 'profile_id');?>
-            <?php echo $form->hiddenField($socialProfile, 'id');?>
+            <?php echo $form->hiddenField($socialProfile, 'id',array('class'=>'hidden-values'));?>
         </div>
     </div>
     <div class="panel-footer">

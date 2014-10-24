@@ -39,7 +39,6 @@ class UserSkill extends CActiveRecord
                         array('award_number, skill_id, trainer_id, award_rank, award_date, expiry_date', 'required', 'on'=>'save'),
 			array('user_id, skill_id, trainer_id, award_rank', 'numerical', 'integerOnly'=>true),
 			array('award_number', 'length', 'max'=>255),
-			array('award_date, expiry_date', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, user_id, skill_id, trainer_id, award_number, award_rank, award_date, expiry_date', 'safe', 'on'=>'search,save'),

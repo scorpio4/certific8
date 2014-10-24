@@ -5,20 +5,26 @@
 $this->breadcrumbs = array(
     'Profiles',
 );
-
-$this->menu = array(
-    array('label' => '<i class="fa fa-plus"></i>', 'url' => array('/profile'), 'linkOptions' => array('class' => 'btn btn-primary', 'title' => 'Add')),
-);
+$currentPage = Yii::app()->controller->id.'-'.Yii::app()->controller->action->id;
+if(isset($_GET['id'])) {
+    $this->menu = array(
+        array('label' => '<i class="fa fa-plus"></i>', 'url' => array('/profile'), 'linkOptions' => array('class' => 'btn btn-default', 'title' => 'Add')),
+        array('label' => '<i class="fa fa-pencil"></i>', 'url' => array('/profile/'.$_GET['id']),'visible'=>$currentPage!='profile-update'?true:false, 'linkOptions' => array('class' => 'btn btn-success', 'title' => 'Edit')),
+        array('label' => '<i class="fa fa-search"></i>', 'url' => array('/profileview/'.$_GET['id']),'visible'=>$currentPage!='profile-view'?true:false, 'linkOptions' => array('class' => 'btn btn-primary', 'title' => 'View')),
+        array('label' => '<i class="fa fa-files-o"></i>', 'url' => array('/profilecopy/'.$_GET['id']),'visible'=>$currentPage!='profile-profileCopy'?true:false, 'linkOptions' => array('class' => 'btn btn-warning', 'title' => 'Copy')),
+        array('label' => '<i class="fa fa-trash-o"></i>', 'url' => 'javascript:void(0)', 'linkOptions' => array('class' => 'btn btn-danger', 'title' => 'Delete','onclick'=>'deleteProfilePage('.$_GET['id'].')')),
+    );
+    echo '';
+}
 echo CHtml::hiddenField('profile_id',$profile->id);
 $profileId = $profile->id;
 ?>
-
 <div class="row" id="my-profile">
     <div class="col-md-8">
         <div class="profile-bg">
             <div class="profile-head">
                 <div class="row">
-                    <?php echo $this->renderPartial('basic-view',compact('profile','user'));?>
+                    <?php echo $this->renderPartial('basic-view',compact('profile','user','type'));?>
                 </div>
             </div>
             <div class="profile-tab">
@@ -32,24 +38,27 @@ $profileId = $profile->id;
             </div>
             <div class="profile-content tab-content">
                 <div class="tab-pane active" id="Myjobs">
-                   <?php echo $this->renderPartial('job-view', compact('profileJob','profileId'));?>
+                   <?php echo $this->renderPartial('job-view', compact('profileJob','profileId','type'));?>
                 </div>
                 <div class="tab-pane" id="Mycerts">
-                   <?php //echo $this->renderPartial('certificate-view', compact('userSkill','profileId'));?>
+                   <?php echo $this->renderPartial('certificate-view', compact('userSkill','profileId','type'));?>
                 </div>
                 <div class="tab-pane" id="Social">
-                   <?php echo $this->renderPartial('social-view', array('userId'=>$user->id,'profileId'=>$profileId,'socialProfile'=>$socialProfile));?>
+                   <?php echo $this->renderPartial('social-view', array('userId'=>$user->id,'profileId'=>$profileId,'socialProfile'=>$socialProfile,'type'=>$type));?>
                 </div>
                 <div class="tab-pane" id="contact">
-                   <?php echo $this->renderPartial('contact-view', compact('user'));?>
+                   <?php echo $this->renderPartial('contact-view', compact('user','type'));?>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-4">
-        <div class="business-card">
-            <?php echo $this->renderPartial('vCard',array());?>
-        </div>
+        <?php if($type <> 'view') {?>
+            <div class="business-card">
+                <div id="vCard-success"></div>
+                <?php echo $this->renderPartial('vCard',compact('profile'));?>
+            </div>
+        <?php }?>
         <div class="help-box">
             <?php echo $this->renderPartial('help',array());?>
         </div>
@@ -84,13 +93,7 @@ $profileId = $profile->id;
         <?php }?>
     });  
     
-    function successmsg(id,message) 
-    {
-        $('#'+id).html('<div class="alert alert-success alert-dismissable mt20">'+
-                            '<button type=button class=close data-dismiss=alert aria-hidden=true>&times;</button>'+
-                            '<div>'+message+'</div>'+
-                       '</div>');
-    }
+    
     
     function cancelbtn(id) 
     {
@@ -109,15 +112,66 @@ $profileId = $profile->id;
             data:{'id':id,'type':type},
             success: function(data) {
                 if(data) {
+                    if(type == 'skill') {
+                          //markers=JSON.stringify(data.title_data);
+                          //console.log(markers);
+                         // var names = markers;
+                        /*$('#UserSkill_skill_id').select2({
+                            //data:  markers,
+                            data:{ results: names, text: 'title' },
+                            formatSelection: format,
+                            formatResult: format   
+                        });*/
+                        //$('#UserSkill_skill_id').val(4);
+                    }
                     $.each(data, function(key, val) {
-                        $("#"+type+"-form #"+key).val(val);                                                    
+                        $("#"+type+"-form #"+key).val(val);  
                     });
+                    $("#UserSkill_trainer_id").select2();
+
+                    var options =  data.title_data;
+                    
+                    $("#UserSkill_skill_id").select2({
+                        minimumInputLength: 1,
+                        triggerChange: true,
+                        allowClear: true,
+                        id: function (data) {
+                            return data.id;
+                        },
+                        ajax: {
+                            url: baseUrl+'/user/profile/searchSkill',
+                            quietMillis: 1500,
+                            dataType: 'json',
+                            cache: true,
+                            data: function (term, page) {
+                                return {
+                                    title: term, 
+                                };
+                            },
+                            results: function (data, page) {
+                                return {
+                                    results: data.results 
+                                };
+                            }
+                        },
+                        initSelection: function (element, callback) {
+                            var id = element.val();
+                            var data = options;
+                            callback(data[0]);
+                        },
+                        formatResult: function (data) {
+                            return "<div class='select2-user-result'>" + data.title + "</div>";
+                        },
+                        formatSelection: function (data) {
+                            return data.title;
+                        }
+                    }).select2('val', [id]);
                     $("#edit"+type).collapse('show');
                 }
             }
         });
     }
-    
+    function format(item) { return item.title; };
     function deleteData(type,id,islist)
     {
         $.ajax({
@@ -138,6 +192,47 @@ $profileId = $profile->id;
     function setDefault(id)
     {
         $("#"+id+"-form")[0].reset();
+        //$('[id$="-success"]').html('');
+        $('.hidden-values').val('');
         cancelbtn(id); 
     }
+    
+    function sortList(type,sort)
+    {
+     
+     $( "#"+type+"-lists "+sort ).sortable({
+        handle: ".drag-states",
+        delay: 10,
+         cursorAt: { bottom: 2 },
+         distance: 5,
+         helper: "clone" ,
+         update: function( event, ui ) {
+             var sortedlist = $(this).sortable('toArray').toString();
+             $.ajax({
+                      url: "<?php echo $this->createUrl('profile/changeOrder') ?>",
+                      'type': "POST",
+                      data: {'order': sortedlist,'type':type},
+                      success: function(html) {
+
+                      }
+
+                  });
+         }
+    }).disableSelection();
+  }
+  
+  function deleteProfilePage(id)
+  {
+        $.ajax({
+            url:baseUrl+'/user/profile/delete',
+            dataType: 'json',
+            type: 'post',
+            data:{'id':id,'ajax':'delete'},
+            success: function(data) {
+                if(data.status == 'success') {
+                    window.location.href = "<?php echo $this->createUrl('/listprofile');?>";
+                }
+            }
+        });
+  }
 </script>

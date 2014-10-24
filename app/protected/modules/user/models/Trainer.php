@@ -1,34 +1,33 @@
 <?php
 
 /**
- * This is the model class for table "{{org}}".
+ * This is the model class for table "{{trainer}}".
  *
- * The followings are the available columns in table '{{org}}':
+ * The followings are the available columns in table '{{trainer}}':
  * @property integer $id
- * @property string $legal_name
- * @property string $tax_number
- * @property string $logo
- * @property integer $billing_user_id
- * @property integer $admin_user_id
+ * @property integer $org_id
+ * @property integer $membership_id
  * @property integer $is_registered
+ * @property integer $is_paid
+ * @property string $first_joined
+ * @property string $last_seen
+ * @property string $last_valdiated
  *
  * The followings are the available model relations:
- * @property Hr[] $hrs
- * @property HrTeam[] $hrTeams
- * @property User $billingUser
- * @property User $adminUser
- * @property ProfileJob[] $profileJobs
- * @property Provider[] $providers
- * @property Trainer[] $trainers
+ * @property ProviderTrainer[] $providerTrainers
+ * @property SkillTrainer[] $skillTrainers
+ * @property Org $org
+ * @property Membership $membership
+ * @property UserSkill[] $userSkills
  */
-class Org extends CActiveRecord
+class Trainer extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return '{{org}}';
+		return '{{trainer}}';
 	}
 
 	/**
@@ -39,12 +38,11 @@ class Org extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('billing_user_id, admin_user_id, is_registered', 'numerical', 'integerOnly'=>true),
-			array('legal_name, tax_number, logo', 'length', 'max'=>255),
-                        array('logo', 'file', 'allowEmpty'=>true,'types'=>'jpg,png,gif','on'=>'update'),
+			array('first_joined, last_seen, last_valdiated', 'required'),
+			array('org_id, membership_id, is_registered, is_paid', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, legal_name, tax_number, logo, billing_user_id, admin_user_id, is_registered', 'safe', 'on'=>'search'),
+			array('id, org_id, membership_id, is_registered, is_paid, first_joined, last_seen, last_valdiated', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -56,13 +54,11 @@ class Org extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'hrs' => array(self::HAS_MANY, 'Hr', 'org_id'),
-			'hrTeams' => array(self::HAS_MANY, 'HrTeam', 'org_id'),
-			'billingUser' => array(self::BELONGS_TO, 'User', 'billing_user_id'),
-			'adminUser' => array(self::BELONGS_TO, 'User', 'admin_user_id'),
-			'profileJobs' => array(self::HAS_MANY, 'ProfileJob', 'org_id'),
-			'providers' => array(self::HAS_MANY, 'Provider', 'org_id'),
-			'trainers' => array(self::HAS_MANY, 'Trainer', 'org_id'),
+			'providerTrainers' => array(self::HAS_MANY, 'ProviderTrainer', 'trainer_id'),
+			'skillTrainers' => array(self::HAS_MANY, 'SkillTrainer', 'trainer_id'),
+			'org' => array(self::BELONGS_TO, 'Org', 'org_id'),
+			'membership' => array(self::BELONGS_TO, 'Membership', 'membership_id'),
+			'userSkills' => array(self::HAS_MANY, 'UserSkill', 'trainer_id'),
 		);
 	}
 
@@ -73,12 +69,13 @@ class Org extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'legal_name' => 'Legal Name',
-			'tax_number' => 'Tax Number',
-			'logo' => 'Logo',
-			'billing_user_id' => 'Billing User',
-			'admin_user_id' => 'Admin User',
+			'org_id' => 'Org',
+			'membership_id' => 'Membership',
 			'is_registered' => 'Is Registered',
+			'is_paid' => 'Is Paid',
+			'first_joined' => 'First Joined',
+			'last_seen' => 'Last Seen',
+			'last_valdiated' => 'Last Valdiated',
 		);
 	}
 
@@ -101,12 +98,13 @@ class Org extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('legal_name',$this->legal_name,true);
-		$criteria->compare('tax_number',$this->tax_number,true);
-		$criteria->compare('logo',$this->logo,true);
-		$criteria->compare('billing_user_id',$this->billing_user_id);
-		$criteria->compare('admin_user_id',$this->admin_user_id);
+		$criteria->compare('org_id',$this->org_id);
+		$criteria->compare('membership_id',$this->membership_id);
 		$criteria->compare('is_registered',$this->is_registered);
+		$criteria->compare('is_paid',$this->is_paid);
+		$criteria->compare('first_joined',$this->first_joined,true);
+		$criteria->compare('last_seen',$this->last_seen,true);
+		$criteria->compare('last_valdiated',$this->last_valdiated,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -117,7 +115,7 @@ class Org extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Org the static model class
+	 * @return Trainer the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -125,14 +123,10 @@ class Org extends CActiveRecord
 	}
         
         /*
-         * List all organization.
+         * Get organization lists
          */
-        public function getAllOrg()
+        public function getOrganization()
         {
-            $criteria = new CDbCriteria;
-            $criteria->select = 't.logo,t.legal_name,t.id'; 
-            $orgs = Org::model()->findAll($criteria);
-            
-            return $orgs;
+            return $this->org_id;
         }
 }

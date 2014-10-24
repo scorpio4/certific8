@@ -15,23 +15,26 @@
     <div class="profile-details-top">
         <div class="profile-name">
             <div>
-                <a id="username" class="editable editable-click" data-pk="1" data-type="address" href="#" data-original-title="" title="">
-                    <i class="fa fa-pencil edit-before"></i>
-                </a>
+                <?php if($type != 'view') {?>
+                    <a id="username" class="editable editable-click" data-pk="1" data-type="address" href="#" data-original-title="" title="Edit name">
+                        <i class="fa fa-pencil edit-before"></i>
+                    </a>
+                <?php }?>
                 <span id="username-detail">
                     <span class="dark-blue text01"><?php echo $user->first_name?></span> 
                     <span class="light-blue text01"><?php echo $user->last_name?></span>
                 </span>
             </div>
             <div>
-                <a href="#" id="designation" data-type="text" data-placement="top" data-title="Designation" class="editble">
+                <?php if($type != 'view') {?>
+                <a href="#" id="designation" data-type="text" data-placement="top" data-title="Designation" class="editble" title="Edit designation">
                     <i class="fa fa-pencil edit-before"></i>
                 </a>
+                <?php }?>
                 <span class="text02" id="designation-detail"><?php echo $profile->short_title?></span>
             </div>
         </div>
         <div class="profile-icons">
-            <img src="images/cpms.jpg" style="margin-right:10px;"><img src="images/cerified.jpg">
         </div>
         <div class="clearfix"></div>
     </div>
@@ -39,10 +42,12 @@
         <div class="row">
             <div class="col-md-7">
                 <div class="text03">
-                    <a href="#" id="biodata" data-type="textarea" data-placement="bottom" data-title="Biodata">
+                    <?php if($type != 'view') {?>
+                    <a href="#" id="biodata" data-type="textarea" data-placement="bottom" data-title="Biodata" title="Edit biodata">
                         <i class="fa fa-pencil edit-before"></i>
                     </a>
-                      <span id="biodata-detail"><?php echo $profile->short_bio?></span>
+                    <?php }?>
+                    <span id="biodata-detail"><?php echo $profile->short_bio?></span>
                 </div>	
             </div>
         </div>

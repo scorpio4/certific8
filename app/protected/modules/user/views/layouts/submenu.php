@@ -8,4 +8,5 @@
         'items' => $this->menu,
     ));
     ?>
+    <div class="clearfix"></div>
 </div>

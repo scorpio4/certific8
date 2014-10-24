@@ -51,6 +51,7 @@ class Profile extends CActiveRecord
         // will receive user inputs.
         return array(
             array('full_name, short_title, short_bio', 'required','on'=>'save'),
+            array('id, template_id', 'required','on'=>'template'),
             array('template_id, is_active, is_public, can_contact, show_vouches, min_salary, user_id, hr_id, membership_id', 'numerical', 'integerOnly' => true),
             array('slugname', 'length', 'max' => 16),
             array('avatar', 'file', 'allowEmpty'=>true,'types'=>'jpg,png,gif','on'=>'update'),
@@ -157,5 +158,44 @@ class Profile extends CActiveRecord
     {
         return parent::model($className);
     }
-
+    
+    /*
+    * Get profile completeness status
+    */
+    public function getProfileStatus($id)
+    {
+        $point = 0;
+        $profile = Profile::model()->findByPk($id);
+        if($profile) {
+            $user = User::model()->findByPk($profile->user_id);
+            if($profile->short_bio <> '') {
+                $point+= 10;
+            }
+            if($profile->short_title <> '') {
+                $point+= 10;
+            }
+            if($user) {
+                if($user->webpage <> '') {
+                    $point+= 10;
+                }
+                if($user->mobile <> '') {
+                    $point+= 10;
+                }
+            }
+            $socialProfile = SocialProfile::model()->findByAttributes(array('profile_id'=>$profile->id));
+            if($socialProfile) {
+                $point+= 20;
+            }
+            $profileSkill = ProfileSkill::model()->findByAttributes(array('profile_id'=>$profile->id));
+            if($profileSkill) {
+                $point+= 20;
+            }
+            $profileJob = ProfileJob::model()->findByAttributes(array('profile_id'=>$profile->id));
+            if($profileJob) {
+                $point+= 20;
+            }
+        }
+        
+        return $point;
+    }
 }

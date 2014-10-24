@@ -15,7 +15,8 @@
                 ->registerCssFile(Yii::app()->theme->baseUrl . '/css/bootstrap-timepicker.min.css')
                 ->registerCssFile(Yii::app()->theme->baseUrl . '/css/style.css')
                 ->registerCssFile(Yii::app()->theme->baseUrl . '/css/component.css')
-                ->registerCssFile(Yii::app()->theme->baseUrl . '/css/datepicker.css')
+                ->registerCssFile(Yii::app()->theme->baseUrl . '/css/select2.css')
+                ->registerCssFile(Yii::app()->theme->baseUrl . '/css/component.css')
                 ->registerCssFile(Yii::app()->theme->baseUrl . '/css/bootstrap-editable.css');
         $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/jquery-migrate-1.2.1.min.js', CClientScript::POS_END);
         $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/bootstrap.min.js', CClientScript::POS_END);
@@ -31,7 +32,8 @@
         $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/toucheffects.js', CClientScript::POS_END);
         $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/bootstrap-typeahead.js', CClientScript::POS_END);
         $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/bootstrap-datepicker.js', CClientScript::POS_END);
-        
+        $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/select2.min.js', CClientScript::POS_END);
+        $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/user.js', CClientScript::POS_END);
         ?>
         <script type="text/javascript" >
             baseUrl = '<?php echo Yii::app()->baseUrl;?>';
@@ -69,9 +71,14 @@
 
             });
        
-            $(".profile-head").hover(function() {
-                $(".edit-before").show();
+            $(".profile-head").hover(function(ev) {
+                if(ev.type == "mouseleave") {
+                    $(".edit-before").hide();
+                } else {
+                    $(".edit-before").show();
+                }
             });
+            
         </script>
 
         <div class="modal fade" id="Removepublication" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

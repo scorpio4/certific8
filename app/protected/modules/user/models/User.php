@@ -49,7 +49,11 @@
  */
 class User extends CActiveRecord
 {
-	/**
+	public $oldpassword;
+        public $newpassword;
+        public $password2;
+        
+        /**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
@@ -70,6 +74,9 @@ class User extends CActiveRecord
                         array('email, mobile, webpage', 'required','on'=>'contact,contact-update'),
                         array('avatar', 'file','types'=>'jpg, gif, png', 'allowEmpty'=>true, 'on'=>'create,update'),
                         array('password_sha256, email', 'required','on'=>'login'),
+                        array('oldpassword, newpassword,password2', 'required', 'on' => 'changepassword'),
+                        array('password2', 'compare', 'compareAttribute' => 'newpassword', 'on' => 'changepassword'),
+                        array('oldpassword', 'checkpassword', 'on' => 'changepassword'),
 			array('is_registered, is_paid, is_test, membership_id, profile_id, current_salary', 'numerical', 'integerOnly'=>true),
 			array('first_name, last_name, full_name, email, mobile, house_unit_number, street, suburb, state, postcode, country, username, registration_token, avatar', 'length', 'max'=>255),
 			array('geo_territory', 'length', 'max'=>32),
@@ -140,6 +147,9 @@ class User extends CActiveRecord
 			'first_joined' => 'First Joined',
 			'last_seen' => 'Last Seen',
 			'last_valdiated' => 'Last Valdiated',
+                        'password2' => 'Confirm Password',
+                        'oldpassword' => 'Current Password',
+                        'newpassword' => 'New Password',
 		);
 	}
 
@@ -244,6 +254,19 @@ class User extends CActiveRecord
             } else {
                 return false;
                 exit();
+            }
+        }
+        
+        /*
+         * Check current password.
+         */
+        public function checkpassword($attribute, $params)
+        {
+            $user = User::model()->findByPk(Yii::app()->user->id);
+            if ($this->oldpassword != '') {
+                if (!CPasswordHelper::verifyPassword($this->oldpassword, $user->password_sha256)) {
+                    $this->addError($attribute, 'Invalid old password');
+                }
             }
         }
 }

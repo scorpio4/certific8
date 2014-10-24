@@ -1,4 +1,5 @@
-<li>
+<?php $id = rand(100, 999).$data->id.rand(100, 999);?>
+<li id="profile-<?php echo $id;?>">
     <figure>
         <div class="vcard-body">
             <div class="v-top">
@@ -27,22 +28,23 @@
             </div>
         </div>
         <figcaption>
+            <?php $point = $data->getProfileStatus($data->id);?>
             <div class="progress-bar-main">
-                <div class="text11">Profile Completeness <span class="text-bold ml10">20%</span></div>
+                <div class="text11">Profile Completeness <span class="text-bold ml10"><?php echo $point.'%';?></span></div>
                 <div class="progress">
-                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                        <span class="sr-only">20% Complete</span>
+                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?php echo $point;?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $point.'%';?>">
+                        
                     </div>
                 </div>	
             </div>
-            <?php $id = rand(100, 999).$data->id.rand(100, 999);?>
             <div>
-                <a href="" class="btn btn-default btn-xs" title="Settings" data-toggle="modal" data-target="#mysettings"><i class="fa fa-cog"></i></a>
-                <a href="" title="View" class="btn btn-primary btn-xs"><i class="fa fa-search"></i></a>
-                <a href="" title="Copy" class="btn btn-warning btn-xs"><i class="fa fa-files-o"></i></a>
-                <!--<a href="" title="Edit" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i></a>-->
+                <a href="javascript:editSetting('<?php echo $data->id;?>')" class="btn btn-default btn-xs" title="Settings"><i class="fa fa-cog"></i></a>
+                <?php echo CHtml::link('<i class="fa fa-search"></i>',array('/profileview/'.$id),array('class'=>'btn btn-primary btn-xs','title'=>"View" ))?>
+                <?php echo CHtml::link('<i class="fa fa-files-o"></i>',array('/profilecopy/'.$id),array('class'=>'btn btn-warning btn-xs','title'=>"Copy" ))?>
                 <?php echo CHtml::link('<i class="fa fa-pencil"></i>',array('/profile/'.$id),array('class'=>'btn btn-success btn-xs','title'=>"Edit" ))?>
-                <a href="" title="Delete" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+                <?php 
+                    echo CHtml::link('<i class="fa fa-trash-o"></i>','javascript:void(0)',array('class'=>'btn btn-danger btn-xs','title'=>"Delete",'id'=>'delete-'.$id,'onclick'=>'deleteProfile('.$id.')'));
+                ?>
             </div>
         </figcaption>
     </figure>

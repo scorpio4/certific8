@@ -1,9 +1,11 @@
 <div>
     <div class="text04 pull-left"><span class="dark-blue">Contact Details</span></div>
     <div class="edit">
-        <a data-toggle="collapse" data-parent="#accordion" href="#editcontact">
-            <i class="fa fa-plus-square mr5"></i>Edit
-        </a>
+        <?php if($type != 'view') {?>
+            <a data-toggle="collapse" data-parent="#accordion" href="#editcontact">
+                <i class="fa fa-plus-square mr5"></i>Edit
+            </a>
+        <?php }?>
     </div>
     <div class="clearfix"></div>
 </div>
@@ -18,10 +20,11 @@
         <span class="dark-blue">Mobile : </span>   <span id="cell-detail"><?php echo $user->mobile;?></span>
     </div>
 </div>
-
-<div id="editcontact" class="panel-collapse collapse panel">
-    <div class="panel-body">
-        <div id="contact-success"></div>
-        <?php echo $this->renderPartial('_contact-form',compact('user'));?>
+<?php if($type != 'view') {?>
+    <div id="editcontact" class="panel-collapse collapse panel">
+        <div class="panel-body">
+            <div id="contact-success"></div>
+            <?php echo $this->renderPartial('_contact-form',compact('user'));?>
+        </div>
     </div>
-</div>
+<?php }?>

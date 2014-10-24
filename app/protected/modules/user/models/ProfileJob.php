@@ -94,7 +94,8 @@ class ProfileJob extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('profile_id',$profId);
+		//$criteria->compare('profile_id',$profId);
+                $criteria->condition = '(t.profile_id="'.$profId.'" and t.profile_id>0)';
 		//$criteria->compare('org_id',$this->org_id);
                 
 		return new CActiveDataProvider($this, array(

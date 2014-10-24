@@ -92,7 +92,7 @@ class SocialProfile extends CActiveRecord
 
 		$criteria->compare('user_id',$userId);
 		$criteria->compare('profile_id',$profileId);
-
+                $criteria->order = 't.order';
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
