@@ -108,4 +108,15 @@ class SocialProfile extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        /*
+        * Return user's social url/
+        */
+        public function getTemplateUrl()
+        {
+           $url = $this->social->url_template;
+           $url = str_replace('{username}', $this->username, $url);
+           
+           return $url;
+        }
 }

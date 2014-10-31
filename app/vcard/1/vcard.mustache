@@ -1,0 +1,87 @@
+<div id="outerWrapper" class='outerWrapper'>
+    <div id="contentWrapper" class='contentWrapper'>
+        <ul id="navMain" class='navMain'>
+            <!-- You can change the order of the menu or the icons here -->
+            <li><a href="#home" title="home"><img src="{{path}}images/icons/home.gif" alt="Home" /></a></li>
+            <li><a href="#about" title="about"><img src="{{path}}images/icons/about.gif" alt="About" /></a></li>
+            <li><a href="#jobs" title="job"><img src="{{path}}images/icons/job.png" alt="Job" /></a></li>
+            <li><a href="#gallery" title="skills"><img src="{{path}}images/icons/gallery.gif" alt="Skills" /></a></li>
+            <li><a href="#networks" title="social"><img src="{{path}}images/icons/network.gif" alt="Social" /></a></li>
+            <li><a href="#contact" title="contact"><img src="{{path}}images/icons/contact.gif" alt="Contact" /></a></li>
+        </ul>
+        <div id="content" class='content'>
+            <div id="scrollWrapper" class='scrollWrapper'>
+                <ul>
+                    <li id="home" class="home section">
+                        <h1>{{user.full_name}}<a href="javascript:downloadVcf()" class="vcard" title="Download vCard"><img src="{{path}}images/icons/vcard.gif" alt="Download vCard" /></a>
+                        </h1>
+                        <h3>{{profile.short_title}}</h3>
+                    </li>
+                    <li id="about" class="about section">
+                        <h2>About Me</h2>
+                        <img src="{{user.getAvatar}}" alt="Your Name" class="left" />
+                        <p>{{profile.short_bio}}</p>
+                    </li>
+                    <li id="jobs" class="job section">
+                        <h2>Former jobs</h2>
+                        <div class="panel-card">
+                            <table class="table-card">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 37%;">Position</th>
+                                        <th style="width: 28%;">Company</th>
+                                        <th style="width: 35%;">Hired</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{# jobs }}
+                                    {{> jobList}}
+                                    {{/ jobs }}
+                                </tbody>
+                            </table>
+                        </div>    
+                    </li>
+                    <li id="gallery" class="gallery section">
+                        <ul class="navGallery">
+                            <li class="current"><a href="#gallery">1</a></li>
+                        </ul>
+                        <h2>My Qualifications</h2>
+                        <ul class="gallery">
+                            {{# skills }}
+                            {{> skillList }}
+                            {{/ skills }}
+                        </ul>
+                    </li>
+
+                    <li id="networks" class="networks section">
+                        <h2>Learn more about me</h2>
+                        <ul>
+                            {{# socialProfiles }}
+                            {{> socialList }}
+                            {{/ socialProfiles }}
+                        </ul>
+                    </li>
+                    <!-- Contact Section Details -->
+                    <li id="contact" class="contact section">
+                        <h2>Contact</h2>
+                        <div id="addressDetails" class='addressDetails'>
+                            <h3>{{user.full_name}} -{{profile.short_title}}</h3>
+                            <p>{{# user.suburb}}{{user.suburb}},<br />{{/ user.suburb}}
+                                {{# user.state}}{{user.state}},<br />{{/ user.state}}
+                                {{# user.country}}{{user.country}} {{# user.postcode}} : {{user.postcode}}{{/ user.postcode}} {{/ user.country}} </p>
+                            <p>
+                                <strong>Cell:</strong> {{user.mobile}}<br />
+                                <strong>Email:</strong> <a href="mailto:{{user.email}}">{{user.email}}</a>
+                            </p>
+                        </div>
+                        <div id="contactForm" class='contactForm'>
+                            <div id="note" class='note'>Please send a short email. A copy will be sent to you too.</div>
+                            {{> form}}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+

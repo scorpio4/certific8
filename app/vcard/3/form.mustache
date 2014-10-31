@@ -1,0 +1,29 @@
+<form onsubmit="return contactForm({{user.id}});" action="javascript:contactForm({{user.id}});" class="contact" id="contactform">
+    <div id="success" class="successMessage"></div>
+    <p class="form-group" id="contact-name">
+        {{#isLabel}}
+            <label for="name">Name</label>
+         {{/isLabel}}
+        <input type="text" name="User[full_name]" id="User_full_name" value="" class="form-control name-contact" />
+        <div id="User_full_name_em_" class="errorMessage" style=""></div>
+    </p>
+    <p class="form-group" id="contact-email">
+        {{#isLabel}}
+            <label for="email">E-Mail</label>
+        {{/isLabel}}
+        <input type="text" name="User[email]" id="User_email" value="" class="form-control email-contact" />
+        <div id="User_email_em_" class="errorMessage" style=""></div>
+    </p>
+    <p class="form-group" id="contact-message">
+        {{# isLabel}}
+            <label for="message">Message</label>
+        {{/ isLabel}}
+        <textarea class="form-control message-contact" name="User[message]" id="User_message" rows="5" cols="40"></textarea>
+        <div id="User_message_em_" class="errorMessage" style=""></div>
+    </p>
+    
+    <section class="button-demo" style="display: inline-block;">
+        <button class="ladda-button submit send_email" name="submit" data-color="green" data-style="expand-left">SEND MESSAGE</button>
+    </section>
+</form>
+   

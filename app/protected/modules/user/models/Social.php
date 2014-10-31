@@ -122,4 +122,12 @@ class Social extends CActiveRecord
             
             return $social;
         }
+        
+        /*
+         * Return lower case string.
+         */
+        public function getLower()
+        {
+            return strtolower($this->title);
+        }
 }

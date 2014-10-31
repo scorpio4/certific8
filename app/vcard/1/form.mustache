@@ -1,0 +1,27 @@
+<form action="javascript:contactForm({{user.id}});" class="contact" id="contactform">
+    <div id="success" class="successMessage"></div>
+    <div class="field">
+        {{#isLabel}}
+            <label for="name">Name</label>
+         {{/isLabel}}
+        <input type="text" name="User[full_name]" id="User_full_name" value="" class="text" />
+        <div id="User_full_name_em_" class="errorMessage" style=""></div>
+    </div>
+    <div class="field">
+        {{#isLabel}}
+            <label for="email">E-Mail</label>
+        {{/isLabel}}
+        <input type="text" name="User[email]" id="User_email" value="" class="text" />
+        <div id="User_email_em_" class="errorMessage" style=""></div>
+    </div>
+    <div class="field">
+        {{# isLabel}}
+            <label for="message">Message</label>
+        {{/ isLabel}}
+        <textarea class="textbox" name="User[message]" id="User_message" rows="5" cols="40"></textarea>
+        <div id="User_message_em_" class="errorMessage" style=""></div>
+    </div>
+    <div class="buttons">
+        <input type="submit" value="Send" class="submit" />
+    </div>
+</form>

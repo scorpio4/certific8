@@ -140,4 +140,19 @@ class Skill extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        /*
+        * Return certificate logo
+        */
+        public function getLogo()
+        {
+           $path = Yii::getPathOfAlias('webroot'). '/uploads/skill/'.$this->logo;
+           if(file_exists($path)) {
+               $logo = Yii::app()->baseUrl. '/uploads/skill/'.$this->logo;
+           } else {
+               $logo = Yii::app()->theme->baseUrl."/images/certified.png";
+           }
+           return $logo;
+        }
+        
 }

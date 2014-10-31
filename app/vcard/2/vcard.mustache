@@ -1,0 +1,110 @@
+<div id="background-pattern" class="predifined-1">
+    <div id="background-radial">
+        <div id="container">
+            <header class="brown">
+            </header>
+            <div id="card">
+                <div id="card-header" class="red">
+                    <div id="card-header-logo"></div>
+                    <div id="card-header-button" onclick ="downloadVcf()" class="download mouse-events"></div>
+                </div>
+                <div id="card-content">
+                    <div id="card-content-frame">
+                        <div id="card-content-wrap">
+                            <div id="about" class="content clearfix">
+                                <div id="about-image">
+                                    <img src="{{user.getAvatar}}" alt="" />
+                                </div>
+                                <div id="about-content">
+                                    <h1>{{user.full_name}}</h1>
+                                    <h2>{{profile.short_title}}</h2>
+                                    <div style="height:10px;"></div>
+                                    <div class="scrollable" style="padding-right: 8px;height:204px;">
+                                        <h3>About me</h3>
+                                        <p>{{profile.short_bio}}</p>
+                                        <h3>Former jobs</h3>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 37%;">Position</th>
+                                                    <th style="width: 28%;">Company</th>
+                                                    <th style="width: 35%;">Hired</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {{# jobs }}
+                                                {{> jobList}}
+                                                {{/ jobs }}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="work" class="content">
+                                <h1>My skills</h1>
+                                <div id="work-gallery-frame">
+                                    <ul id="work-gallery" class="clearfix">
+                                        {{# skills }}
+                                        {{> skillList }}
+                                        {{/ skills }}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div id="social" class="content">
+                                <h1>Social</h1>
+                                <ul id="social-networks" class="clearfix">
+                                    {{# socialProfiles }}
+                                    {{> socialList }}
+                                    {{/ socialProfiles }}
+                                </ul>
+                            </div>
+                            <div id="contact" class="content">
+                                <h1>Contact us</h1>
+                                <div id="contact-address">
+                                    <p>{{user.full_name}}</p>
+                                    <p>{{user.suburb}}</p>
+                                    <p>{{user.state}}</p>
+                                    <p>{{user.country}}: {{user.postcode}}</p>
+                                </div>
+                                <div id="contact-info">
+                                    <strong>Telephone:</strong><span>{{user.mobile}}</span><br />
+                                    <strong>E-mail:</strong><span>{{user.email}}</span>
+                                </div>
+                                <div id="contact-form">
+                                    {{> form}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="card-footer"></div>
+            </div>
+            <nav>
+                <ul class="clearfix">
+                    <li class="active"><a href="/about">About</a></li>
+                    <li><a href="/work">Work</a></li>
+                    <li><a href="/social">Social</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(window).load(function() {
+        $('.submit-slider').remove();
+        var data = $('#user-contact').serializeArray();
+        $('#user-contact').append('<button class="submit-slider" id="submit-slider">sss</button>');
+        socialNetworks = $('#social-networks').find('li'),
+                socialNetworks.attr('style', 'margin-right: 54px; margin-bottom: 28px');
+        $.each(socialNetworks, function(v, p) {
+            r = (v % 6);
+            if (r == 0 && v != 0) {
+                n = v + 1;
+                $('#social-networks li:nth-child(' + n + ')').css({marginRight: 0});
+            }
+
+        });
+    });
+
+</script>

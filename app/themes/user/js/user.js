@@ -17,6 +17,15 @@ function changeForm(type) {
                     }
     });
 }
+function successmsg(id,message) 
+{
+    $('#'+id).show();
+    $('#'+id).html('<div class="alert alert-success alert-dismissable mt20">'+
+                        '<button type=button class=close data-dismiss=alert aria-hidden=true>&times;</button>'+
+                        '<div>'+message+'</div>'+
+                   '</div>');
+    setTimeout( function(){$('#'+id).hide();} , 4000);       
+}
 
 
 

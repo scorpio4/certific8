@@ -1,7 +1,10 @@
-<?php $id = rand(100, 999).$data->id.rand(100, 999);?>
+<?php 
+    $id = rand(100, 999).$data->id.rand(100, 999);
+    $template = ProfileTemplate::model()->getProfileTemplate($data->template_id);
+?>
 <li id="profile-<?php echo $id;?>">
     <figure>
-        <div class="vcard-body">
+        <div class="<?php echo $template['main-class'];?>">
             <div class="v-top">
                 <div class="v-avatar">
                     <?php 
@@ -21,7 +24,7 @@
                 </div>
                 <div class="clearfix"></div>
             </div>	
-            <div class="v-bio">
+            <div class="<?php echo $template['inner-class'];?>">
                 <div>
                     <?php echo $data->short_bio;?>
                 </div>

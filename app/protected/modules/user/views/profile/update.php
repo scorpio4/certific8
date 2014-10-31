@@ -55,8 +55,8 @@ $profileId = $profile->id;
     <div class="col-md-4">
         <?php if($type <> 'view') {?>
             <div class="business-card">
-                <div id="vCard-success"></div>
-                <?php echo $this->renderPartial('vCard',compact('profile'));?>
+                <div id="template-success"></div>
+                <?php echo $this->renderPartial('template',compact('profile'));?>
             </div>
         <?php }?>
         <div class="help-box">
@@ -235,4 +235,12 @@ $profileId = $profile->id;
             }
         });
   }
+  function setPreview(id)
+  {
+      templte = $('#Profile_template_id').val();
+      if(templte) {
+          window.open("<?php echo Yii::app()->createAbsoluteUrl('/vcard');?>/"+templte+"/profile/"+id);
+      }
+  }
+  
 </script>

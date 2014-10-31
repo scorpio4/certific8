@@ -94,4 +94,36 @@ class ProfileTemplate extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        /*
+        * Get template structure for profile.
+        */
+        public function getProfileTemplate($id)
+	{
+            $template = array();
+            switch ($id) {
+                case 1:
+                    $template['main-class'] = 'vcard-body blue-body';
+                    $template['inner-class'] = 'v-bio blue-light-body';
+                    break;
+                case 2:
+                    $template['main-class'] = 'vcard-body red-body';
+                    $template['inner-class'] = 'v-bio black-body';
+                    break;
+                case 3:
+                    $template['main-class'] = 'vcard-body blue-dark-body';
+                    $template['inner-class'] = 'v-bio black-dark-body';
+                    break;
+                case 4:
+                    $template['main-class'] = 'vcard-body gray-light-body';
+                    $template['inner-class'] = 'v-bio gray-dark-body';
+                    break;
+
+                default:
+                    $template['main-class'] = 'vcard-body';
+                    $template['inner-class'] = 'v-bio';
+            }
+            
+            return $template;
+        }
 }

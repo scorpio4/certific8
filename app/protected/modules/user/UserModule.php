@@ -19,7 +19,7 @@ class UserModule extends CWebModule
                         'user'=>array(
                                  // enable cookie-based authentication
                                  'allowAutoLogin'=>true,
-                                 'loginUrl' => Yii::app()->createUrl('/signup')
+                                 'loginUrl' => Yii::app()->createUrl('/')
                          ),
                  ));
 	}

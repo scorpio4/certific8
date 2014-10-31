@@ -52,7 +52,7 @@ class User extends CActiveRecord
 	public $oldpassword;
         public $newpassword;
         public $password2;
-        
+        public $message;
         /**
 	 * @return string the associated database table name
 	 */
@@ -77,6 +77,7 @@ class User extends CActiveRecord
                         array('oldpassword, newpassword,password2', 'required', 'on' => 'changepassword'),
                         array('password2', 'compare', 'compareAttribute' => 'newpassword', 'on' => 'changepassword'),
                         array('oldpassword', 'checkpassword', 'on' => 'changepassword'),
+                        array('full_name,message, email', 'required','on'=>'sendmail'),
 			array('is_registered, is_paid, is_test, membership_id, profile_id, current_salary', 'numerical', 'integerOnly'=>true),
 			array('first_name, last_name, full_name, email, mobile, house_unit_number, street, suburb, state, postcode, country, username, registration_token, avatar', 'length', 'max'=>255),
 			array('geo_territory', 'length', 'max'=>32),
@@ -86,7 +87,7 @@ class User extends CActiveRecord
                         array('webpage', 'url', 'defaultScheme' => 'http'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, first_name, last_name, full_name, email, mobile, house_unit_number, street, suburb, state, postcode, country, username, password_sha256, registration_token, avatar, is_registered, is_paid, is_test, membership_id, profile_id, current_salary, geo_territory, ipv4address, first_joined, last_seen, last_valdiated, webpage', 'safe', 'on'=>'search,contact,contact-update'),
+			array('id, first_name, last_name, full_name, email, mobile, house_unit_number, street, suburb, state, postcode, country, username, password_sha256, registration_token, avatar, is_registered, is_paid, is_test, membership_id, profile_id, current_salary, geo_territory, ipv4address, first_joined, last_seen, last_valdiated, webpage', 'safe', 'on'=>'search,contact,contact-update,contact'),
 		);
 	}
 
@@ -268,5 +269,20 @@ class User extends CActiveRecord
                     $this->addError($attribute, 'Invalid old password');
                 }
             }
+        }
+        
+        /*
+        * Return avatar of user.
+        */
+        public function getAvatar()
+        {
+           $path = Yii::getPathOfAlias('webroot'). '/uploads/avatar/' . $this->id.'/profile/'.$this->avatar;
+            if(file_exists($path)) {
+                $path = Yii::app()->baseUrl. '/uploads/avatar/' . $this->id.'/profile/'.$this->avatar;
+            } else {
+                $path = Yii::app()->theme->baseUrl."/images/photos/profile.png";
+            }
+            
+            return $path;
         }
 }

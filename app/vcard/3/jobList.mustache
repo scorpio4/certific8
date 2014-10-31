@@ -1,0 +1,10 @@
+<li class="first">
+    <h5>{{job_title}} <span class="duration"><i class="fa fa-calendar color"></i> {{getJobDetatil}}</span></h5>
+    <h6><span class="fa fa-briefcase"></span> {{org.legal_name}}</h6>
+    <p>
+        {{%FILTERS}}
+        {{ comment | helper.jobMinimize }}
+    </p>
+</li>
+
+

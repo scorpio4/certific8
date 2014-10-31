@@ -1,0 +1,15 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Mr Bob Smith
+N:Smith;Bob;;Mr;
+ADR;TYPE=work:;;My Street;Beverley Hills;California;90210;USA
+TEL;TYPE=work,voice:555-123-456
+TEL;TYPE=cell:555-123-567
+TEL;TYPE=work,fax:555-123-678
+EMAIL;TYPE=internet,work:bob@example.com
+TITLE:Certified Professional
+ROLE:CTO
+ORG:Certific8;Professional Services
+REV:2014-08-14T09:02:20Z
+URL:www.example.com/my_profile/
+END:VCARD

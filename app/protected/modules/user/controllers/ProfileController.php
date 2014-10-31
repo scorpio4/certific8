@@ -47,7 +47,10 @@ class ProfileController extends Controller
                                                  'create',
                                                  'update',
                                                  'searchSkill',
-                                                 'saveTemplate'
+                                                 'saveTemplate',
+                                                 'vcard',
+                                                 'contact',
+                                                 'downloadVcf'
                                         ),
 				'roles'=>array('members'),
 			),
@@ -717,6 +720,7 @@ class ProfileController extends Controller
             echo CJSON::encode($resultArr);
             
         }
+        
         /*
          * Save profile template
          */
@@ -726,7 +730,7 @@ class ProfileController extends Controller
             $profile->scenario = 'template';
             $message = 'Template been updated successfully.';
             // if it is ajax validation request
-            if (isset($_POST['ajax']) && $_POST['ajax'] === 'vCard-form') {
+            if (isset($_POST['ajax']) && $_POST['ajax'] === 'template-form') {
                 echo CActiveForm::validate($profile);
                 Yii::app()->end();
             }
@@ -747,4 +751,167 @@ class ProfileController extends Controller
                 }
             }
         }
+        
+        /*
+         * View profile template.
+         */
+        public function actionVcard() 
+        {
+            $this->layout = 'vcard';
+            if(isset($_GET['vid']) && isset($_GET['pid'])) {
+                $id = $_GET['pid'];
+                $id = substr($id, 3, -3);
+                $profile = Profile::model()->findByPk($id);
+                if($profile) {
+                    $vcardId = $_GET['vid'];
+                    $user = User::model()->findByPk($profile->user_id);
+                    $path = Yii::app()->baseUrl . '/vcard/'.$vcardId;
+                    spl_autoload_unregister(array('YiiBase','autoload'));
+                    Yii::import('application.vendor.mustache.*');
+                    require_once('src/Mustache/Autoloader.php');
+                    Mustache_Autoloader::register();
+                    spl_autoload_register(array('YiiBase', 'autoload'));
+                    try {
+                        $path = Yii::getPathOfAlias('webroot') . '/vcard/'.$_GET['vid'];
+                        $options =  array('extension' => '.mustache');
+                        $mustache = new Mustache_Engine(array(
+                            'loader'          => new Mustache_Loader_FilesystemLoader($path,$options),
+                            //'partials_loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__).'/views/partials'),
+                        ));
+                        $mustache->addHelper('helper',array(
+                            'titleMinimize' => function($value) { 
+                                    if(strlen($value)>20) {
+                                        $value = substr($value, 0,20).'..';
+                                    }
+                                    return ((string) $value); 
+                            },
+                            'detailMinimize' => function($value) { 
+                                    if(strlen($value)>40) {
+                                        $value = substr($value, 0,40).'..';
+                                    }
+                                    return ((string) $value); 
+                            },
+                            'jobMinimize' => function($value) { 
+                                    if(strlen($value)>200) {
+                                        $value = substr($value, 0,200).'..';
+                                    }
+                                    return ((string) $value); 
+                            },
+                        ));
+                            
+                        if($vcardId == 2) {
+                            $isLabel = false;
+                        } else {
+                            $isLabel = true;
+                        }
+                        $profileId = $profile->id;
+                        $userId = $profile->user_id;
+                        $skills = ProfileSkill::model()->search($profileId)->getData();
+                        $socialProfiles = SocialProfile::model()->search($userId,$profileId)->getData();
+                        $jobs = ProfileJob::model()->search($profileId)->getData();
+                        $path = Yii::app()->baseUrl. '/vcard/'.$_GET['vid'].'/';
+                        $this->render('vcard',compact('profile','user','path','vcardId','mustache','profileId','skills','socialProfiles','isLabel','jobs'));
+                        Yii::app()->end();
+                    } catch (Exception $e) {
+                        
+                    }
+                }
+            }
+            $this->redirect(array('/listprofile'));
+        }
+        
+        /*
+         * Send a mail to user.
+         */
+        public function actionContact() 
+        {
+           $model = new User;
+           $model->scenario = 'sendmail';
+           // if it is ajax validation request
+           if (isset($_POST['ajax']) && $_POST['ajax'] === 'contactform') {
+               echo CActiveForm::validate($model);
+               Yii::app()->end();
+           }
+           if (isset($_POST['User'])) {
+               $model->attributes = $_POST['User'];
+               if ($model->validate()) {
+                    $user = User::model()->findByPk(Yii::app()->user->id);
+                    $to = $user->email;
+                    $from = Yii::app()->params['adminEmail'];
+                    $sub = 'Certific8 - Contact Enquiry';
+                    $msg = 'Name: '.$model->full_name.'<br><br>
+                            E-Mail: '.$model->email.'<br><br>
+                            Message: '.$model->message.'<br><br>
+                            ';
+                    echo CJSON::encode(array(
+                       'status' => 'success',
+                       'message'=>'Email been sent successfully.'
+                    ));
+                    
+                    $model->sendMail($to, $from, $msg, $sub);
+               } else {
+                   $error = CActiveForm::validate($model);
+                   if ($error != '[]')
+                       echo $error;
+                   Yii::app()->end();
+               }
+           }
+        }
+        
+        /*
+         * Download user vcf
+         */
+        public function actionDownloadVcf()
+        {
+            if(isset($_GET['id'])) {
+                $profile = Profile::model()->findByPk($_GET['id']);
+                if($profile) {
+                    $user = User::model()->findByPk($profile->user_id);
+                    $card = "BEGIN:VCARD\r\n";
+                    $card .= "VERSION:3.0\r\n";
+                    $card .= "PRODID:-//class_vcard from TroyWolf.com//NONSGML Version 1//EN\r\n";
+                    $card .= "REV:".date('Y-m-d H:i:s')."\r\n";
+                    $card .= "FN:".$profile->full_name."\r\n";
+                    $card .= "N:"
+                      .$user->last_name.";"
+                      .$user->first_name.";"
+                      ."\r\n";
+                    $jobs = ProfileJob::model()->search($profile->id)->getData();
+                    $title = array();
+                    $org = array();
+                    foreach ($jobs as $job) {
+                        $title[] = $job->job_title.';';
+                        $org[] = $job->org->legal_name;
+                    }
+                    if(count($title)>0) {
+                        $card .= "TITLE:".implode(';',$title)."\r\n";
+                    }
+                    if(count($org)>0) {
+                        $card .= "ORG:".implode(';',$org)."\r\n";
+                    }
+                    $card .= "\r\n";
+                    $card .= "ADR;TYPE=home:"
+                        .''.";"
+                        .''.";"
+                        .$user->street.";"
+                        .$user->suburb.";"
+                        .$user->state.";"
+                        .$user->postcode.";"
+                        .$user->country."\r\n";
+
+                    $card .= "EMAIL;TYPE=internet,pref:".$user->email."\r\n"; 
+                    $card .= "TEL;TYPE=cell,voice:".$user->mobile."\r\n"; 
+                    $card .= "URL;TYPE=work:".$user->webpage."\r\n"; 
+                    $card .= "END:VCARD\r\n";
+
+                    header("Content-type: text/directory");
+                    header("Content-Disposition: attachment; filename=".$profile->full_name.".vcf");
+                    header("Pragma: public");
+                    echo $card;
+                    exit;
+                }
+            }
+            $this->redirect(array('/listprofile'));
+        }
+        
 }    

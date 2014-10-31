@@ -128,4 +128,22 @@ class ProfileJob extends CActiveRecord
                 }
             }
         }
+        
+        /*
+        * Get current company status of user.
+        */
+        public function getJobDetatil()
+        {
+            $status = '';
+            if($this->end_date <> '' && $this->end_date > 0) {
+                $endate = strtotime($this->end_date);
+                if(time()>$endate) {
+                    $status = date('Y',strtotime($this->start_date)).' - '.date('Y',$endate);
+                } else {
+                    $status = date('Y',strtotime($this->start_date)).' - Present';
+                }
+            }
+            return $status;
+        }
+        
 }

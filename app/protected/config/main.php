@@ -50,6 +50,7 @@ return array(
                                 '/profile/<id>'=>'user/profile/update',
                                 '/listprofile'=>'user/profile/index',
                                 '/profileview/<id>'=>'user/profile/view',
+                                '/vcard/<vid>/profile/<pid>'=>'user/profile/vcard',
                                 '/changepassword'=>'user/user/changePassword',
                                 '/profilecopy/<id>'=>'user/profile/profileCopy',
                                 '/verify/<id>'=>'user/user/verify',

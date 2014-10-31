@@ -1,0 +1,17 @@
+<div class="view view-first portfolio logo" data-cat="logo">
+    <img src="{{userSkill.skill.getLogo}}" />
+    <div class="mask">
+        <h2>
+            {{%FILTERS}}
+            {{ userSkill.skill.title | helper.titleMinimize }}
+        </h2>
+        <p>
+            {{%FILTERS}}
+            {{ userSkill.skill.details | helper.detailMinimize }}
+        </p>
+        <a href="{{userSkill.skill.webpage}}" rel="portfolio" class="info open-imag">
+            <i class="fa fa-search"></i>
+        </a>
+
+    </div>
+</div> 
