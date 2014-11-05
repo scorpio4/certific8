@@ -1,4 +1,7 @@
 <div class="panel-heading">Help</div>
 <div class="panel-body">
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+    <p>Certific8 recognises that users need to tailor their resumes (profiles) to market themselves to employers.</p>
+    <p>A profile is similar to a resume/CV.</p>
+    <p>A Profile is an attractively branded record of their career. Each profile is displayed using a specific template.</p>
+    <p>The Profile Editor allows a user Member to publish a branded resume for their career achievements.</p>
 </div>

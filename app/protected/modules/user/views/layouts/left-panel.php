@@ -14,9 +14,6 @@
             <h4 class="media-heading">
                 <?php echo $user->full_name;?>
             </h4>
-            <small class="text-muted">
-                <?php echo ucfirst(Yii::app()->user->role);?>
-            </small>
         </div>
     </div>
     <?php 

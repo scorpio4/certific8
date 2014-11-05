@@ -7,9 +7,15 @@ $this->breadcrumbs = array(
 );
 
 $this->menu = array(
-    array('label' => '<i class="fa fa-plus"></i>', 'url' => array('/profile'), 'linkOptions' => array('class' => 'btn btn-primary', 'title' => 'Add')),
+    array('label' => '<i class="fa fa-plus"></i>', 'url' => array('/profile'), 'linkOptions' => array('class' => 'btn btn-primary', 'title' => 'Add Profile')),
 );
 ?>
+<?php if(Yii::app()->user->hasFlash('success')):?>
+<div class="alert alert-success alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <?php echo Yii::app()->user->getFlash('success'); ?>
+</div>
+<?php endif; ?>
 <div id="profile-success"></div>
 <?php
     $this->widget('zii.widgets.CListView', array(
@@ -18,6 +24,7 @@ $this->menu = array(
         'itemView'=>'_profile-list',
         'itemsTagName'=>'ul',
         'summaryText'=>'',
+        'emptyText'=>'You have no profiles. '.CHtml::link('Add a profile now.',array('/profile')),
         'enablePagination'=>false,
         'itemsCssClass'=>'grid cs-style-7'
     ));

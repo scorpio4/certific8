@@ -11,10 +11,10 @@
         <?php }?>
         <div class="clearfix"></div>
     </div>
+    <p class="grey-color text-bold"><?php echo date('F Y',  strtotime($data->start_date)).' - '.date('F Y',  strtotime($data->end_date)).' ('.$data->getExperience($data).')';?></p>
     <p>
         <?php echo $data->comment;?>
     </p>
-    <p>Start Date:<?php echo $data->start_date;?></p>
-    <p>End Date:<?php echo $data->end_date;?></p>
+   
 </li>
 

@@ -37,14 +37,14 @@ $form = $this->beginWidget('CActiveForm', array(
                 </div>
                 <div class="row">
                     <div class="pl15"><label>Time Period <span class="red-color">*</span></label></div>
-                    <div class="col-md-3 form-group alpha-r">
+                    <div class="col-md-5 form-group alpha-r">
                         <?php echo $form->textField($profileJob, 'start_date', array('class' => "form-control")); ?>
                         <?php echo $form->error($profileJob, 'start_date'); ?>
                     </div>
                     <div class="col-md-1 form-group text-center">
                     -
                     </div>
-                    <div class="col-md-3 form-group  alpha-r">
+                    <div class="col-md-5 form-group  alpha-r">
                        <?php echo $form->textField($profileJob, 'end_date', array('class' => "form-control")); ?>
                         <?php echo $form->error($profileJob, 'end_date'); ?>
                     </div>
@@ -117,16 +117,17 @@ $(document).ready(function(){
     });
 
     var stdate = $("#ProfileJob_start_date").datepicker( {
-        format: "dd/mm",
-        viewMode: "dates", 
-        maxViewMode: "months"
+        format: "mm/yyyy",
+        viewMode: "months", 
+        minViewMode: "months"
     }).on('changeDate', function(ev) {
             stdate.hide();
         }).data('datepicker');;
     var endate = $("#ProfileJob_end_date").datepicker( {
-        format: "dd/mm",
-        viewMode: "dates", 
-        maxViewMode: "months"
+        format: "mm/yyyy",
+        viewMode: "months", 
+        minViewMode: "months",
+        clearBtn: true,
     }).on('changeDate', function(ev) {
             endate.hide();
         }).data('datepicker');;

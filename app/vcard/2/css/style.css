@@ -596,7 +596,7 @@ input {
 	-webkit-box-shadow: 0px 1px 0px 0px #f1f1f1;
 	-moz-box-shadow: 0px 1px 0px 0px #f1f1f1;
 	box-shadow: 0px 1px 0px 0px #f1f1f1;
-	margin-bottom: 12px;
+	/*margin-bottom: 12px;*/
 	color: #515355;
 }
 .oldie input {
@@ -625,7 +625,7 @@ textarea {
 	-webkit-box-shadow: 0px 1px 0px 0px #f1f1f1;
 	-moz-box-shadow: 0px 1px 0px 0px #f1f1f1;
 	box-shadow: 0px 1px 0px 0px #f1f1f1;
-	margin-bottom: 12px;
+	/*margin-bottom: 12px;*/
 	resize: none;
 	color: #515355;
 }
@@ -1173,4 +1173,10 @@ textarea.valid {
 	color: #9f9f9f;
 	line-height: 12px;
 	text-shadow: #fafafa 0 1px 0;
+}
+.field {
+    margin-bottom: 8px;
+}
+.errorMessage {
+    margin-top: 5px;
 }

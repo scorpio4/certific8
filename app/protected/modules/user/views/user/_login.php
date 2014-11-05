@@ -37,16 +37,17 @@ $form = $this->beginWidget('CActiveForm', array(
                                 });
                             }       
                         }',
-                ), array('id' => 'loginbtn', 'class' => 'btn-green m-r-5 logbtn'));
+                ), array('id' => 'loginbtn', 'class' => 'btn-blue mr10 logbtn'));
         ?>
-        <?php echo CHtml::button('Register', array('onclick' => 'changeForm("register")', 'class' => 'btn-blue')); ?>
+        <?php echo CHtml::link('Forgot your password?','javascript:forgotModal()', array('class' => 'fo-pass'));?>
     </div>
-    <div class="form-group-main">
+    <div class="text05 mb5">Or you can login with one of the following.</div>
+    <div class="form-group-main social-img">
         <?php
-            $img = CHtml::image(Yii::app()->theme->baseUrl . '/images/linked-in.png', 'Linkedin', array('class' => 'm-r-5'));
-            echo CHtml::link($img, array('user/sociallogin/provider/LinkedIn'));
-            $img = CHtml::image(Yii::app()->theme->baseUrl . '/images/facebook.png', 'Facebook');
-            echo CHtml::link($img, array('user/sociallogin/provider/Facebook'));
+            $img = CHtml::image(Yii::app()->theme->baseUrl . '/images/lin.jpg', 'Linkedin', array('class' => 'm-r-5'));
+            echo CHtml::link($img, 'javascript:void(0)',array('onclick'=>'socialLogin("LinkedIn","ln")'));
+            $img = CHtml::image(Yii::app()->theme->baseUrl . '/images/fb.jpg', 'Facebook');
+            echo CHtml::link($img, 'javascript:void(0)',array('onclick'=>'socialLogin("Facebook","fb")'));
         ?>
     </div>
 <?php $this->endWidget(); ?>

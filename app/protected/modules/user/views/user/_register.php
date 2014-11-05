@@ -46,16 +46,16 @@ $form = $this->beginWidget('CActiveForm', array(
                             }',
                     ), array('id' => 'registerbtn', 'class' => 'btn-green m-r-5'));
             ?>
-        <?php echo CHtml::button('Login', array('onclick' => 'changeForm("login")', 'class' => 'btn-blue')); ?>
         </div>
-        <div class="form-group-main">
-        <?php
-            $img = CHtml::image(Yii::app()->theme->baseUrl . '/images/linked-in.png', 'Linkedin', array('class' => 'm-r-5'));
-            echo CHtml::link($img, array('user/sociallogin/provider/LinkedIn'));
-            $img = CHtml::image(Yii::app()->theme->baseUrl . '/images/facebook.png', 'Facebook');
-            echo CHtml::link($img, array('user/sociallogin/provider/Facebook'));
-        ?>
-    </div>
+        <div class="text05 mb5">Or you can register with one of the following.</div>
+        <div class="form-group-main social-img">
+            <?php
+                $img = CHtml::image(Yii::app()->theme->baseUrl . '/images/lin.jpg', 'Linkedin', array('class' => 'm-r-5'));
+                echo CHtml::link($img, 'javascript:void(0)',array('onclick'=>'socialLogin("LinkedIn","ln")'));
+                $img = CHtml::image(Yii::app()->theme->baseUrl . '/images/fb.jpg', 'Facebook');
+                echo CHtml::link($img, 'javascript:void(0)',array('onclick'=>'socialLogin("Facebook","fb")'));
+            ?>
+        </div>
     </div>
     <div class="text06">* We will not forward your email address to any third party.</div>
 <?php $this->endWidget(); ?>

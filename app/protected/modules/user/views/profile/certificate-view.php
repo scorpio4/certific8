@@ -2,7 +2,7 @@
     <div class="text04 pull-left"><span class="dark-blue">My</span><span class="light-blue"> Certifications</span></div>
     <div class="edit">
         <?php if($type != 'view') {?>
-            <a  href="javascript:void(0)"  onclick="setDefault('skill')">
+        <a  href="javascript:void(0)"  onclick="setDefault('skill')" title="Add Certification">
                 <i class="fa fa-plus-square mr5"></i>Add
             </a>
         <?php }?>
@@ -18,7 +18,7 @@
             'dataProvider' => ProfileSkill::model()->search($profileId),
             'itemView' => '/profile/_skill_list',
             'enablePagination' => false,
-            'emptyText'=>'',
+            'emptyText'=>'<div class="add-box"> <a  href="javascript:void(0)"  onclick=setDefault("skill") title="Add Certification"><i class="fa fa-plus-square mr5"></i>Add</a></div>',
             'itemsTagName'=>'ul',
             'afterAjaxUpdate'=>"function() {
                 sortList('skill','ul');

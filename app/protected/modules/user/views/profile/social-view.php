@@ -2,7 +2,7 @@
     <div class="text04 pull-left"><span class="dark-blue">My Social</span><span class="light-blue"> Network</span></div>
     <div class="edit"> 
         <?php if($type != 'view') {?>
-            <a href="javascript:void(0)"  onclick="setDefault('social')"><i class="fa fa-plus-square mr5"></i>Add</a>
+            <a href="javascript:void(0)"  onclick="setDefault('social')" title="Add Social Network"><i class="fa fa-plus-square mr5"></i>Add</a>
         <?php }?>
     </div>
     <div class="clearfix"></div>
@@ -14,7 +14,7 @@
         'dataProvider' =>  $socialProfile->search($userId,$profileId),
         'itemView' => '/profile/_social_list',
         'enablePagination' => false,
-        'emptyText'=>'',
+        'emptyText'=>'<div class="add-box"> <a  href="javascript:void(0)"  onclick=setDefault("social") title="Add Social Network"><i class="fa fa-plus-square mr5"></i>Add</a></div>',
         'afterAjaxUpdate'=>"function() {
             sortList('social','.onsort');
         }",

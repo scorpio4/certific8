@@ -162,6 +162,7 @@ class ProfileController extends Controller
                         'status' => 'success',
                         'message' => 'Profile has been deleted successfully.',
                     ));
+                    Yii::app()->user->setFlash('success','Profile has been deleted successfully.');
                 }
             }
 
@@ -435,9 +436,9 @@ class ProfileController extends Controller
                        $org->save(false);
                        $profile->org_id = $org->id;
                    }
-                   $year = date('Y');
-                   $profile->start_date = date('Y-m-d',strtotime($profile->start_date.'/'.$year));
-                   $profile->end_date = date('Y-m-d',strtotime($profile->end_date.'/'.$year));
+                   $date = '01';
+                   $profile->start_date = date('Y-m-d',strtotime($date.'/'.$profile->start_date));
+                   $profile->end_date = date('Y-m-d',strtotime($date.'/'.$profile->end_date));
                    $profile->save(false);
                    echo CJSON::encode(array(
                        'status' => 'success',
@@ -485,9 +486,9 @@ class ProfileController extends Controller
                $skill->attributes = $_POST['UserSkill'];
                $skill->user_id = Yii::app()->user->id;
                if ($skill->validate()) {
-                   $year = date('y');
-                   $skill->award_date = date('Y-m-d',strtotime($skill->award_date.'/'.$year));
-                   $skill->expiry_date = date('Y-m-d',strtotime($skill->expiry_date.'/'.$year));
+                   $date = '01';
+                   $skill->award_date = date('Y-m-d',strtotime($date.'/'.$skill->award_date));
+                   $skill->expiry_date = date('Y-m-d',strtotime($date.'/'.$skill->expiry_date));
                    $skill->save(false);
                    $skill->id = Yii::app()->db->getLastInsertID();
                    $profSkill = ProfileSkill::model()->findByAttributes(array('profile_id'=>$profId,'user_skill_id'=>$skill->id));
@@ -692,11 +693,9 @@ class ProfileController extends Controller
                     $newsocilaProf->isNewRecord = true;
                     $newsocilaProf->save(false);
                 }
-                $id = rand(100, 999).$newProfile->id.rand(100, 999);
-                $this->redirect(array('/profile/'.$id));
-            } else {
-                $this->redirect(array('/profile'));
-            }
+                Yii::app()->user->setFlash('success','Your profile has been successfully copied.');
+            } 
+            $this->redirect(array('/listprofile'));
         }
         /*
         * Search skill based on title or keywords.
@@ -728,7 +727,7 @@ class ProfileController extends Controller
         {
             $profile = Profile::model()->findByPk($_POST['Profile']['id']);
             $profile->scenario = 'template';
-            $message = 'Template been updated successfully.';
+            $message = 'Profile been updated successfully.';
             // if it is ajax validation request
             if (isset($_POST['ajax']) && $_POST['ajax'] === 'template-form') {
                 echo CActiveForm::validate($profile);

@@ -43,7 +43,7 @@
                     </li>
                     <li id="gallery" class="gallery section">
                         <ul class="navGallery">
-                            <li class="current"><a href="#gallery">1</a></li>
+                            {{# skills }}<li class="current"><a href="#gallery">1</a></li>{{/ skills }}
                         </ul>
                         <h2>My Qualifications</h2>
                         <ul class="gallery">
@@ -54,7 +54,7 @@
                     </li>
 
                     <li id="networks" class="networks section">
-                        <h2>Learn more about me</h2>
+                        <h2>Social Networks</h2>
                         <ul>
                             {{# socialProfiles }}
                             {{> socialList }}
@@ -65,17 +65,18 @@
                     <li id="contact" class="contact section">
                         <h2>Contact</h2>
                         <div id="addressDetails" class='addressDetails'>
-                            <h3>{{user.full_name}} -{{profile.short_title}}</h3>
+                            <h3>{{user.full_name}} - {{profile.short_title}}</h3>
                             <p>{{# user.suburb}}{{user.suburb}},<br />{{/ user.suburb}}
                                 {{# user.state}}{{user.state}},<br />{{/ user.state}}
                                 {{# user.country}}{{user.country}} {{# user.postcode}} : {{user.postcode}}{{/ user.postcode}} {{/ user.country}} </p>
                             <p>
-                                <strong>Cell:</strong> {{user.mobile}}<br />
+                                <strong>Mobile:</strong> {{user.mobile}}<br />
+                                <strong>Website:</strong> <a target="_blank" href="{{user.webpage}}">{{user.webpage}}</a><br />
                                 <strong>Email:</strong> <a href="mailto:{{user.email}}">{{user.email}}</a>
                             </p>
                         </div>
                         <div id="contactForm" class='contactForm'>
-                            <div id="note" class='note'>Please send a short email. A copy will be sent to you too.</div>
+                            <div id="note" class='note'>Please send a short email.</div>
                             {{> form}}
                         </div>
                     </li>

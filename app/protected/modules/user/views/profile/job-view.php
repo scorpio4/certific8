@@ -2,7 +2,7 @@
     <div class="text04 pull-left"><span class="dark-blue">My</span><span class="light-blue"> Jobs</span></div>
     <div class="edit">
         <?php if($type != 'view') {?>
-            <a href="javascript:void(0)"  onclick="setDefault('jobs')">
+            <a href="javascript:void(0)"  onclick="setDefault('jobs')" title="Add Job">
                 <i class="fa fa-plus-square mr5"></i>Add
             </a>
         <?php }?>
@@ -17,7 +17,7 @@
             'dataProvider' =>  $profileJob->search($profileId),
             'itemView' => '/profile/_job_list',
             'enablePagination' => false,
-            'emptyText'=>'',
+            'emptyText'=>'<div class="add-box"> <a  href="javascript:void(0)"  onclick=setDefault("jobs") title="Add Job"><i class="fa fa-plus-square mr5"></i>Add</a></div>',
             'itemsTagName'=>'ul',
             'itemsCssClass' => 'portfolioContainer',
             'template' => '{items}',

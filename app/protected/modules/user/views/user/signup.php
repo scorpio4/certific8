@@ -35,8 +35,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-5" id="form-type">
-                        <?php $this->renderPartial('/user/register', array('model'=>$model)); ?>   
+                    <div class="col-sm-5">
+                        <ul class="nav nav-tabs log-tab">
+                            <li class="active"><a href="#register-tab" data-toggle="tab" onclick ='changeForm("register")'><strong>Register</strong></a></li>
+                            <li><a href="#login-tab" data-toggle="tab" onclick ='changeForm("login")'><strong>Login</strong></a></li>
+                        </ul>
+                        <div class="tab-content mb30" id="form-type">
+                            <?php $this->renderPartial('/user/register', array('model'=>$model)); ?> 
+                        </div>
                 </div>
             </div>
         </div>

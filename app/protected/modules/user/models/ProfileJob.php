@@ -120,9 +120,9 @@ class ProfileJob extends CActiveRecord
         public function checkDate()
         {
             if($this->start_date <> '' || $this->end_date <> '') {
-                $year = date('y');
-                $startdt = $this->start_date.'/'.$year;
-                $endate = $this->end_date.'/'.$year;
+                $date= '01';
+                $startdt = $date.'/'.$this->start_date;
+                $endate = $date.'/'.$this->end_date;
                 if(strtotime($startdt) > strtotime($endate)) {
                     $this->addError('end_date', 'End date must be greater than "Start date"');
                 }
@@ -137,13 +137,32 @@ class ProfileJob extends CActiveRecord
             $status = '';
             if($this->end_date <> '' && $this->end_date > 0) {
                 $endate = strtotime($this->end_date);
-                if(time()>$endate) {
-                    $status = date('Y',strtotime($this->start_date)).' - '.date('Y',$endate);
-                } else {
-                    $status = date('Y',strtotime($this->start_date)).' - Present';
-                }
+                $status = date('Y',strtotime($this->start_date)).' - '.date('Y',$endate);
             }
             return $status;
         }
         
+        /*
+        * Get current company status of user.
+        */
+        public function getExperience($job)
+        {
+            $start = $job->start_date;
+            $end = $job->end_date;
+            $start = new DateTime($start);
+            $end = new DateTime($end);
+            $interval = $start->diff($end);
+            $experience = '';
+            if($interval->y > 1) {
+                $experience = $interval->y.' years and ';
+            } else {
+                $experience = $interval->y.' year and ';
+            }
+            if($interval->m > 1) {
+                $experience.= $interval->m.' months';
+            } else {
+                $experience.= $interval->m.' month';
+            }
+            return $experience;
+        }
 }

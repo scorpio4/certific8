@@ -69,6 +69,7 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+                        array('email', 'required','on'=>'password-reset'),
 			array('full_name,password_sha256, email', 'required','on'=>'register'),
                         array('first_name,last_name, email, mobile', 'required','on'=>'create,update'),
                         array('email, mobile, webpage', 'required','on'=>'contact,contact-update'),
@@ -83,6 +84,7 @@ class User extends CActiveRecord
 			array('geo_territory', 'length', 'max'=>32),
 			array('ipv4address', 'length', 'max'=>16),
                         array('email', 'email'),
+                        array('email', 'haveMail','on'=>'password-reset'),
                         array('email', 'unique','on'=>'register,update,contact'),
                         array('webpage', 'url', 'defaultScheme' => 'http'),
 			// The following rule is used by search().
@@ -285,4 +287,17 @@ class User extends CActiveRecord
             
             return $path;
         }
-}
+        
+        /*
+         * Check current password.
+         */
+        public function haveMail($attribute, $params)
+        {
+            if (!$this->getError('email')) {
+                $user = User::model()->findByAttributes(array('email' => $this->email));
+                if (!$user) {
+                    $this->addError($attribute, 'There is no password set for this email address. Please register with this email address.');
+                }
+            }
+        }
+}       

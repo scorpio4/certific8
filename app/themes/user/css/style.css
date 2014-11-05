@@ -628,7 +628,7 @@
 
     padding-top:20px;
     display:block;
-    position:relative;
+    position:absolute;
     z-index:9999;
 }
 .v-top{
@@ -669,13 +669,13 @@
     font-size:13px;
     padding:10px;
     border-top:7px solid #64a4db;
-    min-height: 90px;
+    height: 105px;
 }
 .progress-bar-main{
     width:100%;
     /*background-color:#fff;
     padding:10px;*/
-    margin-top:66%;
+    margin-top:70%;
 }
 .text10{
     font-size:15px;
@@ -767,4 +767,22 @@
 }
 .text-black {
     color: #000 !important;
+}
+.grid li figure{
+    height: 250px;
+}
+.grey-color{
+    color: #636E7B;
+}
+.add-box{
+    width: 100%;
+    text-align: center;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    border: 1px dashed #636E7B;
+    color: #428bca;
+}
+.add-box a{
+    text-decoration: none;
+    color: #428bca;
 }

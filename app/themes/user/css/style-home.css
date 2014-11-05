@@ -313,3 +313,50 @@ body{
 .error-msg {
     color:#ffffff !important;
 }
+.errorMessage {
+    color:#b94a48 !important;
+}
+.log-tab{
+	border-bottom:2px solid #fff !important;
+	margin-bottom:15px !important;
+	}
+.log-tab li a{
+	font-family: 'Oswald', sans-serif !important;
+	font-size:15px !important;
+	color:#000 !important;
+	border:none!important;
+	padding-left:0px !important
+	}
+.log-tab li a:hover{
+	background:none !important;
+	border:none!important;
+	}
+.log-tab > li.active > a, .log-tab > li.active > a:hover, .log-tab > li.active > a:focus {
+    background:none !important;
+	border:none !important;
+    cursor: default;
+	color:#fff !important;
+}
+.social-img img{
+	width:48px;
+	height:48px;
+	border:2px solid #fff;
+	}
+.mb5{
+	margin-bottom:5px;
+	}
+.fo-pass{
+	font-size:13px;
+	color:#fff;
+	font-family: 'Oswald', sans-serif !important;
+	text-decoration:none;
+	}
+.fo-pass:hover{
+	font-size:13px;
+	color:#fff;
+	font-family: 'Oswald', sans-serif !important;
+	text-decoration:none;
+	}
+.mr10{
+	margin-right:10px;
+	}

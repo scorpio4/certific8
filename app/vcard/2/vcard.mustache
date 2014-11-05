@@ -61,13 +61,14 @@
                             <div id="contact" class="content">
                                 <h1>Contact us</h1>
                                 <div id="contact-address">
-                                    <p>{{user.full_name}}</p>
-                                    <p>{{user.suburb}}</p>
-                                    <p>{{user.state}}</p>
-                                    <p>{{user.country}}: {{user.postcode}}</p>
+                                    {{# user.full_name}}<p>{{user.full_name}}</p>{{/ user.full_name}}
+                                    {{# user.suburb}}<p>{{user.suburb}}</p>{{/ user.suburb}}
+                                    {{# user.state}}<p>{{user.state}}</p>{{/ user.state}}
+                                    <p>{{user.country}}{{# user.postcode}}: {{user.postcode}}{{/ user.postcode}}</p>
                                 </div>
                                 <div id="contact-info">
                                     <strong>Telephone:</strong><span>{{user.mobile}}</span><br />
+                                    <strong>Website:</strong> <span><a target="_blank" href="{{user.webpage}}">{{user.webpage}}</a></span><br />
                                     <strong>E-mail:</strong><span>{{user.email}}</span>
                                 </div>
                                 <div id="contact-form">
@@ -80,7 +81,7 @@
                 <div id="card-footer"></div>
             </div>
             <nav>
-                <ul class="clearfix">
+                <ul class="clearfix" style="width: 100%;">
                     <li class="active"><a href="/about">About</a></li>
                     <li><a href="/work">Work</a></li>
                     <li><a href="/social">Social</a></li>

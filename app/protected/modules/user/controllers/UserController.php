@@ -28,11 +28,11 @@ class UserController extends Controller {
     {
         return array(
             array('allow', 
-                'actions' => array('index', 'register', 'login', 'changeFrom', 'socialLogin', 'verify'),
+                'actions' => array('index', 'register', 'login', 'changeFrom', 'socialLogin', 'verify','sendPassword'),
                 'users' => array('?'),
             ),
             array('allow', 
-                'actions' => array('index', 'socialResponse'),
+                'actions' => array('index', 'socialResponse','accountadded'),
                 'users' => array('*'),
             ),
             array('allow', 
@@ -83,7 +83,7 @@ class UserController extends Controller {
                 $userRole->role_id = $roleId;
                 $userRole->user_id = $model->id;
                 $userRole->save(false);
-                $message = 'Email has been sent to your email address.Please verify your email.';
+                $message = 'Email has been sent to your email address. Please verify your email.';
                 Yii::app()->user->setFlash('success', $message);
                 echo CJSON::encode(array(
                     'status' => 'success',
@@ -245,7 +245,7 @@ class UserController extends Controller {
                     }
                 }
                 Yii::app()->user->setFlash('success', 'Profle saved successfully.');
-                $this->redirect(array('/'));
+                $this->redirect(array('/user'));
                 exit;
             }
         }
@@ -340,26 +340,49 @@ class UserController extends Controller {
                             $role = strtolower($userRole->role->name);
                         }
                         $identity->setState('role', $role);
-                        Yii::app()->user->login($identity);
+                        if(Yii::app()->user->login($identity)) {
+                            $this->redirect(array('user/accountadded'));
+                        }
+                        
                     }
                 } else {
-                    $user = new User;
-                    $user->email = $profile->email;
-                    $user->full_name = $profile->firstName . ' ' . $profile->lastName;
-                    $user->first_name = $profile->firstName;
-                    $user->last_name = $profile->lastName;
-                    $user->country = $profile->country;
-                    $user->mobile = $profile->phone;
-                    $user->postcode = $profile->zip;
-                    $user->first_joined = date('Y-m-d');
+                    $user = User::model()->findByAttributes(array('email'=>$profile->email));
+                    if(!$user) {
+                        $user = new User;
+                        $user->email = $profile->email;
+                        $user->membership_id = 1;
+                    }
+                    if($user->full_name == '') {
+                        $user->full_name = $profile->firstName . ' ' . $profile->lastName;
+                    }
+                    if($user->first_name == '') {
+                        $user->first_name = $profile->firstName;
+                    }
+                    if($user->last_name == '') {
+                        $user->last_name =  $profile->lastName;
+                    }
+                    if($user->country == '') {
+                        $user->country = $profile->country;
+                    }
+                    if($user->mobile == '') {
+                        $user->mobile = $profile->phone;
+                    }
+                    if($user->postcode == '') {
+                        $user->postcode = $profile->zip;
+                    }
+                    if($user->first_joined == '') {
+                        $user->first_joined = date('Y-m-d');
+                    }
+                    if($user->ipv4address == '') {
+                        $user->ipv4address = ip2long(Yii::app()->request->getUserHostAddress());
+                    }
                     $user->last_valdiated = date('Y-m-d');
                     $user->last_seen = date('Y-m-d');
                     $user->ipv4address = ip2long(Yii::app()->request->getUserHostAddress());
                     $user->is_registered = 1;
-                    $user->membership_id = 1;
                     $user->save(false);
                     $url = $profile->photoURL;
-                    if ($url <> '') {
+                    if ($url <> '' && ($user->avatar == '' || $user->avatar == 'avatar.png')) {
                         $image = 'avatar_' . $user->id . '.png';
                         $user->avatar = $image;
                         $destination = Yii::getPathOfAlias('webroot') . '/uploads/avatar/' . $user->id;
@@ -398,7 +421,10 @@ class UserController extends Controller {
                         $image->saveToFile($tempname);
                     }
                     $user->save(false);
-                    $socialprofile = new SocialProfile;
+                    $socialprofile = SocialProfile::model()->findByAttributes(array('identifier' => $identifier,'user_id'=>$user->id));
+                    if(!$socialprofile) {
+                        $socialprofile = new SocialProfile;
+                    }
                     $socialprofile->user_id = $user->id;
                     $socialprofile->identifier = $identifier;
                     $socialprofile->social_id = $socialid;
@@ -410,7 +436,10 @@ class UserController extends Controller {
                     } else {
                         $roleId = 1;
                     }
-                    $userRole = new UserRole;
+                    $userRole = UserRole::model()->findByAttributes(array('role_id' => $roleId,'user_id'=>$user->id));
+                    if(!$userRole) {
+                        $userRole = new UserRole;
+                    }
                     $userRole->role_id = $roleId;
                     $userRole->user_id = $user->id;
                     $userRole->save(false);
@@ -428,22 +457,30 @@ class UserController extends Controller {
                     $role = '';
                     $identity = new UserIdentity($user->full_name, '');
                     $identity->setUser($user->id);
-                    $userRole = UserRole::model()->findByAttributes(array('user_id' => $user->id));
                     if (isset($userRole->role)) {
                         $role = strtolower($userRole->role->name);
                     }
                     $identity->setState('role', $role);
-                    Yii::app()->user->login($identity);
+                    if(Yii::app()->user->login($identity)) {
+                        $this->redirect(array('user/accountadded'));
+                    } 
                 }
+                $this->redirect(array('user/accountadded'));
             }
         } catch (Exception $e) {
-            $this->redirect(array('/'));
+            echo $e->getMessage();
         }
-
-
-        $this->redirect(array('/'));
+       
     }
-
+    
+    /*
+     * Display page after social login 
+     */
+    public function actionAccountadded()
+    {
+        $this->layout = 'social';
+        $this->render('account-added');
+    }
     /**
      * Hybridauth redirect url.
      */
@@ -479,8 +516,8 @@ class UserController extends Controller {
     }
     
     /*
-     * Change user password.
-     */
+    * Change user password.
+    */
     public function actionChangepassword()
     {
         $model = User::model()->findByPk(Yii::app()->user->id);
@@ -498,6 +535,43 @@ class UserController extends Controller {
             'model' => $model,
         ));
     }
+    
+    /*
+    * Send mail to user for reset password.
+    */
+    public function actionSendPassword()
+    {
+        $user = new User;
+        $user->scenario = 'password-reset';
+        if (isset($_POST['User'])) {
+            $user->attributes = $_POST['User'];
+            if ($user->validate()) {
+                $user = User::model()->findByAttributes(array('email' => $user->email));
+                $password = $user->randString(8);
+                $user->password_sha256 = CPasswordHelper::hashPassword($password);
+                $user->save(false);
+                $template = EmailTemplate::model()->findByAttributes(array('type'=>'forgot_password'));
+                $to = $user->email;
+                $from = Yii::app()->params['adminEmail'];
+                $msg = $template->template;
+                $msg = str_replace('{full_name}',$user->full_name,$msg);
+                $msg = str_replace('{temp_password}',$password,$msg);
+                $sub = $template->subject;
+                if($user->sendMail($to,$from,$msg,$sub)) {
+                }
+                echo CJSON::encode(array(
+                   'status' => 'success',
+                   'message'=>'Password has been reset.Please check your email.'
+               ));
+           } else {
+               $error = CActiveForm::validate($user);
+               if ($error != '[]')
+                   echo $error;
+               Yii::app()->end();
+           }
+        }
+    }
+    
     /**
      * Returns the data model based on the primary key given in the GET variable.
      * If the data model is not found, an HTTP exception will be raised.

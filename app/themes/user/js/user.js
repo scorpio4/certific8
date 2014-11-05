@@ -11,8 +11,8 @@ function changeForm(type) {
             data:{'type':type},
             success:function(rsponse) {
                         if(rsponse != '') {
-                            
                             $('#form-type').html(rsponse);
+                            $('#'+type+'-tab').addClass('active');
                         }
                     }
     });
