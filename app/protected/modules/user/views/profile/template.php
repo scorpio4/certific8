@@ -43,9 +43,9 @@
                     ), array('id' => 'templatebtn', 'class' => 'btn btn-primary mr5 contbtn'));
         }
         if($type <> 'view') {
-            echo CHtml::link('Preview','#',array('class'=>'btn btn-default','onclick'=>'setPreview('.$id.')'));
+            echo CHtml::link('Preview','#',array('class'=>'btn btn-default','onclick'=>'setPreview('.$profile->id.')'));
         } else {
-            echo CHtml::link('Preview','#',array('class'=>'btn btn-primary','onclick'=>'setPreview('.$id.')'));
+            echo CHtml::link('Preview','#',array('class'=>'btn btn-primary','onclick'=>'setPreview('.$profile->id.')'));
         }
     ?>
 

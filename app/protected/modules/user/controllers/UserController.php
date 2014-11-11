@@ -36,7 +36,7 @@ class UserController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', 
-                'actions' => array('changepassword'),
+                'actions' => array('changepassword','responsebitly'),
                 'users' => array('@'),
             ),
             array('allow', 
@@ -597,6 +597,14 @@ class UserController extends Controller {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
+    }
+    
+    /*
+     * Response from bit.ly api
+     */
+    public function actionResponsebitly() {
+        
+        
     }
 
 }

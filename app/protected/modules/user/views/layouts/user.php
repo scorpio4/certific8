@@ -37,9 +37,11 @@
         $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/bootstrap-datepicker.js', CClientScript::POS_END);
         $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/select2.min.js', CClientScript::POS_END);
         $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/user.js', CClientScript::POS_END);
+        
         ?>
         <script type="text/javascript" >
-            baseUrl = '<?php echo Yii::app()->baseUrl;?>';
+            var defname = '';
+            var baseUrl = '<?php echo Yii::app()->baseUrl;?>';
         </script>
     </head>
 
@@ -83,7 +85,7 @@
             });
             
         </script>
-
+        <?php $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/address.js', CClientScript::POS_END);?>
         <div class="modal fade" id="Removepublication" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">

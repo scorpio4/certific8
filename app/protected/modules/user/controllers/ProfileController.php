@@ -48,12 +48,18 @@ class ProfileController extends Controller
                                                  'update',
                                                  'searchSkill',
                                                  'saveTemplate',
-                                                 'vcard',
+                                                 //'vcard',
                                                  'contact',
-                                                 'downloadVcf'
-                                        ),
+                                                 'downloadVcf',
+                                                 'shareProfile',
+                                                 'getTwitterUrl'
+                                    ),
 				'roles'=>array('members'),
 			),
+                        array('allow', 
+                            'actions' => array('vcard'),
+                            'users' => array('*'),
+                        ),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -178,13 +184,14 @@ class ProfileController extends Controller
 	public function actionIndex()
 	{
                 $profile = new Profile;
+                $contact = new ContactForm;
                 $id = Yii::app()->user->id;
                 $profile= new Profile('search');
 		$profile->unsetAttributes();  
 		if(isset($_GET['Profile'])) {
                     $profile->attributes=$_GET['Profile'];
                 }
-		$this->render('profile-list',  compact('profile','id'));
+		$this->render('profile-list',  compact('profile','id','contact'));
         }        
 	/**
 	 * Manages all models.
@@ -759,7 +766,6 @@ class ProfileController extends Controller
             $this->layout = 'vcard';
             if(isset($_GET['vid']) && isset($_GET['pid'])) {
                 $id = $_GET['pid'];
-                $id = substr($id, 3, -3);
                 $profile = Profile::model()->findByPk($id);
                 if($profile) {
                     $vcardId = $_GET['vid'];
@@ -844,7 +850,7 @@ class ProfileController extends Controller
                             ';
                     echo CJSON::encode(array(
                        'status' => 'success',
-                       'message'=>'Email been sent successfully.'
+                       'message'=>'Email has been sent successfully.'
                     ));
                     
                     $model->sendMail($to, $from, $msg, $sub);
@@ -911,6 +917,62 @@ class ProfileController extends Controller
                 }
             }
             $this->redirect(array('/listprofile'));
+        }
+        
+        /*
+         * Share profile with others. 
+         */
+        public function actionShareProfile()
+        {
+            if (isset($_POST['ContactForm'],$_POST['profileId'])) {
+               $model = new ContactForm;
+               $profileId = $_POST['profileId'];
+               $profileId = substr($profileId, 3, -3);
+               $model->attributes = $_POST['ContactForm'];
+               if ($model->validate()) {
+                    $profile = Profile::model()->findByPk($profileId);
+                    if($profile) {
+                        $url = Yii::app()->createAbsoluteUrl('/vcard')."/".$profile->template_id."/profile/".$profile->id;
+                        $url = $profile->getBitlyUrl($url);
+                        $to = $model->email;
+                        $from = $profile->user->email;
+                        $sub = $model->subject;
+                        $msg = $model->body;
+                        $msg.= '<br><br>
+                               URL: '.$url.' 
+                               ';
+                        echo CJSON::encode(array(
+                           'status' => 'success',
+                           'message'=>'Email has been sent successfully.'
+                        ));
+                        $profile->user->sendMail($to, $from, $msg, $sub);
+                    }
+               } else {
+                   $error = CActiveForm::validate($model);
+                   if ($error != '[]')
+                       echo $error;
+                   Yii::app()->end();
+               }
+           }
+        }
+        
+        /*
+         * Get url to share profile on twitter. 
+         */
+        public function actionGetTwitterUrl()
+        {
+            if(isset($_POST['id'])) {
+                $id = $_POST['id'];
+                $id = substr($id, 3,-3);
+                $profile = Profile::model()->findByPk($id);
+                if($profile) {
+                    $url = Yii::app()->createAbsoluteUrl('/vcard')."/".$profile->template_id."/profile/".$profile->id;
+                    $url = $profile->getBitlyUrl($url);
+                    $name = $profile->user->first_name.' '. $profile->user->last_name;
+                    $url = 'http://twitter.com/intent/tweet?text='.$profile->user->first_name.' '. $profile->user->last_name.' profile @ Certific8 -  &url='.$url;
+                    echo CJSON::encode(array('url'=>$url));
+                }
+            }
         }
         
 }    

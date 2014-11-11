@@ -16,7 +16,7 @@
         <div class="profile-name">
             <div>
                 <?php if($type != 'view') {?>
-                    <a id="username" class="editable editable-click" data-pk="1" data-type="address" href="#" data-original-title="" title="Edit name">
+                    <a id="username" class="editable editable-click" data-pk="1" data-type="address" href="#" data-original-title="">
                         <i class="fa fa-pencil edit-before"></i>
                     </a>
                 <?php }?>
@@ -27,7 +27,7 @@
             </div>
             <div>
                 <?php if($type != 'view') {?>
-                <a href="#" id="designation" data-type="text" data-placement="top" data-title="Designation" class="editble" title="Edit designation">
+                <a href="#" id="designation" data-type="text" data-placement="top" data-title="Designation" class="editble" title="Edit designation" data-value="<?php echo $profile->short_title?>">
                     <i class="fa fa-pencil edit-before"></i>
                 </a>
                 <?php }?>
@@ -43,7 +43,7 @@
             <div class="col-md-7">
                 <div class="text03">
                     <?php if($type != 'view') {?>
-                    <a href="#" id="biodata" data-type="textarea" data-placement="bottom" data-title="Biodata" title="Edit Shortbio">
+                    <a href="#" id="biodata" data-type="textarea" data-placement="bottom" data-title="Biodata" title="Edit Shortbio" data-value="<?php echo $profile->short_bio?>">
                         <i class="fa fa-pencil edit-before"></i>
                     </a>
                     <?php }?>
@@ -53,3 +53,9 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+ var defname ={
+            firstName: "<?php echo $user->first_name?>", 
+            lastName: "<?php echo $user->last_name?>", 
+        };
+</script>

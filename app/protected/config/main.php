@@ -38,6 +38,13 @@ return array(
 			'allowAutoLogin'=>true,
                          'class' => 'WebUser',
 		),
+                'bitly' => array(
+                        'class' => 'application.extensions.bitly.VGBitly',
+                        'login' => 'o_2vj8uf1e6v', // login name
+                        'apiKey' => 'R_1d1c0c31b6ad45cd903b5aafe8b165c3', // apikey 
+                        'format' => 'json', // default format of the response this can be either xml, json (some callbacks support txt as well)
+                ),
+            
 		// uncomment the following to enable URLs in path-format
 		
 		'urlManager'=>array(
@@ -54,6 +61,7 @@ return array(
                                 '/changepassword'=>'user/user/changePassword',
                                 '/profilecopy/<id>'=>'user/profile/profileCopy',
                                 '/verify/<id>'=>'user/user/verify',
+                                '/responsebitly'=>'user/user/responsebitly',
                                 '/admin'=>'admin/site/login',
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',

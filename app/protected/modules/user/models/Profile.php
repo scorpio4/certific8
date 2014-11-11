@@ -198,4 +198,17 @@ class Profile extends CActiveRecord
         
         return $point;
     }
+    
+    /*
+     * Return short url using Bit.ly api
+     */
+    public function getBitlyUrl($url)
+    {
+        $bitlyResp = Yii::app()->bitly->shorten($url)->getResponseData();
+        $bitlyResp = CJSON::decode($bitlyResp);
+        if(isset($bitlyResp['data']['url'])) {
+            $url = $bitlyResp['data']['url'];
+        }
+        return $url;
+    }
 }

@@ -351,8 +351,13 @@
     left: 0;
 }
 .view-2 img {
-    /* display: block;*/
-    position: relative;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    vertical-align: middle;
 }
 .view img {
     display: block;
@@ -773,6 +778,11 @@
 }
 .grey-color{
     color: #636E7B;
+}
+.grey-color-bold{
+    color: #636E7B;
+    font-weight: bold;
+    font-size: 15px;
 }
 .add-box{
     width: 100%;

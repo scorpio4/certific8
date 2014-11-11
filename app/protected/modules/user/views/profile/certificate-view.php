@@ -9,7 +9,13 @@
     </div>
     <div class="clearfix"></div>
 </div>
-
+<?php 
+    if($type != 'view') {
+        $emptext = '<div class="add-box"> <a  href="javascript:void(0)"  onclick=setDefault("skill") title="Add Certification"><i class="fa fa-plus-square mr5"></i>Add</a></div>';
+    } else {
+        $emptext = '';
+    }
+?>
 <div class="cert mb20">
     <div id="skill-msgs"></div>
     <?php
@@ -18,7 +24,7 @@
             'dataProvider' => ProfileSkill::model()->search($profileId),
             'itemView' => '/profile/_skill_list',
             'enablePagination' => false,
-            'emptyText'=>'<div class="add-box"> <a  href="javascript:void(0)"  onclick=setDefault("skill") title="Add Certification"><i class="fa fa-plus-square mr5"></i>Add</a></div>',
+            'emptyText'=>$emptext,
             'itemsTagName'=>'ul',
             'afterAjaxUpdate'=>"function() {
                 sortList('skill','ul');

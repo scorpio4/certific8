@@ -22,11 +22,14 @@ $form = $this->beginWidget('CActiveForm', array(
             <a href="#" data-toggle="modal" data-target="#myprofile">
                 <?php 
                     $path = Yii::getPathOfAlias('webroot'). '/uploads/avatar/' . $model->id.'/user/'.$model->avatar;
-                    if(file_exists($path)) {?>
-                    <img src="<?php echo Yii::app()->baseUrl. '/uploads/avatar/' . $model->id.'/user/'.$model->avatar; ?>">
-                <?php } else {?>
-                    <img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/upload-profile.jpg">
-                <?php }?>
+                    if(file_exists($path)) { 
+                        $path = Yii::app()->baseUrl. '/uploads/avatar/' . $model->id.'/user/'.$model->avatar;
+                    } else {
+                        $path = Yii::app()->theme->baseUrl."/images/upload-profile.jpg";
+                    }
+                    echo CHtml::hiddenField('default_img',$path);
+                ?>
+                <img class="uploded-img" src="<?php echo $path; ?>">
             </a>
         </div>
         <div class="row">
@@ -135,13 +138,13 @@ $form = $this->beginWidget('CActiveForm', array(
                                               return true;
 
                                     }',
-                            )
+                                )
                             ));
                           ?>
                          <?php echo $form->error($model, 'avatar'); ?>
                     </div>
                     <div class="mt10">
-                        <button type="button" class="btn btn-primary mr5" data-dismiss="modal">Done</button>
+                        <button type="button" class="btn btn-primary mr5" onclick="setImage()" data-dismiss="modal">Done</button>
                     </div>
                 </div>
             </div>

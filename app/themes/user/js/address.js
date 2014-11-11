@@ -29,7 +29,7 @@
                 return; 
             }
             var html = $('<div>').text(value.city).html() + ', ' + $('<div>').text(value.street).html() + ' st., bld. ' + $('<div>').text(value.building).html();
-            $(element).html(html); 
+            //$(element).html(html); 
         },
         
         /**
@@ -93,8 +93,8 @@
            if(!value) {
              return;
            }
-           this.$input.filter('[name="firstName"]').val(value.city);
-           this.$input.filter('[name="lastName"]').val(value.street);
+           this.$input.filter('[name="firstName"]').val(value.firstName);
+           this.$input.filter('[name="lastName"]').val(value.lastName);
        },       
        
        /**

@@ -45,6 +45,10 @@
                 <?php echo CHtml::link('<i class="fa fa-search"></i>',array('/profileview/'.$id),array('class'=>'btn btn-primary btn-xs','title'=>"View Profile" ))?>
                 <?php echo CHtml::link('<i class="fa fa-files-o"></i>',array('/profilecopy/'.$id),array('class'=>'btn btn-warning btn-xs','title'=>"Copy Profile" ))?>
                 <?php echo CHtml::link('<i class="fa fa-pencil"></i>',array('/profile/'.$id),array('class'=>'btn btn-success btn-xs','title'=>"Edit Profile" ))?>
+                <?php if($data->template_id >0) {?>
+                    <?php echo CHtml::link('<i class="fa fa-twitter-square"></i>','javascript:shareToTwitter('.$id.')',array('class'=>'btn btn-info btn-xs','title'=>"Share on Twitter" ,'target'=>'_blank'))?>
+                    <?php echo CHtml::link('<i class="fa fa fa-share-square"></i>','javascript:getShareProfile('.$id.')',array('class'=>'btn btn-default btn-xs','title'=>"Share with colleague" ))?>
+                <?php }?>
                 <?php 
                     echo CHtml::link('<i class="fa fa-trash-o"></i>','javascript:void(0)',array('class'=>'btn btn-danger btn-xs','title'=>"Delete Profile",'id'=>'delete-'.$id,'onclick'=>'deleteProfile('.$id.')'));
                 ?>

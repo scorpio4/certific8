@@ -7,6 +7,13 @@
     </div>
     <div class="clearfix"></div>
 </div>
+<?php 
+    if($type != 'view') {
+        $emptext = '<div class="add-box"> <a  href="javascript:void(0)"  onclick=setDefault("social") title="Add Social Network"><i class="fa fa-plus-square mr5"></i>Add</a></div>';
+    } else {
+        $emptext = '';
+    }
+?>
 <div id="social-msgs"></div>
 <?php
     $this->widget('zii.widgets.CListView', array(
@@ -14,7 +21,7 @@
         'dataProvider' =>  $socialProfile->search($userId,$profileId),
         'itemView' => '/profile/_social_list',
         'enablePagination' => false,
-        'emptyText'=>'<div class="add-box"> <a  href="javascript:void(0)"  onclick=setDefault("social") title="Add Social Network"><i class="fa fa-plus-square mr5"></i>Add</a></div>',
+        'emptyText'=>$emptext,
         'afterAjaxUpdate'=>"function() {
             sortList('social','.onsort');
         }",

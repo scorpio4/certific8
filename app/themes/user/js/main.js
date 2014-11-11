@@ -22,6 +22,7 @@ $(document).ready(function() {
             }
             return fst;
         },
+        value:defname,
         display: function(value) {
             if(!value) {
                 return; 

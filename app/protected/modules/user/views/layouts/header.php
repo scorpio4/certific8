@@ -12,11 +12,11 @@
     ?>
     <div class="headerwrapper <?php echo $class;?>" id="head-wrp">
         <div class="header-left">
-            <a href="<?php echo Yii::app()->homeUrl;?>" class="logo">
+            <a href="javascript:void(0)" class="logo">
                 <img src="<?php echo Yii::app()->theme->baseUrl ?>/images/logo.png" alt="" /> 
             </a>
             <div class="pull-right">
-                <a href="" class="menu-collapse" >
+                <a href="javascript:void(0)" class="menu-collapse" >
                     <i class="fa fa-bars"></i>
                 </a>
             </div>

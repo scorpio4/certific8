@@ -1,6 +1,6 @@
 <?php
 /* @var $this UserController */
-/* @var $model Profile */
+/* @var $model User */
 
 $this->breadcrumbs = array(
     'Public Profile',
@@ -19,4 +19,16 @@ $this->breadcrumbs = array(
         </div>
     </div>
 </div>
+<script type="text/javascript">
+function setImage()
+{
+    var fileData = $('#User_avatar')[0].files;
+    if(fileData.length >= 1) {
+        $(".uploded-img").attr({'src':URL.createObjectURL(fileData[0]),height:'171px',width:'174px'});
+    } else {
+        console.log(fileData);
+        $(".uploded-img").attr({'src':$('#default_img').val()});
+    }
+}
+</script>
 

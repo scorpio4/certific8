@@ -174,19 +174,29 @@ $profileId = $profile->id;
     function format(item) { return item.title; };
     function deleteData(type,id,islist)
     {
-        $.ajax({
-            url:baseUrl+'/user/profile/deleteData',
-            type: 'post',
-            data:{'id':id,'type':type},
-            success: function(message) {
-                if(message) {
-                    successmsg(type+"-msgs",message);
-                    if(islist == 1) {
-                        $.fn.yiiListView.update(type+"-lists");
+        var msg = '';
+        if(type == 'jobs') {
+            msg = "Do you want to delete job?";
+        } else if(type == 'social') {
+            msg = "Do you want to delete social profile?";
+        } else {
+            msg = "Do you want to delete "+type+"?";
+        }
+        if(confirm(msg)) {
+            $.ajax({
+                url:baseUrl+'/user/profile/deleteData',
+                type: 'post',
+                data:{'id':id,'type':type},
+                success: function(message) {
+                    if(message) {
+                        successmsg(type+"-msgs",message);
+                        if(islist == 1) {
+                            $.fn.yiiListView.update(type+"-lists");
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
     }
      
     function setDefault(id)
@@ -223,17 +233,19 @@ $profileId = $profile->id;
   
   function deleteProfilePage(id)
   {
-        $.ajax({
-            url:baseUrl+'/user/profile/delete',
-            dataType: 'json',
-            type: 'post',
-            data:{'id':id,'ajax':'delete'},
-            success: function(data) {
-                if(data.status == 'success') {
-                    window.location.href = "<?php echo $this->createUrl('/listprofile');?>";
+        if(confirm("Do you want to delete profile?")) {
+            $.ajax({
+                url:baseUrl+'/user/profile/delete',
+                dataType: 'json',
+                type: 'post',
+                data:{'id':id,'ajax':'delete'},
+                success: function(data) {
+                    if(data.status == 'success') {
+                        window.location.href = "<?php echo $this->createUrl('/listprofile');?>";
+                    }
                 }
-            }
-        });
+            });
+        }
   }
   function setPreview(id)
   {
