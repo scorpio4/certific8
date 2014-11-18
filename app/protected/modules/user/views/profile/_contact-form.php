@@ -9,7 +9,7 @@
     CHtml::$afterRequiredLabel = '<span class="red-color">*</span>';
 ?>
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="form-group">
                 <?php echo $form->labelEx($user, 'email'); ?>
                 <?php echo $form->textField($user, 'email', array('class' => "form-control")); ?>
@@ -47,7 +47,7 @@
                                 }',
                         ), array('id' => 'contactbtn', 'class' => 'btn btn-primary mr5 contbtn'));
             ?>
-            <input type="button" value="Cancel" class="btn btn-default mr5" id="cancel-contact" onclick="cancelbtn('contact')" />
+            <input type="button" value="Cancel" class="btn btn-white mr5" id="cancel-contact" onclick="cancelbtn('contact')" />
         </div>
     </div>
 <?php $this->endWidget(); ?>

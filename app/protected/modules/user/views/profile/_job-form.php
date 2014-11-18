@@ -19,7 +19,7 @@ $form = $this->beginWidget('CActiveForm', array(
 ?>
     <div class="panel-body">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="form-group">
                     <?php echo $form->labelEx($profileJob, 'org_id'); ?>
                     <?php echo $form->textField($profileJob, 'org_id', array('class' => "form-control typeahead")); ?>
@@ -42,19 +42,21 @@ $form = $this->beginWidget('CActiveForm', array(
                         <?php echo $form->error($profileJob, 'start_date'); ?>
                     </div>
                     <div class="col-md-1 form-group text-center">
-                    -
+                    _
                     </div>
-                    <div class="col-md-5 form-group  alpha-r">
+                    <div class="col-md-5 form-group  alpha-r alpha-l">
+                        <div id="isCurrent" class="mt10" style="display: none"></div>
                        <?php echo $form->textField($profileJob, 'end_date', array('class' => "form-control")); ?>
                         <?php echo $form->error($profileJob, 'end_date'); ?>
+                        <div>
+                            <?php echo $form->checkBox($profileJob, 'isCurrent'); ?> I currently work here
+                        </div>
                     </div>
                 </div>
                 <?php echo $form->hiddenField($profileJob, 'profile_id');?>
                 <?php echo $form->hiddenField($profileJob, 'id',array('class'=>'hidden-values'));?>
             </div>
         </div>
-    </div>
-    <div class="panel-footer">
         <?php
         echo CHtml::ajaxSubmitButton('Save', CHtml::normalizeUrl(array('profile/saveJob?rand=' . rand())), array(
             'dataType' => 'json',
@@ -75,7 +77,7 @@ $form = $this->beginWidget('CActiveForm', array(
                         }',
                 ), array('id' => 'jobsbtn', 'class' => 'btn btn-primary mr5 jobsbtn'));
         ?>
-        <?php echo CHtml::link('Cancel', 'javascript:void(0)', array('class' => 'btn btn-default mr5','onclick'=>'setDefault("jobs")')) ?>
+        <?php echo CHtml::link('Cancel', 'javascript:void(0)', array('class' => 'btn btn-white mr5','onclick'=>'setDefault("jobs")')) ?>
     </div>
 <?php $this->endWidget(); ?>
 
@@ -132,4 +134,18 @@ $(document).ready(function(){
             endate.hide();
         }).data('datepicker');;
 })
+$('#ProfileJob_isCurrent').click(function (){
+    toggleEndDate();
+});
+function toggleEndDate(){
+    if($('#ProfileJob_isCurrent').is(':checked')) {
+        $('#ProfileJob_end_date').hide();
+        $('#isCurrent').html('Present');
+        $('#isCurrent').show();
+        $(".errorMessage").hide();
+    } else {
+        $('#ProfileJob_end_date').show();
+        $('#isCurrent').hide();
+    }
+}
 </script>

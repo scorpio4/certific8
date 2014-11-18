@@ -30,6 +30,7 @@
                     array('label'=>'<i class="fa fa-adjust"></i> <span>Coaching</span>', 'url'=>array('/'),'active'=>$currentPage=='user-'?true:false),
                     array('label'=>'<i class="fa fa-coffee"></i> <span>Branding</span>', 'url'=>array('/'),'active'=>$currentPage=='user-'?true:false),
                     array('label'=>'<i class="fa fa-lightbulb-o"></i> <span>Special Offers</span>', 'url'=>array('/'),'active'=>$currentPage=='user-'?true:false),
+                    array('label' => '<i class="fa fa-sign-out"></i> Sign Out', 'url' => array('site/logout')),
             )
         ));    
     ?>

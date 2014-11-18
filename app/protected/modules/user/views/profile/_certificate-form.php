@@ -28,7 +28,7 @@ $form = $this->beginWidget('CActiveForm', array(
 ?>
     <div class="panel-body">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="form-group">
                     <?php echo $form->labelEx($userSkill, 'skill_id'); ?>
                     <?php //echo $form->dropDownList($userSkill, 'skill_id', $skills, array('class' => "fullwidth",'empty'=>'Select')); ?>
@@ -64,8 +64,6 @@ $form = $this->beginWidget('CActiveForm', array(
             <?php echo CHtml::hiddenField('profile_id', $profileId);?>
             <?php echo $form->hiddenField($userSkill, 'id',array('class'=>'hidden-values'));?>
         </div>
-    </div>
-    <div class="panel-footer">
         <?php
         echo CHtml::ajaxSubmitButton('Save', CHtml::normalizeUrl(array('profile/saveSkill?rand=' . rand())), array(
             'dataType' => 'json',
@@ -75,6 +73,7 @@ $form = $this->beginWidget('CActiveForm', array(
                             if(data.status=="success"){
                                 successmsg("skill-success",data.message);
                                 $("#skill-form")[0].reset();
+                                setDefaultSelect2("",""); 
                                 $("#skill-form #UserSkill_id").val("");
                                 $.fn.yiiListView.update("skill-lists");
                             } else {
@@ -86,7 +85,7 @@ $form = $this->beginWidget('CActiveForm', array(
                         }',
                 ), array('id' => 'skillbtn', 'class' => 'btn btn-primary mr5 skillbtn'));
         ?>
-        <?php echo CHtml::link('Cancel', 'javascript:void(0)', array('class' => 'btn btn-default mr5','onclick' =>'setDefault("skill")')) ?>
+        <?php echo CHtml::link('Cancel', 'javascript:void(0)', array('class' => 'btn btn-white mr5','onclick' =>'setDefault("skill")')) ?>
     </div>
 <?php $this->endWidget(); ?>
 <script type="text/javascript">
@@ -106,8 +105,8 @@ $(document).ready(function(){
     }).on('changeDate', function(ev) {
             endate.hide();
         }).data('datepicker');
-        
-    $("#UserSkill_trainer_id").select2({
+    setDefaultSelect2('','');    
+    /*$("#UserSkill_trainer_id").select2({
         placeholder:"Select",
      });  
     $("#UserSkill_skill_id").select2({
@@ -138,9 +137,10 @@ $(document).ready(function(){
             return "<div class='select2-user-result'>" + data.title + "</div>";
         },
         formatSelection: function (data) {
+            alert(data.title);
             return data.title;
         }
-    });
+    });*/
     
 });
 

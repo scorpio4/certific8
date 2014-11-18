@@ -2,7 +2,7 @@
     <div class="text04 pull-left"><span class="dark-blue">My</span><span class="light-blue"> Jobs</span></div>
     <div class="edit">
         <?php if($type != 'view') {?>
-            <a href="javascript:void(0)"  onclick="setDefault('jobs')" title="Add Job">
+            <a href="javascript:void(0)"  onclick="setDefault('jobs')" title="Add Job" class="btn btn-primary">
                 <i class="fa fa-plus-square mr5"></i>Add
             </a>
         <?php }?>
@@ -33,10 +33,10 @@
     ?>
 </div>
 <?php if($type != 'view') {?>
-    <div id="editjobs" class="panel-collapse collapse panel">
-        <div class="panel-body">
+    <div id="editjobs" class="panel-collapse collapse">
+        <div>
             <div id="jobs-success"></div>
-            <?php echo $this->renderPartial('_job-form',compact('profileJob','profileId'));?>
+            <?php echo $this->renderPartial('/profile/_job-form',compact('profileJob','profileId'));?>
         </div>
     </div>
 <?php }?>

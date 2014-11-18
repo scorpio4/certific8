@@ -2,7 +2,7 @@
     <div class="text04 pull-left"><span class="dark-blue">My</span><span class="light-blue"> Certifications</span></div>
     <div class="edit">
         <?php if($type != 'view') {?>
-        <a  href="javascript:void(0)"  onclick="setDefault('skill')" title="Add Certification">
+        <a  href="javascript:void(0)"  onclick="setDefault('skill')" title="Add Certification" class="btn btn-primary">
                 <i class="fa fa-plus-square mr5"></i>Add
             </a>
         <?php }?>
@@ -37,10 +37,10 @@
     <div class="clearfix"></div>
 </div>
 <?php if($type != 'view') {?>
-    <div id="editskill" class="panel-collapse collapse panel">
-        <div class="panel-body">
+    <div id="editskill" class="panel-collapse collapse">
+        <div>
             <div id="skill-success"></div>
-            <?php echo $this->renderPartial('_certificate-form',compact('userSkill','profileId'));?>
+            <?php echo $this->renderPartial('/profile/_certificate-form',compact('userSkill','profileId'));?>
         </div>
     </div>
 <?php }?>

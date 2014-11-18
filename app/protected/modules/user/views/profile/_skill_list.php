@@ -9,22 +9,14 @@
     
         <div class="mask">
             <?php 
-                if($type == 'view') {
-                    $url = parse_url($data->userSkill->skill->webpage);
-                    if(isset($url['scheme']) && $url['scheme'] == '') {
-                       $url = 'http://'.$data->userSkill->skill->webpage;
-                    } elseif(!isset($url['scheme'])){
-                        $url = 'http://'.$data->userSkill->skill->webpage;
-                    } else {
-                        $url = $data->userSkill->skill->webpage;
-                    }
-            ?>
-            <a href="<?php echo $url;?>" class="info-4" style="top:56px !important" title="View" target="_blank">View</a>
-            <?php } else {?>
-                <a href="<?php echo $data->userSkill->skill->webpage;?>" class="info-4" style="top:56px !important" title="View" target="_blank">View</a>
-                <a class="info" href="javascript:void(0)" onclick="editData('skill',<?php echo $data->user_skill_id; ?>)" style="top:56px !important" title="Edit">Edit</a>
-                <a href="javascript:void(0)"  onclick="deleteData('skill',<?php echo $data->id; ?>, 1)" class="info-2" style="top:56px !important" title="Delete">Delete</a>
-                <a href="javascript:void(0)" class="info-3 drag-states" style="top:56px !important" title="Drag">Drag</a>
+				$url = $data->formatUrl();
+                if($type == 'view') {?>
+            		<a href="<?php echo $url;?>" class="info-4" style="top:56px !important" title="View" target="_blank">View</a>
+            	<?php } else {?>
+                    <a href="<?php echo $url;;?>" class="info-4" style="top:56px !important" title="View" target="_blank">View</a>
+                    <a class="info" href="javascript:void(0)" onclick="editData('skill',<?php echo $data->user_skill_id; ?>)" style="top:56px !important" title="Edit">Edit</a>
+                    <a href="javascript:void(0)"  onclick="deleteData('skill',<?php echo $data->id; ?>, 1)" class="info-2" style="top:56px !important" title="Delete">Delete</a>
+                    <a href="javascript:void(0)" class="info-3 drag-states" style="top:56px !important" title="Drag">Drag</a>
             <?php }?>
         </div>
   

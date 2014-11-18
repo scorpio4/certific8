@@ -21,27 +21,6 @@
                 </a>
             </div>
         </div>
-        <div class="header-right">
-            <div class="pull-right">
-                <div class="btn-group btn-group-option">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-caret-down"></i>
-                    </button>
-                    <?php
-                    $this->widget('zii.widgets.CMenu', array(
-                        'id' => 'menu-home',
-                        'activeCssClass' => 'active',
-                        'encodeLabel' => false,
-                        'htmlOptions' => array('class' => 'dropdown-menu pull-right', 'role' => 'menu'),
-                        'items' => array(
-                            array('label' => '<i class="glyphicon glyphicon-cog"></i> Change Password', 'url' => array('user/changepassword')),
-                            array('label' => '<i class="glyphicon glyphicon-log-out"></i> Sign Out', 'url' => array('site/logout')),
-                        ),
-                    ));
-                    ?>
-                </div>
-            </div>
-        </div>
     </div>
 </header>
 <script type="text/javascript">

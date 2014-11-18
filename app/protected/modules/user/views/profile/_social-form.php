@@ -16,7 +16,7 @@ $form = $this->beginWidget('CActiveForm', array(
 ?>
     <div class="panel-body">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="form-group">
                     <?php echo $form->labelEx($socialProfile, 'social_id'); ?>
                     <?php echo $form->dropDownList($socialProfile, 'social_id', $sociallist, array('class' => "form-control",'empty'=>'Select')); ?>
@@ -31,8 +31,6 @@ $form = $this->beginWidget('CActiveForm', array(
             <?php echo $form->hiddenField($socialProfile, 'profile_id');?>
             <?php echo $form->hiddenField($socialProfile, 'id',array('class'=>'hidden-values'));?>
         </div>
-    </div>
-    <div class="panel-footer">
         <?php
         echo CHtml::ajaxSubmitButton('Save', CHtml::normalizeUrl(array('profile/saveSocial?rand=' . rand())), array(
             'dataType' => 'json',
@@ -53,7 +51,7 @@ $form = $this->beginWidget('CActiveForm', array(
                         }',
                 ), array('id' => 'socialbtn', 'class' => 'btn btn-primary mr5 socbtn'));
         ?>
-        <?php echo CHtml::link('Cancel', 'javascript:void(0)', array('class' => 'btn btn-default mr5','onclick' =>'setDefault("social")')) ?>
+        <?php echo CHtml::link('Cancel', 'javascript:void(0)', array('class' => 'btn btn-white mr5','onclick' =>'setDefault("social")')) ?>
     </div>
 <?php $this->endWidget(); ?>
 

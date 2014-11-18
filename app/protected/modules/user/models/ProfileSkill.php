@@ -79,11 +79,8 @@ class ProfileSkill extends CActiveRecord
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
-
-		//$criteria->compare('id',$this->id);
-		$criteria->compare('profile_id',$id);
+                $criteria->condition = '(t.profile_id="'.$id.'" and t.profile_id>0)';
                 $criteria->order = 't.order';
-		//$criteria->compare('user_skill_id',$this->user_skill_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -99,5 +96,21 @@ class ProfileSkill extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+	
+	/*
+	 * Return formatted url with scheme.
+	 */
+	public function formatUrl()
+	{
+		$url = $this->userSkill->skill->webpage;
+		$formatUrl = parse_url($url);
+		if(isset($formatUrl['scheme']) && $formatUrl['scheme'] == '') {
+		   $url = 'http://'.$url;
+		} elseif(!isset($url['scheme'])){
+			$url = 'http://'.$url;
+		} 
+		
+		return $url;	
 	}
 }

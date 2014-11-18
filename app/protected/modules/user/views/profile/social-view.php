@@ -2,7 +2,7 @@
     <div class="text04 pull-left"><span class="dark-blue">My Social</span><span class="light-blue"> Network</span></div>
     <div class="edit"> 
         <?php if($type != 'view') {?>
-            <a href="javascript:void(0)"  onclick="setDefault('social')" title="Add Social Network"><i class="fa fa-plus-square mr5"></i>Add</a>
+            <a href="javascript:void(0)"  onclick="setDefault('social')" title="Add Social Network" class="btn btn-primary"><i class="fa fa-plus-square mr5"></i>Add</a>
         <?php }?>
     </div>
     <div class="clearfix"></div>
@@ -32,8 +32,8 @@
 ?>
 <div class="clearfix"></div>
 <?php if($type != 'view') {?>
-    <div id="editsocial" class="panel-collapse collapse panel">
-        <div class="panel-body">
+    <div id="editsocial" class="panel-collapse collapse">
+        <div>
             <div id="social-success"></div>
             <?php echo $this->renderPartial('_social-form',  compact('socialProfile','profileId')); ?>
         </div>

@@ -21,6 +21,7 @@
     background-color:#e1e8ef;
     width:100%;
     min-height:1000px;
+    background-position: right top;
 }
 .profile-head{
     padding:20px;
@@ -630,8 +631,6 @@
 .vcard-body{
     width:100%;
     background-color:#428bca;
-
-    padding-top:20px;
     display:block;
     position:absolute;
     z-index:9999;
@@ -674,20 +673,20 @@
     font-size:13px;
     padding:10px;
     border-top:7px solid #64a4db;
-    height: 105px;
+    height: 125px;
 }
 .progress-bar-main{
     width:100%;
     /*background-color:#fff;
     padding:10px;*/
-    margin-top:70%;
+    /* margin-top:70%;*/
 }
 .text10{
     font-size:15px;
     color:#000;
 }
 .text11{
-    font-size:15px;
+    font-size:12px;
     color:#fff;
 }
 .text-bold{
@@ -715,12 +714,12 @@
 }
 
 .tt-dropdown-menu {
-  text-align: left;
+    text-align: left;
 }
 .tt-dropdown-menu {
-  max-height: 150px;
-  overflow-y: auto;
-  width: 94.5% !important;
+    max-height: 150px;
+    overflow-y: auto;
+    width: 94.5% !important;
 }
 .tt-dropdown-menu li img{
     width: 30px;
@@ -732,7 +731,7 @@
     font-size: 14px;
     color: #000 !important;
     display: block;
-      
+
 }
 .tt-dropdown-menu li a:hover{
     background-color: #428bca !important;
@@ -774,7 +773,7 @@
     color: #000 !important;
 }
 .grid li figure{
-    height: 250px;
+    height: 265px;
 }
 .grey-color{
     color: #636E7B;
@@ -795,4 +794,60 @@
 .add-box a{
     text-decoration: none;
     color: #428bca;
+}
+.background-bg{
+}
+.bg-white{
+    background-color:#fff !important;
+}
+.figicons{
+    margin-top:90%;
+}
+.vcard-name{
+    font-size:15px;
+    color:#fff;
+    font-weight:bold;
+
+    border-bottom:1px solid #fff;
+    margin-bottom:15px;
+
+    width:100%;
+    background-color:#428bca;
+}
+.vcard-name a{
+    color:#fff;
+    text-decoration:none;
+    padding-left:10px;
+    padding-top:10px;
+    padding-bottom:10px;
+    display:block;
+}
+.grid li{
+    margin-bottom:20px !important;
+}
+.tab-profile{
+    background:none !important;
+    border:none !important;
+    margin-top:20px;
+}
+.tab-profile li a{
+
+    font-weight:600 !important;
+    font-size:14px !important;
+    padding:0px !important;
+    margin-right:20px;
+
+}
+.tab-profile > li.active > a, .tab-profile > li.active > a:hover, .tab-profile > li.active > a:focus {
+    border:none !important;
+    color:#428bca !important;
+
+}
+/*.profile-content{
+    padding:0px !important;
+    border:none !important;
+}*/
+.profile-con{
+    padding: 0px !important;
+    border: none !important;
 }

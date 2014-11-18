@@ -135,9 +135,14 @@ class ProfileController extends Controller
              $type = '';
              if($id == 0) {
                 $profile = new Profile;
+                $user = User::model()->findByPk(Yii::app()->user->id);
+                $profileDefault = Profile::model()->findByPk($user->profile_id);
+                if($profileDefault) {
+                    $profile->attributes = $profileDefault->attributes;
+                    $profile->isNewRecord = true;
+                }
                 $profile->scenario = 'save';
                 $type = 'view';
-                $user = User::model()->findByPk(Yii::app()->user->id);
             } else {
                 $id = substr($id, 3, -3);
                 $profile = $this->loadModel($id);
@@ -314,7 +319,12 @@ class ProfileController extends Controller
                $profile->user_id = Yii::app()->user->id;
                if ($profile->save()) {
                    $id = rand(100,999).$profile->id.rand(100,999);
-                   echo CJSON::encode(array(
+                   $user = User::model()->findByPk(Yii::app()->user->id);
+                   $profileDefault = Profile::model()->findByPk($user->profile_id);
+                    if($profileDefault) {
+                      $this->copyAllData($profileDefault->id,$profile->id); 
+                    }
+                    echo CJSON::encode(array(
                        'status' => 'success',
                        'message'=>'Profile been created successfully.',
                        'profid'=>$id
@@ -410,57 +420,61 @@ class ProfileController extends Controller
         */
        public function actionSaveJob() 
        {
-           $profile = new ProfileJob;
-           $profile->scenario = 'save';
-           $message = 'Job been created successfully.';
-           // if it is ajax validation request
-           if (isset($_POST['ajax']) && $_POST['ajax'] === 'jobs-form') {
-               echo CActiveForm::validate($profile);
-               Yii::app()->end();
-           }
-            
-           if (isset($_POST['ProfileJob'])) {
-               
-               if(isset($_POST['ProfileJob']['id']) && $_POST['ProfileJob']['id']>0) {
-                   $profile = ProfileJob::model()->findByPk($_POST['ProfileJob']['id']);
-                   if(!$profile) {
-                       $profile = new ProfileJob;
-                       $profile->scenario = 'save';
-                   } else {
-                       $profile->org_id = $profile->org->legal_name;
-                       $profile->scenario = 'save';
-                       $message = 'Job been updated successfully.';
-                   }
-               }
-               $profile->attributes = $_POST['ProfileJob'];
-               if ($profile->validate()) {
-                   $org = Org::model()->findByAttributes(array('legal_name'=>$profile->org_id));
-                   if($org) {
-                       $profile->org_id = $org->id;
-                   } else {
-                       $org = new Org;
-                       $org->legal_name = $profile->org_id;
-                       $org->save(false);
-                       $profile->org_id = $org->id;
-                   }
-                   $date = '01';
-                   $profile->start_date = date('Y-m-d',strtotime($date.'/'.$profile->start_date));
-                   $profile->end_date = date('Y-m-d',strtotime($date.'/'.$profile->end_date));
-                   $profile->save(false);
-                   echo CJSON::encode(array(
-                       'status' => 'success',
-                       'message'=>$message,
-                   ));
-               } else {
-                   $error = CActiveForm::validate($profile);
-                   if ($error != '[]')
-                       echo $error;
-                   Yii::app()->end();
-               }
-           }
+            $profile = new ProfileJob;
+            $profile->scenario = 'save';
+            $message = 'Job been created successfully.';
+            // if it is ajax validation request
+            if (isset($_POST['ajax']) && $_POST['ajax'] === 'jobs-form') {
+                echo CActiveForm::validate($profile);
+                Yii::app()->end();
+            }
+
+            if (isset($_POST['ProfileJob'])) {
+
+                if (isset($_POST['ProfileJob']['id']) && $_POST['ProfileJob']['id'] > 0) {
+                    $profile = ProfileJob::model()->findByPk($_POST['ProfileJob']['id']);
+                    if (!$profile) {
+                        $profile = new ProfileJob;
+                        $profile->scenario = 'save';
+                    } else {
+                        $profile->org_id = $profile->org->legal_name;
+                        $profile->scenario = 'save';
+                        $message = 'Job been updated successfully.';
+                    }
+                }
+                $profile->attributes = $_POST['ProfileJob'];
+                if ($profile->validate()) {
+                    $org = Org::model()->findByAttributes(array('legal_name' => $profile->org_id));
+                    if ($org) {
+                        $profile->org_id = $org->id;
+                    } else {
+                        $org = new Org;
+                        $org->legal_name = $profile->org_id;
+                        $org->save(false);
+                        $profile->org_id = $org->id;
+                    }
+                    $date = '01';
+                    $profile->start_date = date('Y-d-m', strtotime($date . '/' . $profile->start_date));
+                    if ($_POST['ProfileJob']['isCurrent'] == 1) {
+                        $profile->end_date = NULL;
+                    } else {
+                        $profile->end_date = date('Y-d-m', strtotime($date . '/' . $profile->end_date));
+                    }
+                    $profile->save(false);
+                    echo CJSON::encode(array(
+                        'status' => 'success',
+                        'message' => $message,
+                    ));
+                } else {
+                    $error = CActiveForm::validate($profile);
+                    if ($error != '[]')
+                        echo $error;
+                    Yii::app()->end();
+                }
+            }
         }
-        
-        /**
+
+    /**
         * Save user's skill details
         */
         public function actionSaveSkill() 
@@ -545,8 +559,13 @@ class ProfileController extends Controller
                    $data['ProfileJob_org_id'] = $profileJob->org->legal_name;
                    $data['ProfileJob_job_title'] = $profileJob->job_title;
                    $data['ProfileJob_comment'] = $profileJob->comment;
-                   $data['ProfileJob_start_date'] = date('d/m',strtotime($profileJob->start_date));
-                   $data['ProfileJob_end_date'] = date('d/m',strtotime($profileJob->end_date));
+                   $data['ProfileJob_start_date'] = date('m/Y',strtotime($profileJob->start_date));
+                   if($profileJob->end_date == NULL) {
+                       $data['ProfileJob_isCurrent'] = 1;
+                   } else {
+                       $endDate = date('m/Y',strtotime($profileJob->end_date));
+                       $data['ProfileJob_end_date'] = $endDate;
+                   }
                    $data['ProfileJob_id'] = $id;
                }
            } elseif($type == 'skill') {
@@ -667,39 +686,7 @@ class ProfileController extends Controller
                 $newProfile->id = null;
                 $newProfile->isNewRecord = true;
                 $newProfile->save(false);
-                
-                $profileJobs = ProfileJob::model()->findAllByAttributes(array('profile_id'=>$id));
-                foreach ($profileJobs as $profileJob) {
-                    $newProfJob = new ProfileJob;
-                    $newProfJob->scenario = 'save';
-                    $newProfJob->attributes = $profileJob->attributes;
-                    $newProfJob->profile_id = $newProfile->id;
-                    $newProfJob->id = '';
-                    $newProfJob->isNewRecord = true;
-                    $newProfJob->save(false);
-                }
-                
-                $profileSkills = ProfileSkill::model()->findAllByAttributes(array('profile_id'=>$id));
-                foreach ($profileSkills as $profileSkill) {
-                    $newProfSkill = new ProfileSkill;
-                    $newProfSkill->scenario = 'save';
-                    $newProfSkill->attributes = $profileSkill->attributes;
-                    $newProfSkill->profile_id = $newProfile->id;
-                    $newProfSkill->id = '';
-                    $newProfSkill->isNewRecord = true;
-                    $newProfSkill->save(false);
-                }
-                
-                $socilaProfiles = SocialProfile::model()->findAllByAttributes(array('profile_id'=>$id));
-                foreach ($socilaProfiles as $socilaProfile) {
-                    $newsocilaProf = new SocialProfile;
-                    $newsocilaProf->scenario = 'save';
-                    $newsocilaProf->attributes = $socilaProfile->attributes;
-                    $newsocilaProf->profile_id = $newProfile->id;
-                    $newsocilaProf->id = '';
-                    $newsocilaProf->isNewRecord = true;
-                    $newsocilaProf->save(false);
-                }
+                $this->copyAllData($id,$newProfile->id);
                 Yii::app()->user->setFlash('success','Your profile has been successfully copied.');
             } 
             $this->redirect(array('/listprofile'));
@@ -785,8 +772,8 @@ class ProfileController extends Controller
                         ));
                         $mustache->addHelper('helper',array(
                             'titleMinimize' => function($value) { 
-                                    if(strlen($value)>20) {
-                                        $value = substr($value, 0,20).'..';
+                                    if(strlen($value)>15) {
+                                        $value = substr($value, 0,15).'..';
                                     }
                                     return ((string) $value); 
                             },
@@ -974,5 +961,44 @@ class ProfileController extends Controller
                 }
             }
         }
+        
+        /*
+         * Copy all the data with an existing profile.
+        */
+        public function copyAllData($id,$newProfileId)
+        {
+            $profileJobs = ProfileJob::model()->findAllByAttributes(array('profile_id'=>$id));
+            foreach ($profileJobs as $profileJob) {
+                $newProfJob = new ProfileJob;
+                $newProfJob->scenario = 'save';
+                $newProfJob->attributes = $profileJob->attributes;
+                $newProfJob->profile_id = $newProfileId;
+                $newProfJob->id = '';
+                $newProfJob->isNewRecord = true;
+                $newProfJob->save(false);
+            }
+
+            $profileSkills = ProfileSkill::model()->findAllByAttributes(array('profile_id'=>$id));
+            foreach ($profileSkills as $profileSkill) {
+                $newProfSkill = new ProfileSkill;
+                $newProfSkill->scenario = 'save';
+                $newProfSkill->attributes = $profileSkill->attributes;
+                $newProfSkill->profile_id = $newProfileId;
+                $newProfSkill->id = '';
+                $newProfSkill->isNewRecord = true;
+                $newProfSkill->save(false);
+            }
+
+            $socilaProfiles = SocialProfile::model()->findAllByAttributes(array('profile_id'=>$id));
+            foreach ($socilaProfiles as $socilaProfile) {
+                $newsocilaProf = new SocialProfile;
+                $newsocilaProf->scenario = 'save';
+                $newsocilaProf->attributes = $socilaProfile->attributes;
+                $newsocilaProf->profile_id = $newProfileId;
+                $newsocilaProf->id = '';
+                $newsocilaProf->isNewRecord = true;
+                $newsocilaProf->save(false);
+            }
+       }
         
 }    

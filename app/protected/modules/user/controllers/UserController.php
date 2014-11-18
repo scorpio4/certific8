@@ -36,7 +36,7 @@ class UserController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', 
-                'actions' => array('changepassword','responsebitly'),
+                'actions' => array('changePassword','responsebitly'),
                 'users' => array('@'),
             ),
             array('allow', 
@@ -79,6 +79,14 @@ class UserController extends Controller {
                 } else {
                     $roleId = 1;
                 }
+                $profile = new Profile;
+                $profile->full_name = $model->full_name;
+                $profile->user_id = $model->id;
+                if($profile->save(false)) {
+                    $model->profile_id = $profile->id;
+                    $model->save(false);
+                }
+                
                 $userRole = new UserRole;
                 $userRole->role_id = $roleId;
                 $userRole->user_id = $model->id;
@@ -183,15 +191,23 @@ class UserController extends Controller {
     public function actionUpdate()
     {
         $model = $this->loadModel(Yii::app()->user->id);
-        $model->scenario ='create';
+        $model->scenario ='all';
         $email = $model->email;
-        if(isset($_POST['ajax']) && $_POST['ajax']==='user-form') {
-                echo CActiveForm::validate($model);
-                Yii::app()->end();
+        $profileJob = new ProfileJob;
+        $profileJob->scenario = 'save';
+        $userSkill = new UserSkill;
+        $userSkill->scenario = 'save';
+        $profile = Profile::model()->findByPk($model->profile_id);
+        if(!$profile) {
+            $profile = new Profile;
         }
-        if (isset($_POST['User'])) {
-
+        $type = '';
+        if (isset($_POST['User']) || isset($_POST['Profile'])) {
+            $model->scenario ='create';
             $model->attributes = $_POST['User'];
+            $profile->scenario ='search';
+            $profile->attributes = $_POST['Profile'];
+            $profile->save(false);
             $photos = CUploadedFile::getInstances($model,'avatar');
             if($email != $model->email) {
                 $model->scenario ='update';
@@ -244,15 +260,21 @@ class UserController extends Controller {
                         $model->save(false);
                     }
                 }
-                Yii::app()->user->setFlash('success', 'Profle saved successfully.');
-                $this->redirect(array('/user'));
-                exit;
+                echo CJSON::encode(array(
+                       'status' => 'success',
+                       'message'=>'Profle saved successfully.'
+                ));
+                Yii::app()->end();
+            }  else {
+                $error = CActiveForm::validate($model);
+                if ($error != '[]') {
+                    echo $error;
+                }
+                Yii::app()->end();
             }
         }
 
-        $this->render('update', array(
-            'model' => $model,
-        ));
+        $this->render('update',compact('model','profileJob','userSkill','type','profile'));
     }
 
     /**
@@ -381,6 +403,15 @@ class UserController extends Controller {
                     $user->ipv4address = ip2long(Yii::app()->request->getUserHostAddress());
                     $user->is_registered = 1;
                     $user->save(false);
+                    if ($user->profile_id <= 0) {
+                        $profile = new Profile;
+                        $profile->full_name = $model->full_name;
+                        $profile->user_id = $user->id;
+                        if($profile->save(false)) {
+                            $user->profile_id = $profile->id;
+                            $user->save(false);
+                        }
+                    }
                     $url = $profile->photoURL;
                     if ($url <> '' && ($user->avatar == '' || $user->avatar == 'avatar.png')) {
                         $image = 'avatar_' . $user->id . '.png';
@@ -518,7 +549,7 @@ class UserController extends Controller {
     /*
     * Change user password.
     */
-    public function actionChangepassword()
+    public function actionChangePassword()
     {
         $model = User::model()->findByPk(Yii::app()->user->id);
         $model->scenario = 'changepassword';
@@ -527,13 +558,19 @@ class UserController extends Controller {
             if ($model->validate()) {
                 $model->password_sha256 = CPasswordHelper::hashPassword($model->newpassword);
                 $model->save(false);
-                Yii::app()->user->setFlash('success', "Password changed successfully.");
-                $this->redirect(array('changepassword'));
+                echo CJSON::encode(array(
+                       'status' => 'success',
+                       'message'=>'Password changed successfully.'
+                   ));
+            } else {
+                $error = CActiveForm::validate($model);
+                if ($error != '[]') {
+                   echo $error;
+                }
+                Yii::app()->end();
             }
         }
-        $this->render('change-password', array(
-            'model' => $model,
-        ));
+        
     }
     
     /*

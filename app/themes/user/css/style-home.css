@@ -360,3 +360,61 @@ body{
 .mr10{
 	margin-right:10px;
 	}
+/*	11-12-2014*/
+.you-tube-video{
+	width:100%;
+	margin-top:40px;
+	margin-bottom:40px;
+	background-color:#000;
+	}
+.video-file{
+	width:100%;
+	height:300px;
+	}
+.vcard-main{
+	width:100%;
+	margin-bottom:40px;
+	}
+.vcard-main img{
+	width:80%;
+	}
+.form-contact{
+	 background-color: #fff;
+    border: 2px solid #ccc;
+    color: #999999;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 12px 10px;
+    transition: all 1s ease-in-out 0s;
+    width: 100%;
+	}
+.form-contact:focus{
+	 background-color: #fff;
+    border: 2px solid #46b39c;
+	color:#000;
+	}
+.form-group-lrg{
+	margin-bottom:10px;
+	}
+.form-group-lrg label {
+    color: #000;
+    font-family: "Oswald",sans-serif !important;
+    font-size: 15px;
+    line-height: 24px;
+}
+.form-text{
+	 background-color: #fff;
+    border: 2px solid #ccc;
+    color: #999999;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 12px 10px;
+    transition: all 1s ease-in-out 0s;
+    width: 100%;
+	height:150px;
+	}
+.form-text:focus{
+	background-color:#fff;
+    border: 2px solid #46b39c;
+	color:#000;
+	}

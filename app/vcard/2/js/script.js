@@ -13,14 +13,7 @@ $(document).ready(function() {
 	
 	$('#work-gallery-frame').gallery();
 	
-	$("#work-gallery").find('a').fancybox({
-		'transitionIn': 'elastic',
-		'transitionOut': 'elastic',
-		'speedIn': 300,
-		'speedOut': 200,
-		'overlayOpacity': 0.58,
-		'overlayColor': '#000'
-	});
+
 	
 	$('#social-networks').social({
 		listStyle: 'tooltip'

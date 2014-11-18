@@ -2,7 +2,8 @@
 
 class SiteController extends Controller
 {
-	/**
+	public $layout = '//layouts/login';
+        /**
 	 * Declares class-based actions.
 	 */
 	public function actions()
@@ -105,6 +106,23 @@ class SiteController extends Controller
 	{
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
+	}
+        
+        /**
+	 * Display About Us page.
+	 */
+	public function actionAboutUs()
+	{
+            $this->layout = 'login';
+            $this->render('aboutus');
+	}
+        /**
+	 * Display Contact Us.
+	 */
+	public function actionContactus()
+	{
+            $this->layout = 'login';
+            $this->render('contactus');
 	}
         
         public function actionProfilejson()

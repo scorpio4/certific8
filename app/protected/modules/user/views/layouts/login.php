@@ -37,14 +37,21 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="" href=""><img src="<?php echo Yii::app()->theme->baseUrl;?>/images/logo-primary.png" alt="Certific8"></a>
+                    <a href="<?php echo Yii::app()->baseUrl;?>"><img src="<?php echo Yii::app()->theme->baseUrl;?>/images/logo-primary.png" alt="Certific8"></a>
                 </div>
                 <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right navigation">
-                        <li><a href="">Home</a></li>
-                        <li><a href="">About Us</a></li>
-                        <li><a href="">Contact Us</a></li>
-                    </ul>
+                    <?php 
+                        $this->widget('zii.widgets.CMenu',array(
+                            'htmlOptions' => array('class' => 'nav navbar-nav navbar-right navigation'),
+                            'activeCssClass' => 'active',
+                            'encodeLabel' => false,
+                            'items'=> array(
+                                    array('label'=>'Home', 'url'=>array('/')),
+                                    array('label'=>'About Us', 'url'=>array('/aboutus')),
+                                    array('label'=>'Contact Us', 'url'=>array('/contactus')),
+                            )
+                        ));    
+                    ?>
                 </div><!--/.nav-collapse -->
             </div>
         </header>

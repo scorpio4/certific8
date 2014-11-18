@@ -20,7 +20,8 @@
  */
 class ProfileJob extends CActiveRecord
 {
-	/**
+        public $isCurrent;
+        /**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
@@ -35,13 +36,14 @@ class ProfileJob extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('comment, job_title, org_id,start_date,end_date', 'required','on'=>'save'),
+			array('comment, job_title, org_id,start_date', 'required','on'=>'save'),
+                        array('end_date', 'checkEndDate','on'=>'save'),
 			array('profile_id, hr_id, rating', 'numerical', 'integerOnly'=>true),
 			array('job_title', 'length', 'max'=>255),
 			array('end_date', 'checkDate'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, profile_id, org_id, job_title, hr_id, rating, comment, start_date, end_date', 'safe', 'on'=>'search,save'),
+			array('id, profile_id, org_id, job_title, hr_id, rating, comment, start_date, end_date, isCurrent', 'safe', 'on'=>'search,save'),
 		);
 	}
 
@@ -93,10 +95,7 @@ class ProfileJob extends CActiveRecord
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
-
-		//$criteria->compare('profile_id',$profId);
                 $criteria->condition = '(t.profile_id="'.$profId.'" and t.profile_id>0)';
-		//$criteria->compare('org_id',$this->org_id);
                 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -119,12 +118,29 @@ class ProfileJob extends CActiveRecord
          */
         public function checkDate()
         {
-            if($this->start_date <> '' || $this->end_date <> '') {
+            if(($this->start_date <> '' || $this->end_date <> '') && !$this->hasErrors('start_date') && !$this->hasErrors('end_date')) {
                 $date= '01';
                 $startdt = $date.'/'.$this->start_date;
                 $endate = $date.'/'.$this->end_date;
-                if(strtotime($startdt) > strtotime($endate)) {
+                if(strtotime($startdt) > strtotime($endate) && $this->isCurrent == 0 ) {
                     $this->addError('end_date', 'End date must be greater than "Start date"');
+                } elseif ($this->isCurrent == 1) {
+                    $endate = $date.'/'.date('m/Y');
+                    if(strtotime($startdt) > strtotime($endate)) {
+                         $this->addError('start_date', 'Start date must be lesser than this month');
+                    }
+                }
+            }
+        }
+        
+        /*
+         * Compare date and check if error
+         */
+        public function checkEndDate()
+        {
+            if($this->isCurrent == 0) {
+                if($this->end_date == '') {
+                    $this->addError('end_date', 'End Date cannot be blank.');
                 }
             }
         }
@@ -148,7 +164,11 @@ class ProfileJob extends CActiveRecord
         public function getExperience($job)
         {
             $start = $job->start_date;
-            $end = $job->end_date;
+            if($job->end_date == NULL) {
+                $end = date('Y-m-d');
+            } else {
+                $end = $job->end_date;
+            }
             $start = new DateTime($start);
             $end = new DateTime($end);
             $interval = $start->diff($end);

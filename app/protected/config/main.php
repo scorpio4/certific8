@@ -62,6 +62,8 @@ return array(
                                 '/profilecopy/<id>'=>'user/profile/profileCopy',
                                 '/verify/<id>'=>'user/user/verify',
                                 '/responsebitly'=>'user/user/responsebitly',
+                                '/aboutus'=>'user/site/aboutus',
+                                '/contactus'=>'user/site/contactus',
                                 '/admin'=>'admin/site/login',
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',

@@ -2,7 +2,7 @@
     <div class="text04 pull-left"><span class="dark-blue">Contact Details</span></div>
     <div class="edit">
         <?php if($type != 'view') {?>
-        <a data-toggle="collapse" data-parent="#accordion" href="#editcontact" title="Edit Contact">
+        <a data-toggle="collapse" data-parent="#accordion" href="#editcontact" title="Edit Contact" class="btn btn-primary">
                 <i class="fa fa-plus-square mr5"></i>Edit
             </a>
         <?php }?>
@@ -29,7 +29,7 @@
     </ul>
 </div>
 <?php if($type != 'view') {?>
-    <div id="editcontact" class="panel-collapse collapse panel">
+    <div id="editcontact" class="panel-collapse collapse">
         <div class="panel-body">
             <div id="contact-success"></div>
             <?php echo $this->renderPartial('_contact-form',compact('user'));?>

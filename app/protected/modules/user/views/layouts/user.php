@@ -53,9 +53,11 @@
                 <div class="mainpanel">
                     <div class="pageheader">
                         <div class="media left-head">
-                            <div class="media-body">
-                                <?php echo $this->renderPartial('/layouts/breadcrumb'); ?>
-                            </div>
+                            <?php if(Yii::app()->controller->id.'/'.Yii::app()->controller->action->id == 'user/update') {?>
+                                <div class="media-body">
+                                    <?php echo $this->renderPartial('/layouts/profile-tab'); ?>
+                                </div>
+                            <?php }?>
                         </div>
                         <div class="right-head">
                             <?php echo $this->renderPartial('/layouts/submenu'); ?>
