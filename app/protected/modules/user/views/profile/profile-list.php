@@ -18,6 +18,12 @@ $this->menu = array(
 <?php endif; ?>
 <div id="profile-success"></div>
 <?php
+    $basicId = '';
+    $user = User::model()->findByPk(Yii::app()->user->id);
+    $profileTemp = Profile::model()->findByPk($user->profile_id);
+    if($profileTemp) {
+        $basicId = $profileTemp->id;
+    }
     $this->widget('zii.widgets.CListView', array(
         'id'=>'profile-lists',
         'dataProvider'=>$profile->search($id),
@@ -26,6 +32,7 @@ $this->menu = array(
         'summaryText'=>'',
         'emptyText'=>'You have no profiles. '.CHtml::link('Add a profile now.',array('/profile')),
         'enablePagination'=>false,
+        'viewData'=>compact('basicId'),
         'itemsCssClass'=>'grid cs-style-7'
     ));
 ?>

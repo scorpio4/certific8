@@ -113,6 +113,8 @@ if ($model->current_salary <= 0) {
                         <?php echo $form->error($model, 'country'); ?>
                     </div>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <?php echo $form->labelEx($model, 'current_salary'); ?>
@@ -120,8 +122,6 @@ if ($model->current_salary <= 0) {
                         <?php echo $form->error($model, 'current_salary'); ?>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <?php echo $form->labelEx($profile, 'short_title'); ?>
@@ -131,10 +131,21 @@ if ($model->current_salary <= 0) {
                 </div> 
             </div>  
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="form-group">
                         <?php echo $form->labelEx($profile, 'short_bio'); ?>
-                        <?php echo $form->textArea($profile, 'short_bio', array('class' => "form-control",'rows'=>5)); ?>
+                        <?php Yii::import('ext.imperavi-redactor-widget.ImperaviRedactorWidget');?>
+                        <?php 
+                            $this->widget('ImperaviRedactorWidget', array(
+                                'model' => $profile,
+                                'attribute' => 'short_bio',
+                                'htmlOptions'=>array('class'=>'form-control'),
+                                'options' => array(
+                                    'toolbar' => true,
+                                    'iframe' => true,
+                                ),
+                            ));
+                        ?>
                         <?php echo $form->error($profile, 'short_bio'); ?>
                     </div>
                 </div>

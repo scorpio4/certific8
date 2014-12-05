@@ -23,7 +23,7 @@
                         'encodeLabel' => false,
                         'htmlOptions' => array('class' => 'dropdown-menu pull-right', 'role' => 'menu'),
                         'items' => array(
-                            array('label' => '<i class="glyphicon glyphicon-cog"></i> Change Password', 'url' => array('user/changepassword')),
+                            array('label' => '<i class="glyphicon glyphicon-cog"></i> Change Password', 'url' => array('/changepassword')),
                             array('label' => '<i class="glyphicon glyphicon-log-out"></i> Sign Out', 'url' => array('site/logout')),
                         ),
                     ));

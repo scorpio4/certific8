@@ -48,11 +48,12 @@ class ProfileController extends Controller
                                                  'update',
                                                  'searchSkill',
                                                  'saveTemplate',
-                                                 //'vcard',
                                                  'contact',
                                                  'downloadVcf',
                                                  'shareProfile',
-                                                 'getTwitterUrl'
+                                                 'getTwitterUrl',
+                                                 'getBasicInfo',
+                                                 'saveShortbio',
                                     ),
 				'roles'=>array('members'),
 			),
@@ -707,7 +708,8 @@ class ProfileController extends Controller
             $criteria->group = 't.id';
             $skills = Skill::model()->findAll($criteria);
             foreach ($skills as $skill) {
-                $skillArr[] = array('id'=>$skill->id,'title'=>$skill->title);
+                $logo = CHtml::image(Yii::app()->homeUrl."uploads/skill/".$skill->logo);
+                $skillArr[] = array('id'=>$skill->id,'title'=>$skill->title,'logo'=>$logo);
             }
             $resultArr['results'] = $skillArr;
             echo CJSON::encode($resultArr);
@@ -719,28 +721,22 @@ class ProfileController extends Controller
          */
         public function actionSaveTemplate() 
         {
-            $profile = Profile::model()->findByPk($_POST['Profile']['id']);
-            $profile->scenario = 'template';
-            $message = 'Profile been updated successfully.';
-            // if it is ajax validation request
-            if (isset($_POST['ajax']) && $_POST['ajax'] === 'template-form') {
-                echo CActiveForm::validate($profile);
-                Yii::app()->end();
-            }
-
-            if (isset($_POST['Profile'])) {
-
-                $profile->attributes = $_POST['Profile'];
-                if ($profile->save()) {
+            if (isset($_POST['profileId'],$_POST['templateId'])) {
+                $profileId = $_POST['profileId'];
+                //$profileId = substr($profileId, 3, -3);
+                $profile = Profile::model()->findByPk($profileId);
+                if ($profile) {
+                    $profile->template_id = $_POST['templateId'];
+                    $profile->save();
                     echo CJSON::encode(array(
                         'status' => 'success',
-                        'message' => $message,
+                        'message' => 'Profile been updated successfully.',
                     ));
                 } else {
-                    $error = CActiveForm::validate($profile);
-                    if ($error != '[]')
-                        echo $error;
-                    Yii::app()->end();
+                     echo CJSON::encode(array(
+                        'status' => 'error',
+                        'message' => 'Profile does not exist.',
+                    ));
                 }
             }
         }
@@ -756,6 +752,16 @@ class ProfileController extends Controller
                 $profile = Profile::model()->findByPk($id);
                 if($profile) {
                     $vcardId = $_GET['vid'];
+                    $template = ProfileTemplate::model()->findByPk($vcardId);
+                    if($template) {
+                        if($template->template_type == 'simple_vCard') {
+                            $vcardId = 1;
+                        } elseif($template->template_type == 'iDvCard') {
+                            $vcardId = 2;
+                        } elseif($template->template_type == 'flexyvCard') {
+                            $vcardId = 3;
+                        }
+                    }
                     $user = User::model()->findByPk($profile->user_id);
                     $path = Yii::app()->baseUrl . '/vcard/'.$vcardId;
                     spl_autoload_unregister(array('YiiBase','autoload'));
@@ -764,7 +770,7 @@ class ProfileController extends Controller
                     Mustache_Autoloader::register();
                     spl_autoload_register(array('YiiBase', 'autoload'));
                     try {
-                        $path = Yii::getPathOfAlias('webroot') . '/vcard/'.$_GET['vid'];
+                        $path = Yii::getPathOfAlias('webroot') . '/vcard/'.$vcardId;
                         $options =  array('extension' => '.mustache');
                         $mustache = new Mustache_Engine(array(
                             'loader'          => new Mustache_Loader_FilesystemLoader($path,$options),
@@ -801,15 +807,16 @@ class ProfileController extends Controller
                         $skills = ProfileSkill::model()->search($profileId)->getData();
                         $socialProfiles = SocialProfile::model()->search($userId,$profileId)->getData();
                         $jobs = ProfileJob::model()->search($profileId)->getData();
-                        $path = Yii::app()->baseUrl. '/vcard/'.$_GET['vid'].'/';
+                        $path = Yii::app()->baseUrl. '/vcard/'.$vcardId.'/';
                         $this->render('vcard',compact('profile','user','path','vcardId','mustache','profileId','skills','socialProfiles','isLabel','jobs'));
                         Yii::app()->end();
                     } catch (Exception $e) {
                         
                     }
+                    
                 }
             }
-            $this->redirect(array('/listprofile'));
+            //$this->redirect(array('/listprofile'));
         }
         
         /*
@@ -999,6 +1006,52 @@ class ProfileController extends Controller
                 $newsocilaProf->isNewRecord = true;
                 $newsocilaProf->save(false);
             }
-       }
+        }
         
+        public function actionGetBasicInfo() 
+        {
+            if(Yii::app()->request->isAjaxRequest) {
+                $type = $_POST['type'];
+                $id = $_POST['id'];
+                $info = '';
+                if($type == 'skill') {
+                    $skill = Skill::model()->findByPk($id);
+                    if($skill) {
+                        $info = $this->renderPartial('_skill-info', compact('skill'), true);
+                    }
+                } elseif($type == 'trainer') {
+                    $trainer = Trainer::model()->findByPk($id);
+                    if($trainer) {
+                        $info = $this->renderPartial('_trainer-info', compact('trainer'), true);
+                    }
+                }
+                
+                echo CJSON::encode($info);
+            }
+        }
+        
+        /*
+         * Update user shortbio.
+         */
+        public function actionSaveShortbio() 
+        {
+            if (isset($_POST['Profile'])) {
+                $profile = Profile::model()->findByPk($_POST['Profile']['id']);
+                $profile->scenario = 'shortbio';
+                $message = 'Profile been updated successfully.';
+                $profile->attributes = $_POST['Profile'];
+                if ($profile->save()) {
+                    echo CJSON::encode(array(
+                        'status' => 'success',
+                        'message' => $message,
+                    ));
+                } else {
+                    $error = CActiveForm::validate($profile);
+                    if ($error != '[]')
+                        echo $error;
+                    Yii::app()->end();
+                }
+            }
+        }
+
 }    

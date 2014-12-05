@@ -49,6 +49,8 @@ $this->breadcrumbs = array(
                         'data' => $model,
                         'htmlOptions' => array('class' => 'table table-striped b-t b-light text-sm view-table'),
                         'attributes' => array(
+                            'brand_name',
+                            'brand_description',
                             array(
                                 'name'=>'is_registered',
                                 'value'=>$model->is_registered=='1'?'YES':'NO',

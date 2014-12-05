@@ -44,7 +44,7 @@ class Org extends CActiveRecord
                         array('logo', 'file', 'allowEmpty'=>true,'types'=>'jpg,png,gif','on'=>'update'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, legal_name, tax_number, logo, billing_user_id, admin_user_id, is_registered', 'safe', 'on'=>'search'),
+			array('id, legal_name, tax_number, logo, billing_user_id, admin_user_id, is_registered, brand_name, brand_description', 'safe'),
 		);
 	}
 
@@ -107,7 +107,9 @@ class Org extends CActiveRecord
 		$criteria->compare('billing_user_id',$this->billing_user_id);
 		$criteria->compare('admin_user_id',$this->admin_user_id);
 		$criteria->compare('is_registered',$this->is_registered);
-
+                $criteria->compare('brand_name',$this->brand_name,true);
+		$criteria->compare('brand_description',$this->brand_description,true);
+     
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

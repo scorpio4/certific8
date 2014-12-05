@@ -106,42 +106,18 @@ $(document).ready(function(){
             endate.hide();
         }).data('datepicker');
     setDefaultSelect2('','');    
-    /*$("#UserSkill_trainer_id").select2({
-        placeholder:"Select",
-     });  
-    $("#UserSkill_skill_id").select2({
-        minimumInputLength: 1,
-        id: function (data) {
-            return data.id;
-        },
-        ajax: {
-            url: baseUrl+'/user/profile/searchSkill',
-            quietMillis: 1500,
-            dataType: 'json',
-            cache: true,
-            data: function (term, page) {
-                return {
-                    title: term, 
-                };
-            },
-            results: function (data, page) {
-                return {
-                    results: data.results 
-                };
-            }
-        },
-        initSelection: function (element, callback) {
-            //callback();
-        },
-        formatResult: function (data) {
-            return "<div class='select2-user-result'>" + data.title + "</div>";
-        },
-        formatSelection: function (data) {
-            alert(data.title);
-            return data.title;
-        }
-    });*/
+   
     
 });
+
+
+$('#UserSkill_trainer_id').change(function () {
+   var id = $(this).val();
+   getBasicInfo('trainer',id);
+})
+$('#UserSkill_skill_id').change(function () {
+    var id = $(this).val();
+    getBasicInfo('skill',id);
+})
 
 </script>

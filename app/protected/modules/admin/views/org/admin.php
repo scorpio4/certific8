@@ -72,6 +72,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'header' => 'Admin User',
             'name' => 'adminUser.username'
         ),
+        'brand_name',
         /*
           'is_registered',
          */

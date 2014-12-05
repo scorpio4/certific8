@@ -37,6 +37,12 @@ $this->breadcrumbs = array(
             <?php echo $this->renderPartial('/profile/help'); ?>
         </div>
     </div>
+    <div id="skill-infopanel">
+
+    </div>
+    <div id="trainer-infopanel">
+
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -46,9 +52,16 @@ $this->breadcrumbs = array(
         if (fileData.length >= 1) {
             $(".uploded-img").attr({'src': URL.createObjectURL(fileData[0]), height: '171px', width: '174px'});
         } else {
-            console.log(fileData);
             $(".uploded-img").attr({'src': $('#default_img').val()});
         }
     }
+     $('#UserSkill_trainer_id').change(function () {
+        var id = $(this).val();
+        getBasicInfo('trainer',id);
+    })
+    $('#UserSkill_skill_id').change(function () {
+        var id = $(this).val();
+        getBasicInfo('skill',id);
+    })
 </script>
 

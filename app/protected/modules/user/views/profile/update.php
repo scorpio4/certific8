@@ -54,11 +54,18 @@ $profileId = $profile->id;
     </div>
     <div class="col-md-4">
         <div class="business-card">
-            <div id="template-success"></div>
-            <?php echo $this->renderPartial('template',compact('profile','type'));?>
+            <?php echo CHtml::link('Choose a template','javascript:void(0)',array('class'=>'btn btn-primary','onclick'=>'getTemplate()')); ?>
         </div>
-        <div class="help-box">
-            <?php echo $this->renderPartial('help',array());?>
+        <div class="infopanel">
+            <div class="help-box ">
+                <?php echo $this->renderPartial('help', array()); ?>
+            </div>
+        </div>
+        <div id="skill-infopanel">
+            
+        </div>
+        <div id="trainer-infopanel">
+            
         </div>
     </div>
 </div>
@@ -79,7 +86,41 @@ $profileId = $profile->id;
             </div>
         </div>
     </div>
- <?php }?>
+ <?php } else {?>
+    <div class="modal fade" id="edit-shortbio-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Edit Shortbio</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel panel-default">
+                        <div id="shortbio-success"></div>
+                        <?php echo $this->renderPartial('_edit-shortbio-form',compact('profile','profileId'));?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <div class="modal fade" id="edit-template-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Choose a Profile Template</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel panel-default">
+                         <div id="template-success"></div>
+                            <?php echo $this->renderPartial('template',compact('profile','type'));?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+<?php }?>
+
 <script type="text/javascript">
     
     $(function() {
@@ -89,6 +130,38 @@ $profileId = $profile->id;
             $('.editble').editable({disabled:true});
             $('#profile-modal').modal('show');
         <?php }?>
-    });  
+    }); 
+   
+    function editShortBio()
+    {
+        var biodata = $('#biodata-detail').html();
+        $('#Profile_short_bio').val(biodata);
+        $('#Profile_short_bio').redactor('code.set', biodata);
+        $('#edit-shortbio-modal').modal('show');
+    }
+    function getTemplate()
+    {
+        $('#edit-template-modal').modal('show');
+    }
     
+    function previewTemplate() 
+    {
+        
+    }
+    
+    function saveTemplate(profileId,templateId) 
+    {
+        $.ajax({
+            dataType : 'json',
+            type : 'post',
+            data : {'profileId':profileId,'templateId':templateId},
+            url: baseUrl + '/user/profile/saveTemplate',
+            success : function(data) {
+                        $(".errorMessage").hide();
+                        if(data.status=="success"){
+                            successmsg("template-success",data.message);
+                        }     
+                    }
+        });            
+    }
 </script>

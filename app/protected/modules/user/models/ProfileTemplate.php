@@ -31,7 +31,7 @@ class ProfileTemplate extends CActiveRecord
 			array('template_name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, template_name', 'safe', 'on'=>'search'),
+			array('id, template_name, template_type', 'safe', 'on'=>'search'),
 		);
 	}
 

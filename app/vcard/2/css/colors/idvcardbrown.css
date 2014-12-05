@@ -1,0 +1,9 @@
+
+#card-header {
+	height: 74px;
+	background: url(../../img/card_header_red.png);
+	position: relative;
+}
+#card-header.bg-color-change {
+	background: url(../../img/card_header_brown.png);
+}

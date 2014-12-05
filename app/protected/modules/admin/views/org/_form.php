@@ -61,6 +61,16 @@ $form = $this->beginWidget('CActiveForm', array(
 
     </div>
     <div class="col-md-6">
+         <div class="form-group">
+            <?php echo $form->labelEx($model, 'brand_name'); ?>
+            <?php echo $form->textField($model, 'brand_name', array('size' => 60, 'maxlength' => 255, 'class' => 'form-control')); ?>
+            <?php echo $form->error($model, 'brand_name'); ?>
+        </div>
+         <div class="form-group">
+            <?php echo $form->labelEx($model, 'brand_description'); ?>
+            <?php echo $form->textArea($model, 'brand_description', array('rows'=>"6",'cols'=>"50" ,'class' => 'form-control')); ?>
+            <?php echo $form->error($model, 'brand_description'); ?>
+        </div>
         <div class="form-group">
             <?php echo $form->labelEx($model, 'is_registered'); ?>
             <?php echo $form->dropDownList($model, 'is_registered', array('0' => 'NO', '1' => 'YES'), array('class' => 'form-control')); ?>

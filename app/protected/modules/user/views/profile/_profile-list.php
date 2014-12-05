@@ -1,11 +1,18 @@
 <?php 
     $id = rand(100, 999).$data->id.rand(100, 999);
     $template = ProfileTemplate::model()->getProfileTemplate($data->template_id);
+    if(($basicId == $data->id) && !isset($data->template)) {
+        $bgmain = 'bg-default';
+        $bghead = 'bg-default-head';
+    } else {
+        $bghead = '';
+        $bgmain = '';
+    }
 ?>
 <li id="profile-<?php echo $id;?>">
     <figure>
-        <div class="<?php echo $template['main-class'];?>">
-            <div class="vcard-name"><?php if(isset($data->template)){?><a href="javascript:void(0)" onclick="window.open('<?php echo Yii::app()->createAbsoluteUrl('/vcard/'.$data->template_id.'/profile/'.$data->id);?>','vcard', 'width=1200,height=700,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=20,top=20');return false;" ><?php echo $data->template->template_name;?></a><?php }?></div>
+        <div class="<?php echo $template['main-class'];?> <?php echo $bgmain;?>">
+            <div class="vcard-name <?php echo $bghead;?>"><?php if(isset($data->template)){?><a href="javascript:void(0)" onclick="window.open('<?php echo Yii::app()->createAbsoluteUrl('/vcard/'.$data->template_id.'/profile/'.$data->id);?>','vcard', 'width=1200,height=700,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=20,top=20');return false;" ><?php echo $data->template->template_name;?></a><?php } else {if($basicId == $data->id) {echo 'Default Profile';} else {echo '&nbsp;&nbsp;';}}?></div>
             <div class="v-top">
                 <div class="v-avatar">
                     <?php 
@@ -32,16 +39,23 @@
                 <div>
                 	<div class="pull-left mr10 mt5">
                     	 <a href="javascript:editSetting('<?php echo $data->id;?>')" class="btn btn-default btn-xs" title="Public Settings"><i class="fa fa-cog"></i></a>
-                    </div>
+                        <?php 
+                            if($bghead <> '') {
+                               echo CHtml::link('Add a profile now.',array('/profile'),array('class'=>'btn btn-success btn-xs'));
+                               echo '<p class="mt5">Create a profile for a specific role. Express your Personal Brand and the value your professional expertise offers.</p>';
+                            }
+                        ?>
+                     </div>
                 	<div class="pull-left">
                     	<?php $point = $data->getProfileStatus($data->id);?>
                         <div class="progress-bar-main">
-                            <div class="text11">Profile Completeness <span class="text-bold ml10"><?php echo $point.'%';?></span></div>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?php echo $point;?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $point.'%';?>">
-                                    
+                            <?php if($bghead == '') {?>
+                                <div class="text11">Profile Completeness <span class="text-bold ml10"><?php echo $point.'%';?></span></div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?php echo $point;?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $point.'%';?>">
+                                    </div>
                                 </div>
-                            </div>	
+                            <?php }?>
                         </div>
                     </div>
                 	<div class="clearfix"></div>

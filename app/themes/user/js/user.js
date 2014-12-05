@@ -53,16 +53,8 @@ function editData(type, id)
         success: function(data) {
             if (data) {
                 if (type == 'skill') {
-                    //markers=JSON.stringify(data.title_data);
-                    //console.log(markers);
-                    // var names = markers;
-                    /*$('#UserSkill_skill_id').select2({
-                     //data:  markers,
-                     data:{ results: names, text: 'title' },
-                     formatSelection: format,
-                     formatResult: format   
-                     });*/
-                    //$('#UserSkill_skill_id').val(4);
+                    getBasicInfo('trainer',data.UserSkill_trainer_id);
+                    getBasicInfo('skill',data.UserSkill_skill_id);
                 }
                 $.each(data, function(key, val) {
                     $("#" + type + "-form #" + key).val(val);
@@ -156,7 +148,11 @@ function setDefaultSelect2(id,options)
             }
         },
         formatResult: function (data) {
-            return "<div class='select2-user-result'>" + data.title + "</div>";
+            return "<div class='select2-user-result'>\n\
+                       <div class='pull-left'>" + data.logo + "</div>\n\
+                       <div class='pull-left width-frop-text'>" + data.title + "</div>\n\
+                        <div class='clearfix'></div>\n\
+                    </div>";
         },
         formatSelection: function (data) {
             return data.title;
@@ -238,17 +234,29 @@ function deleteProfilePage(id)
         });
     }
 }
-function setPreview(id)
+function setPreview(id,templte)
 {
-    var templte = $('#Profile_template_id').val();
     if (templte) {
         var popupAttr = 'width=1200,height=700,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=20,top=20';
         var url = baseUrl + '/vcard/'+ templte +'/profile/' + id;
         window.open(url,'vcard',popupAttr);
     }
 }
-
-
+function getBasicInfo(type,id)
+{
+    $.ajax({
+        type: "POST",
+        beforeSend: function() {
+            $("#" + type + "-infopanel").html('');
+        },
+        url: baseUrl + '/user/profile/getBasicInfo',
+        data: {'type': type,'id':id},
+        dataType: 'json',
+        success: function(rsponse) {
+            $("#" + type + "-infopanel").html(rsponse);
+        }
+    }); 
+}
 
 
 

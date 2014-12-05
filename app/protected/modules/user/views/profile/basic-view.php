@@ -43,7 +43,7 @@
             <div class="col-md-7">
                 <div class="text03">
                     <?php if($type != 'view') {?>
-                    <a href="#" id="biodata" data-type="textarea" data-placement="bottom" data-title="Biodata" title="Edit Shortbio" data-value="<?php echo $profile->short_bio?>">
+                    <a href="#" id="biodata-edit" onclick="editShortBio()" data-type="textarea" data-placement="bottom" data-title="Biodata" title="Edit Shortbio" data-value="<?php echo $profile->short_bio?>">
                         <i class="fa fa-pencil edit-before"></i>
                     </a>
                     <?php }?>

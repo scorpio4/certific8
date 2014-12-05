@@ -155,4 +155,19 @@ class Skill extends CActiveRecord
 	   return $logo;
 	}
         
+        /*
+	 * Return formatted url with scheme.
+	 */
+	public function formatUrl($url)
+	{
+            $formatUrl = parse_url($url);
+            if(isset($formatUrl['scheme']) && $formatUrl['scheme'] == '') {
+               $url = 'http://'.$url;
+            } elseif(!isset($url['scheme'])){
+                    $url = 'http://'.$url;
+            } 
+
+            return $url;	
+	}
+        
 }

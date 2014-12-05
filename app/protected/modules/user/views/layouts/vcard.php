@@ -7,10 +7,21 @@
         <meta name="keywords" content=""/>
         <meta name="description" content=""/>
         <?php
+            $vcardId = $_GET['vid'];
+            $template = ProfileTemplate::model()->findByPk($vcardId);
+            if($template) {
+                if($template->template_type == 'simple_vCard') {
+                    $vcardId = 1;
+                } elseif($template->template_type == 'iDvCard') {
+                    $vcardId = 2;
+                } elseif($template->template_type == 'flexyvCard') {
+                    $vcardId = 3;
+                }
+            }
             Yii::app()->clientScript->registerCoreScript('jquery');
             Yii::app()->clientScript->registerCoreScript('jquery.ui');
             $cs = Yii::app()->clientScript;
-            $dirlist = glob(Yii::getPathOfAlias('webroot') . '/vcard/'.$_GET['vid'].'/css/*', GLOB_ONLYDIR);
+            $dirlist = glob(Yii::getPathOfAlias('webroot') . '/vcard/'.$vcardId.'/css/*', GLOB_ONLYDIR);
             foreach ($dirlist as $css) {
                 foreach (array_reverse(glob($css .'/*')) as $key=>$subcss) {
                     $names = explode('/vcard', $subcss);
@@ -19,15 +30,25 @@
                     $cs->registerCssFile($path);
                 }
             }
-            foreach (glob(Yii::getPathOfAlias('webroot') . '/vcard/'.$_GET['vid'].'/css/*.css') as $key=>$css) {
+            foreach (glob(Yii::getPathOfAlias('webroot') . '/vcard/'.$vcardId.'/css/*.css') as $key=>$css) {
                 $names = explode('/', $css);
                 $name = end($names);
-                $path = Yii::app()->baseUrl . '/vcard/'.$_GET['vid'].'/css/'.$name;;
+                $path = Yii::app()->baseUrl . '/vcard/'.$vcardId.'/css/'.$name;;
                 $cs->registerCssFile($path);
                 
             }
+            if(isset($_GET['vid'])) {
+                $template = ProfileTemplate::model()->findByPk($_GET['vid']);
+                if($template) {
+                    $name = $template->template_name;
+                    $name = str_replace(' ', '', $name);
+                    $name = strtolower($name);
+                    $path = Yii::app()->baseUrl . '/vcard/'.$vcardId.'/css/colors/'.$name.'.css';
+                    echo '<link rel="stylesheet" href="'.$path.'">';
+                }
+            }
             $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/jquery-migrate-1.2.1.min.js', CClientScript::POS_END);
-            $dirlist = glob(Yii::getPathOfAlias('webroot') . '/vcard/'.$_GET['vid'].'/js/*', GLOB_ONLYDIR);
+            $dirlist = glob(Yii::getPathOfAlias('webroot') . '/vcard/'.$vcardId.'/js/*', GLOB_ONLYDIR);
             foreach ($dirlist as $js) {
                 foreach (array_reverse(glob($js .'/*')) as $key=>$subjs) {
                     $names = explode('/vcard', $subjs);
@@ -36,12 +57,13 @@
                     $cs->registerScriptFile($path, CClientScript::POS_END);
                 }
             }
-            foreach (glob(Yii::getPathOfAlias('webroot') . '/vcard/'.$_GET['vid'].'/js/*.js') as $key=>$js) {
+            foreach (glob(Yii::getPathOfAlias('webroot') . '/vcard/'.$vcardId.'/js/*.js') as $key=>$js) {
                 $names = explode('/', $js);
                 $name = end($names);
-                $path = Yii::app()->baseUrl . '/vcard/'.$_GET['vid'].'/js/'.$name;
+                $path = Yii::app()->baseUrl . '/vcard/'.$vcardId.'/js/'.$name;
                 $cs->registerScriptFile($path, CClientScript::POS_END);
             }
+            
         ?>
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Muli:400,400italic|Ubuntu:400,700">
         <script type="text/javascript" >

@@ -17,4 +17,3 @@ INSERT INTO `c8_email_template` (`id`, `type`, `subject`, `template`) VALUES
 (4, 'email_verify', ' Confirm your email address to start using Certific8', 'To start using your Certific8 account, click the link to confirm your email address.<br><br>\n{Confirm_Email_URL}<br><br>\nCertific8 Team<br>');
 DELETE FROM `certific8`.`c8_role` WHERE `c8_role`.`name` = "Members";
 INSERT INTO `c8_role` (`id`, `name`) VALUES(1, 'Members');
-
